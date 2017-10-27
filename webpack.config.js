@@ -1,3 +1,5 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   entry: './src/App.jsx',
 
@@ -33,6 +35,12 @@ module.exports = {
       }
     ]
   },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    })
+  ],
 
   resolve: {
     extensions: ['.js', '.jsx']  // for loading ".jsx" files
