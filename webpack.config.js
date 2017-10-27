@@ -16,6 +16,20 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: 'style-loader!css-loader!sass-loader'
+      },
+      {
+        test: /\.woff2?$|\.ttf$|\.eot$/,
+        loader: 'file-loader',
+        query: {
+            name: 'font/[name].[ext]'
+        }
+      },
+      {
+        test: /\.svg$|\.png|\.jpe?g|\.gif$/,
+        loader: 'file-loader',
+        query: {
+            name: '/images/[name].[ext]'
+        }
       }
     ]
   },
