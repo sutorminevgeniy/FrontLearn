@@ -13,42 +13,65 @@ class App extends React.Component {
     this.state = {
       currentLevel: 0,
       currentLang: 'ru'
+    };
+
+    this.nextLevel = this.nextLevel.bind(this);
+    this.prevLevel = this.prevLevel.bind(this);
+  }
+
+  nextLevel() {
+    let nextLevel = this.state.currentLevel;
+
+    if(nextLevel < (levels.length - 1)) {
+      nextLevel++;
+      this.setState({ currentLevel: nextLevel });
+    }
+  }
+
+  prevLevel() {
+    let prevLevel = this.state.currentLevel;
+
+    if(prevLevel > 0) {
+      prevLevel--;
+      this.setState({ currentLevel: prevLevel });
     }
   }
 
   render() {
-    let currentLevel = levels[this.state.currentLevel];
+    let dataLevel = levels[this.state.currentLevel];
+    let lang = this.state.currentLang;
+
     return (
       <div>
         <section id="sidebar">
           <div>
             <div id="level-counter">
-              <span className="arrow left">◀</span>
+              <span className="arrow left" onClick={ this.prevLevel }>◀</span>
               <span id="level-indicator">
-                <span id="labelLevel" className="translate">Level </span>
+                <span id="labelLevel" className="translate">{ messages.labelLevel[lang] } </span>
                 <span className="current">{ this.state.currentLevel + 1 }</span>
-                <span id="labelOf" className="translate"> of </span>
+                <span id="labelOf" className="translate"> { messages.labelOf[lang] } </span>
                 <span className="total">{ levels.length } </span>
                 <span className="caret">▾</span>
               </span>
-              <span className="arrow right">▶</span>
+              <span className="arrow right" onClick={ this.nextLevel }>▶</span>
               <div id="levelsWrapper" className="tooltip">
                 <div id="levels"></div>
-                <div id="labelReset" className="translate">Reset</div>
+                <div id="labelReset" className="translate">{ messages.labelReset[lang] }</div>
               </div>
             </div>
             <h1>Flexbox Froggy</h1>
-            <p id="instructions" dangerouslySetInnerHTML={{__html: currentLevel.instructions[this.state.currentLang]}}></p>
+            <p id="instructions" dangerouslySetInnerHTML={{__html: dataLevel.instructions[lang]}}></p>
             <p id="docs"></p>
           </div>
           <div id="editor">
             <div id="css">
               <div className="line-numbers">1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</div>
-              <pre id="before" dangerouslySetInnerHTML={{__html: currentLevel.before}}></pre>
+              <pre id="before" dangerouslySetInnerHTML={{__html: dataLevel.before}}></pre>
               <textarea id="code"></textarea>
-              <pre id="after" dangerouslySetInnerHTML={{__html: currentLevel.after}}></pre>
+              <pre id="after" dangerouslySetInnerHTML={{__html: dataLevel.after}}></pre>
             </div>
-            <button id="next" className="translate">Next</button>
+            <button id="next" className="translate">{ messages.next[lang] }</button>
           </div>
           <div id="share">
             <p className="img-next">
@@ -65,41 +88,16 @@ class App extends React.Component {
           </div>
 
           <div className="credits">
-            <span id="labelFooter" className="translate">Flexbox Froggy is created by</span>
-            <a href="https://codepip.com">Codepip</a> •
+            <span id="labelFooter" className="translate">{ messages.labelFooter[lang] } </span>
             <a href="https://github.com/thomaspark/flexboxfroggy/">GitHub</a> •
-            <a href="https://twitter.com/playcodepip">Twitter</a> •
             <span id="language">
-              <span id="languageActive" className="toggle translate">{ this.state.currentLang }English</span>
+              <span id="languageActive" className="toggle translate">{ messages.languageActive[lang] }</span>
               <span className="tooltip">
-                <a href="#en">English</a>
-                <a href="#es">Español</a>
-                <a href="#fr">Français</a>
-                <a href="#de">Deutsch</a>
-                <a href="#nl">Nederlands</a>
-                <a href="#pt-br">Português</a>
-                <a href="#it">Italiano</a>
-                <a href="#sv">Svenska</a>
-                <a href="#pl">Polski</a>
-                <a href="#cs">Česky</a>
-                <a href="#hu">Magyar</a>
-                <a href="#ro">Română</a>
-                <a href="#bg">Български</a>
-                <a href="#lt">Lietuvių</a>
-                <a href="#uk">Українська</a>
-                <a href="#ru">Русский</a>
-                <a href="#sr">Српски</a>
-                <a href="#tr">Türkçe</a>
-                <a href="#fa">فارسی</a>
-                <a href="#hi">हिंदी</a>
-                <a href="#ta">தமிழ்</a>
-                <a href="#ml">മലയാളം</a>
-                <a href="#zh-cn">简体中文</a>
-                <a href="#zh-tw">繁體中文</a>
-                <a href="#ja">日本語</a>
-                <a href="#ko">한국어</a>
-                <a href="#vi">Tiếng Việt</a>
-                <a href="#eo">Esperanto</a>
+                { Object.entries(messages.languageActive).map(item => {
+                  return (
+                    <a href={ "#" + item[0] } key={ item[0] }>{ item[1] }</a>
+                  );
+                }) }
               </span>
             </span>
           </div>
