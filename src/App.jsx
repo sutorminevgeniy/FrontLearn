@@ -75,7 +75,7 @@ class App extends React.Component {
         <section id="sidebar">
           <div>
             <div id="level-counter">
-              <span className="arrow left" onClick={ this.prevLevel }>◀</span>
+              <span className={ "arrow left" + (this.state.currentLevel == 0 ? " disabled" : "") } onClick={ this.prevLevel }>◀</span>
               <span id="level-indicator" onClick={ this.toggleLevels }>
                 <span id="labelLevel" className="translate">{ messages.labelLevel[lang] } </span>
                 <span className="current">{ this.state.currentLevel + 1 }</span>
@@ -83,7 +83,7 @@ class App extends React.Component {
                 <span className="total">{ levels.length } </span>
                 <span className="caret">▾</span>
               </span>
-              <span className="arrow right" onClick={ this.nextLevel }>▶</span>
+              <span className={ "arrow right" + (this.state.currentLevel == levels.length - 1 ? " disabled" : "")} onClick={ this.nextLevel }>▶</span>
               <div id="levelsWrapper" className="tooltip" style={ this.state.levelsShow ? styleShow : {} }>
                 <div id="levels">
                   {
