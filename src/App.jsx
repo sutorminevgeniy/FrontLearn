@@ -4,7 +4,8 @@ import ReactDom from 'react-dom';
 import {levels, levelWin} from './levels';
 import messages from './messages';
 
-import './style.scss'
+import './style.scss';
+import './animate.scss';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,15 +14,19 @@ class App extends React.Component {
     this.state = {
       currentLevel: 0,
       currentLang: 'ru',
-      levelsShow: false
+      levelsShow: false,
+      langShow: false
     };
 
     this.nextLevel = this.nextLevel.bind(this);
     this.prevLevel = this.prevLevel.bind(this);
+    this.toggleLevels = this.toggleLevels.bind(this);
     this.changeLevel = this.changeLevel.bind(this);
-    this.toggleLevels = this.toggleLevels.bind(this);  
+    this.toggleLang = this.toggleLang.bind(this);
+    this.changeLang = this.changeLang.bind(this);  
   }
 
+  // Уровни =========================================================================================
   // Следующий уровень
   nextLevel() {
     let nextLevel = this.state.currentLevel;
@@ -42,22 +47,59 @@ class App extends React.Component {
     }
   }
 
-  // Выбор уровня
-  changeLevel(e) {
-    let level = parseInt(e.target.dataset.level);
-
-    this.setState({ currentLevel: level });
-  }
-
   // Открытие закрытие окна с уровнями
   toggleLevels() {
     this.setState({ levelsShow: !this.state.levelsShow });
   }
 
+  // Выбор уровня
+  changeLevel(event) {
+    let level = parseInt(event.target.dataset.level);
+
+    this.setState({ currentLevel: level });
+  }
+
+  // Языки ==========================================================================================
+  // Открытие закрытие окна с языками
+  toggleLang() {
+    this.setState({ langShow: !this.state.langShow });
+  }
+
+  // Выбор уровня
+  changeLang(event) {
+    event.preventDefault();
+    let lang = event.target.dataset.lang;
+
+    this.setState({ currentLang: lang });
+  }
+
+  // Фигуры =========================================================================================
+  // Получение цвета
+  getColor(color) {
+    switch (color) {
+      case 'g':
+        return ' green';
+        break;
+      case 'y':
+        return ' yellow';
+        break;
+      case 'r':
+        return ' red';
+        break;
+      default:
+        return '';
+    }
+  }
+
+  // Построение =====================================================================================
   // Проверка перед обнавлением состояния или свойств
   shouldComponentUpdate(nextProps, nextState) {
     if(this.state.levelsShow) {
       nextState.levelsShow = false;
+    }
+
+    if(this.state.langShow) {
+      nextState.langShow = false;
     }
 
     return true;
@@ -84,7 +126,7 @@ class App extends React.Component {
                 <span className="caret">▾</span>
               </span>
               <span className={ "arrow right" + (this.state.currentLevel == levels.length - 1 ? " disabled" : "")} onClick={ this.nextLevel }>▶</span>
-              <div id="levelsWrapper" className="tooltip" style={ this.state.levelsShow ? styleShow : {} }>
+              <div id="levelsWrapper" className={ "tooltip" + (this.state.levelsShow ? "" : " hide") }>
                 <div id="levels">
                   {
                     levels.map((item, i) => {
@@ -132,13 +174,17 @@ class App extends React.Component {
           </div>
           <div className="credits">
             <span id="labelFooter" className="translate">{ messages.labelFooter[lang] } </span>
-            <a href="https://github.com/thomaspark/flexboxfroggy/">GitHub</a> •
+            <a href="https://github.com/thomaspark/flexboxfroggy/">GitHub</a> • 
             <span id="language">
-              <span id="languageActive" className="toggle translate">{ messages.languageActive[lang] }</span>
-              <span className="tooltip">
+              <span id="languageActive" className="toggle translate" onClick={ this.toggleLang }>{ messages.languageActive[lang] }</span>
+              <span className={ "tooltip" + (this.state.langShow ? "" : " hide") }>
                 { Object.entries(messages.languageActive).map(item => {
                   return (
-                    <a href={ "#" + item[0] } key={ item[0] }>{ item[1] }</a>
+                    <a 
+                      key={ item[0] } 
+                      href={ "#" + item[0] } 
+                      data-lang={ item[0] }
+                      onClick={ this.changeLang } >{ item[1] }</a> 
                   );
                 }) }
               </span>
@@ -152,8 +198,22 @@ class App extends React.Component {
         <section id="view">
           <div id="board">
             <div id="pond">
+              { dataLevel.board.split('').map((item, index) => {
+                return (
+                  <div key={ index } className={ "frog" + this.getColor(item) }>
+                    <div className="bg animated pulse infinite"></div>
+                  </div>
+                );
+              }) }
             </div>
             <div id="background">
+              { dataLevel.board.split('').map((item, index) => {
+                return (
+                  <div key={ index } className={ "lilypad" + this.getColor(item) }>
+                    <div className="bg"></div>
+                  </div>
+                );
+              }) }
             </div>
           </div>
         </section>

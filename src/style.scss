@@ -21,6 +21,7 @@ body {
   color: rgba(255, 255, 255, 0.7);
   font-family: 'PT Sans', sans-serif;
 }
+
 #root {
   width: 100%;
   margin: 0;
@@ -31,6 +32,7 @@ body {
     margin: 0;
   }
 }
+
 #sidebar {
   width: 50%;
   min-width: 300px;
@@ -38,6 +40,13 @@ body {
   padding: 2em;
   background-color: #43A047;
   font-size: 15px;
+}
+
+.hide {
+  display: none !important;
+}
+.show {
+  display: block;
 }
 
 h1 {
@@ -66,10 +75,10 @@ li {
 
 a {
   color: rgba(255, 255, 255, 0.7);
-}
 
-a:hover {
-  color: #fff;
+  &:hover {
+    color: #fff;
+  }  
 }
 
 .help {
@@ -87,18 +96,18 @@ a:hover {
   font-size: 12px;
   line-height: 1.5;
   z-index: 60;
-}
 
-.tooltip:after {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 12px;
-  width: 0; 
-  height: 0; 
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 12px solid #2c3e50;
+  &:after {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 12px;
+    width: 0; 
+    height: 0; 
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #2c3e50;
+  }  
 }
 
 #share {
@@ -114,17 +123,17 @@ a:hover {
 
 .img-next {
   text-align: center;
-}
 
-.img-next img {
-  display: inline-block;
-  margin: 1em;
-  width: 200px;
-  opacity: 0.9;
-}
+  img {
+    display: inline-block;
+    margin: 1em;
+    width: 200px;
+    opacity: 0.9;
 
-.img-next img:hover {
-  opacity: 1;
+    &:hover {
+      opacity: 1;
+    }  
+  }
 }
 
 #editor {
@@ -186,16 +195,15 @@ pre {
 }
 
 #levelsWrapper {
-  display: none;
   top: 30px;
   right: 20px;
   max-width: 160px;
   padding: 1em 0.5em;
   margin-top: 12px;
-}
 
-#levelsWrapper:after {
-  left: calc(50% - 12px);
+  &:after {
+    left: calc(50% - 12px);
+  }  
 }
 
 #levels {
@@ -216,15 +224,14 @@ pre {
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
-}
 
-.level-marker.current,
-.level-marker:hover {
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-.level-marker.solved {
-  background-color: #228B24;
+  &.current,
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  &.solved {
+    background-color: #228B24;
+  }  
 }
 
 #level-indicator,
@@ -245,11 +252,6 @@ pre {
   margin-left: 5px;
 }
 
-.caret {
-  display: inline-block;
-  margin-left: 2px;
-}
-
 #level-indicator:hover,
 .arrow:not(.disabled):hover {
   background-color: rgba(255, 255, 255, 0.2);
@@ -261,28 +263,30 @@ pre {
   cursor: pointer;
 }
 
+.caret {
+  display: inline-block;
+  margin-left: 2px;
+}
+
 .arrow {
   display: inline-block;
   font-family: 'Comic Sans MS';
   padding: 0.25em 0.4em 0.2em;
   cursor: pointer;
-}
 
-.arrow.left {
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.arrow.right {
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.arrow.left:not(.disabled):hover,
-.arrow.right:not(.disabled):hover {
-  border-color: transparent;
-}
-
-.arrow.disabled {
-  opacity: 0.5;
+  &.left {
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  &.right {
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  &.left:not(.disabled):hover,
+  &.right:not(.disabled):hover {
+    border-color: transparent;
+  }
+  &.disabled {
+    opacity: 0.5;
+  }  
 }
 
 button {
@@ -302,24 +306,23 @@ button {
   user-select: none;
   -webkit-appearance: none;
   appearance: none;
-}
 
-button:active {
-  outline: none;
-}
-
-button:not(.disabled):hover {
-  background-color: #F12D22;
+  &:active, &:focus {
+    outline: none;
+  }
+  &:not(.disabled):hover {
+    background-color: #F12D22;
+  }  
 }
 
 #next {
   position: absolute;
   right: 1em;
   bottom: 1em;
-}
 
-#next.disabled {
-  opacity: 0.5;
+  &.disabled {
+    opacity: 0.5;
+  }  
 }
 
 .credits {
@@ -332,48 +335,49 @@ button:not(.disabled):hover {
 
 #language {
   position: relative;
-}
 
-#language .toggle {
-  display: inline-block;
-  padding: 1px 8px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  user-select: none;
-}
+  .toggle {
+    display: inline-block;
+    padding: 1px 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    user-select: none;
+  }
 
-#language .toggle:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
+  .toggle:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 
-#language .tooltip {
-  display: none;
-  bottom: 30px;
-  left: 0px;
-  width: 200px;
-  padding: 1em;
-}
+  .tooltip {
+    display: block;
+    bottom: 30px;
+    left: 0px;
+    width: 200px;
+    padding: 1em;
+  }
 
-#language .tooltip:after {
-  top: auto;
-  bottom: -12px;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-top: 12px solid #2c3e50;
-  border-bottom: none;
-}
+  .tooltip:after {
+    top: auto;
+    bottom: -12px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #2c3e50;
+    border-bottom: none;
+  }
 
-#language .tooltip a {
-  padding: 0 2px;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.7);
-  white-space: nowrap;
-}
+  .tooltip a {
+    display: inline-block;
+    padding: 0 4px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+  }
 
-#language .tooltip a:hover {
-  color: #fff;
+  .tooltip a:hover {
+    color: #fff;
+  }  
 }
 
 #board {
@@ -412,71 +416,69 @@ button:not(.disabled):hover {
   width: 20%;
   height: 20%;
   overflow: hidden;
+
+  .bg {
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }  
 }
 
-.frog.bounceOutUp {
-  -webkit-animation-delay: .6s;
-  -moz-animation-delay: .6s;
-  -ms-animation-delay: .6s;
-  animation-delay: .6s;
+.frog {
+  &.bounceOutUp {
+    -webkit-animation-delay: .6s;
+    -moz-animation-delay: .6s;
+    -ms-animation-delay: .6s;
+    animation-delay: .6s;
+  }
+  &.yellow .bg.bounce {
+    -webkit-animation-delay: .3s;
+    -moz-animation-delay: .3s;
+    -ms-animation-delay: .3s;
+    animation-delay: .3s;
+  }
+  &.red .bg.bounce {
+    -webkit-animation-delay: .6s;
+    -moz-animation-delay: .6s;
+    -ms-animation-delay: .6s;
+    animation-delay: .6s;
+  }  
+  &.green .bg {
+    background-image: url("./images/frog-green.svg");
+  }
+  &.red .bg {
+    background-image: url("./images/frog-red.svg");
+  }
+  &.yellow .bg {
+    background-image: url("./images/frog-yellow.svg");
+  }
+
+  .bg {
+    background-size: 60% 60%;
+
+    &.bounce {
+      -webkit-animation-duration: 2s;
+      -moz-animation-duration: 2s;
+      -ms-animation-duration: 2s;
+      animation-duration: 2s;
+    }  
+  }
 }
 
-.frog .bg.bounce {
-  -webkit-animation-duration: 2s;
-  -moz-animation-duration: 2s;
-  -ms-animation-duration: 2s;
-  animation-duration: 2s;
-}
+.lilypad{
+  &.green .bg {
+    background-image: url("./images/lilypad-green.svg");
+  }
 
-.frog.yellow .bg.bounce {
-  -webkit-animation-delay: .3s;
-  -moz-animation-delay: .3s;
-  -ms-animation-delay: .3s;
-  animation-delay: .3s;
-}
+  &.red .bg {
+    background-image: url("./images/lilypad-red.svg");
+  }
 
-.frog.red .bg.bounce {
-  -webkit-animation-delay: .6s;
-  -moz-animation-delay: .6s;
-  -ms-animation-delay: .6s;
-  animation-delay: .6s;
-}
-
-.lilypad .bg,
-.frog .bg {
-  width: 100%;
-  height: 100%;
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.frog .bg {
-  background-size: 60% 60%;
-}
-
-.lilypad.green .bg {
-  background-image: url("./images/lilypad-green.svg");
-}
-
-.lilypad.red .bg {
-  background-image: url("./images/lilypad-red.svg");
-}
-
-.lilypad.yellow .bg {
-  background-image: url("./images/lilypad-yellow.svg");
-}
-
-.frog.green .bg {
-  background-image: url("./images/frog-green.svg");
-}
-
-.frog.red .bg {
-  background-image: url("./images/frog-red.svg");
-}
-
-.frog.yellow .bg {
-  background-image: url("./images/frog-yellow.svg");
+  &.yellow .bg {
+    background-image: url("./images/lilypad-yellow.svg");
+  }
 }
 
 .wrap {
