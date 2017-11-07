@@ -23,7 +23,8 @@ class App extends React.Component {
     this.toggleLevels = this.toggleLevels.bind(this);
     this.changeLevel = this.changeLevel.bind(this);
     this.toggleLang = this.toggleLang.bind(this);
-    this.changeLang = this.changeLang.bind(this);  
+    this.changeLang = this.changeLang.bind(this);
+    this.inputAnswer = this.inputAnswer.bind(this);
   }
 
   // Уровни =========================================================================================
@@ -115,6 +116,17 @@ class App extends React.Component {
     return strStyle + ';';
   }
 
+  // Ответы =========================================================================================
+  // Ввод ответа
+  inputAnswer (event) {
+    let answer = event.target.value;
+
+    console.log(answer);
+
+    event.target.value = 111;
+    // this.setState({ title });
+  }
+
   // Построение =====================================================================================
   // Проверка перед обнавлением состояния или свойств
   shouldComponentUpdate(nextProps, nextState) {
@@ -130,15 +142,19 @@ class App extends React.Component {
   }
 
   render() {
-    let dataLevel = levels[this.state.currentLevel];
-    let lang = this.state.currentLang;
     const styleShow = {
       display: "block"
     };
 
+    let dataLevel = levels[this.state.currentLevel];
+    let lang = this.state.currentLang;
+    
     let questionStyle = this.getArrayStyle( dataLevel.before + dataLevel.after );
     let strStyleAnswer = this.getStrStyle( dataLevel.style );
     let ansverStyle = this.getArrayStyle( dataLevel.before + strStyleAnswer + dataLevel.after );
+
+    let styleTextarea = {};
+    styleTextarea.height = (20 * Object.entries(dataLevel.style).length + 4) + 'px';
 
     return (
       <div>
@@ -181,7 +197,7 @@ class App extends React.Component {
             <div id="css">
               <div className="line-numbers">1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</div>
               <pre id="before" dangerouslySetInnerHTML={{__html: dataLevel.before}}></pre>
-              <textarea id="code"></textarea>
+              <textarea id="code" onChange={ this.inputAnswer } style={ styleTextarea }></textarea>
               <pre id="after" dangerouslySetInnerHTML={{__html: dataLevel.after}}></pre>
             </div>
             <button id="next" className="translate">{ messages.next[lang] }</button>
