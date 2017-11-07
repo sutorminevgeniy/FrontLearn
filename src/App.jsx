@@ -78,17 +78,41 @@ class App extends React.Component {
   getColor(color) {
     switch (color) {
       case 'g':
-        return ' green';
+        return 'green';
         break;
       case 'y':
-        return ' yellow';
+        return 'yellow';
         break;
       case 'r':
-        return ' red';
+        return 'red';
         break;
       default:
         return '';
     }
+  }
+
+  // Разбор строки стилей в массив
+  getArrayStyle (strStyle) {
+    let arrStyle = '{' + strStyle + '}';
+
+    arrStyle = arrStyle.replace(/([\{\}])\s*([^\{\}:;"]*)\s+\{/g, '$1 "$2": {');
+    arrStyle = arrStyle.replace(/([\{;])\s*([^\{\}:;"]*)\s*:/g, '$1 "$2": ');
+    arrStyle = arrStyle.replace(/:\s*([^\{\}"]+)\s*;/g, ': "$1";');
+    arrStyle = arrStyle.replace(/;/g, '');
+    arrStyle = arrStyle.replace(/(["\}])(\s+["\{])/g, '$1,$2');
+
+    return JSON.parse(arrStyle);
+  }
+
+  // Разбор массива стилей в строку
+  getStrStyle (arrStyle) {
+    let strStyle = JSON.stringify(arrStyle);
+
+    strStyle = strStyle.replace(/[\{\}"]/g, '');
+    strStyle = strStyle.replace(/:/g, ': ');
+    strStyle = strStyle.replace(/,/g, '; ');
+
+    return strStyle + ';';
   }
 
   // Построение =====================================================================================
@@ -111,6 +135,10 @@ class App extends React.Component {
     const styleShow = {
       display: "block"
     };
+
+    let questionStyle = this.getArrayStyle( dataLevel.before + dataLevel.after );
+    let strStyleAnswer = this.getStrStyle( dataLevel.style );
+    let ansverStyle = this.getArrayStyle( dataLevel.before + strStyleAnswer + dataLevel.after );
 
     return (
       <div>
@@ -197,20 +225,30 @@ class App extends React.Component {
 
         <section id="view">
           <div id="board">
-            <div id="pond">
+            <div id="pond" style={ questionStyle[ '#pond' ] ? questionStyle[ '#pond' ] : '' }>
               { dataLevel.board.split('').map((item, index) => {
+                let colorItem = this.getColor(item);
+
                 return (
-                  <div key={ index } className={ "frog" + this.getColor(item) }>
-                    <div className="bg animated pulse infinite"></div>
+                  <div 
+                    key={ index } 
+                    className={ "frog " + colorItem }
+                    style={ questionStyle[ '.' + colorItem ] ? questionStyle[ '.' + colorItem ] : {} } >
+                      <div className="bg animated pulse infinite"></div>
                   </div>
                 );
               }) }
             </div>
-            <div id="background">
+            <div id="background" style={ ansverStyle[ '#pond' ] ? ansverStyle[ '#pond' ] : {} }>
               { dataLevel.board.split('').map((item, index) => {
+                let colorItem = this.getColor(item);
+
                 return (
-                  <div key={ index } className={ "lilypad" + this.getColor(item) }>
-                    <div className="bg"></div>
+                  <div 
+                    key={ index } 
+                    className={ "lilypad " + colorItem }
+                    style={ ansverStyle[ '.' + colorItem ] ? ansverStyle[ '.' + colorItem ] : {} } >
+                      <div className="bg"></div>
                   </div>
                 );
               }) }
