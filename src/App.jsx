@@ -14,8 +14,11 @@ class App extends React.Component {
     this.state = {
       currentLevel: 0,
       currentLang: 'ru',
+      currentAnswer: '',
+      correctAnswer: levels[0].style,
+      disabledCheck: true,
       levelsShow: false,
-      langShow: false
+      langShow: false 
     };
 
     this.nextLevel = this.nextLevel.bind(this);
@@ -34,7 +37,11 @@ class App extends React.Component {
 
     if(nextLevel < (levels.length - 1)) {
       nextLevel++;
-      this.setState({ currentLevel: nextLevel });
+      this.setState({
+        currentLevel: nextLevel,
+        currentAnswer: '',
+        disabledCheck: true
+      });
     }
   }
 
@@ -44,7 +51,10 @@ class App extends React.Component {
 
     if(prevLevel > 0) {
       prevLevel--;
-      this.setState({ currentLevel: prevLevel });
+      this.setState({
+        currentLevel: prevLevel,
+        currentAnswer: ''
+      });
     }
   }
 
@@ -57,7 +67,10 @@ class App extends React.Component {
   changeLevel(event) {
     let level = parseInt(event.target.dataset.level);
 
-    this.setState({ currentLevel: level });
+    this.setState({
+      currentLevel: level,
+      currentAnswer: ''
+    });
   }
 
   // Языки ==========================================================================================
@@ -106,7 +119,7 @@ class App extends React.Component {
   }
 
   // Разбор массива стилей в строку
-  getStrStyle (arrStyle) {
+  getStrStyle(arrStyle) {
     let strStyle = JSON.stringify(arrStyle);
 
     strStyle = strStyle.replace(/[\{\}"]/g, '');
@@ -118,13 +131,30 @@ class App extends React.Component {
 
   // Ответы =========================================================================================
   // Ввод ответа
-  inputAnswer (event) {
-    let answer = event.target.value;
+  inputAnswer(event) {
+    let currentAnswer = event.target.value;
+    let correctAnswer = this.getStrStyle(this.state.correctAnswer);
+    let disabledCheck = true;
 
-    console.log(answer);
+    if(this.clearStr(correctAnswer) === this.clearStr(currentAnswer)) {
+      disabledCheck = false;
+    }
 
-    event.target.value = 111;
-    // this.setState({ title });
+    this.setState({
+      currentAnswer: currentAnswer,
+      disabledCheck: disabledCheck,
+    });
+
+    console.log(this.clearStr(correctAnswer), this.clearStr(currentAnswer));
+  }
+
+  clearStr(str) {
+    let result = str;
+
+    result = result.replace(/\s{2,}/g, ' ');
+    result = result.replace(/^(\s*)(.*)(\s*)$/, '$2');
+
+    return result;
   }
 
   // Построение =====================================================================================
@@ -197,10 +227,17 @@ class App extends React.Component {
             <div id="css">
               <div className="line-numbers">1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</div>
               <pre id="before" dangerouslySetInnerHTML={{__html: dataLevel.before}}></pre>
-              <textarea id="code" onChange={ this.inputAnswer } style={ styleTextarea }></textarea>
+              <textarea 
+                id="code" 
+                onChange={ this.inputAnswer } 
+                style={ styleTextarea } 
+                value={ this.state.currentAnswer }></textarea>
               <pre id="after" dangerouslySetInnerHTML={{__html: dataLevel.after}}></pre>
             </div>
-            <button id="next" className="translate">{ messages.next[lang] }</button>
+            <button 
+              id="next" 
+              className={ "translate" + (this.state.disabledCheck ? ' disabled' : '') }
+              onClick={ () => (this.state.disabledCheck ? '' : this.nextLevel()) }>{ messages.next[lang] }</button>
           </div>
 
           <div id="share">
