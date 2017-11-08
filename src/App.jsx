@@ -7,6 +7,13 @@ import messages from './messages';
 import './style.scss';
 import './animate.scss';
 
+import LevelCounter from './components/LevelCounter';
+import Instructions from './components/Instructions';
+import Editor       from './components/Editor';
+import Share        from './components/Share';
+import Credits      from './components/Credits';
+import Board        from './components/Board';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -40,6 +47,7 @@ class App extends React.Component {
       this.setState({
         currentLevel: nextLevel,
         currentAnswer: '',
+        correctAnswer: levels[nextLevel].style,
         disabledCheck: true
       });
     }
@@ -53,7 +61,8 @@ class App extends React.Component {
       prevLevel--;
       this.setState({
         currentLevel: prevLevel,
-        currentAnswer: ''
+        currentAnswer: '',
+        correctAnswer: levels[prevLevel].style,
       });
     }
   }
@@ -69,7 +78,8 @@ class App extends React.Component {
 
     this.setState({
       currentLevel: level,
-      currentAnswer: ''
+      currentAnswer: '',
+      correctAnswer: levels[level].style,
     });
   }
 
@@ -148,11 +158,13 @@ class App extends React.Component {
     console.log(this.clearStr(correctAnswer), this.clearStr(currentAnswer));
   }
 
+  // очистка строки от лишних пробельных символов
   clearStr(str) {
     let result = str;
 
-    result = result.replace(/\s{2,}/g, ' ');
-    result = result.replace(/^(\s*)(.*)(\s*)$/, '$2');
+    result = result.replace(/\s+/g, ' ');
+    result = result.replace(/^\s*/, '');
+    result = result.replace(/\s*$/, '');
 
     return result;
   }
@@ -172,140 +184,60 @@ class App extends React.Component {
   }
 
   render() {
-    const styleShow = {
-      display: "block"
-    };
-
     let dataLevel = levels[this.state.currentLevel];
-    let lang = this.state.currentLang;
     
     let questionStyle = this.getArrayStyle( dataLevel.before + dataLevel.after );
     let strStyleAnswer = this.getStrStyle( dataLevel.style );
     let ansverStyle = this.getArrayStyle( dataLevel.before + strStyleAnswer + dataLevel.after );
 
-    let styleTextarea = {};
-    styleTextarea.height = (20 * Object.entries(dataLevel.style).length + 4) + 'px';
-
     return (
       <div>
         <section id="sidebar">
           <div>
-            <div id="level-counter">
-              <span className={ "arrow left" + (this.state.currentLevel == 0 ? " disabled" : "") } onClick={ this.prevLevel }>◀</span>
-              <span id="level-indicator" onClick={ this.toggleLevels }>
-                <span id="labelLevel" className="translate">{ messages.labelLevel[lang] } </span>
-                <span className="current">{ this.state.currentLevel + 1 }</span>
-                <span id="labelOf" className="translate"> { messages.labelOf[lang] } </span>
-                <span className="total">{ levels.length } </span>
-                <span className="caret">▾</span>
-              </span>
-              <span className={ "arrow right" + (this.state.currentLevel == levels.length - 1 ? " disabled" : "")} onClick={ this.nextLevel }>▶</span>
-              <div id="levelsWrapper" className={ "tooltip" + (this.state.levelsShow ? "" : " hide") }>
-                <div id="levels">
-                  {
-                    levels.map((item, i) => {
-                      return (
-                        <span 
-                          key={ i } 
-                          className={"level-marker" + ( i === this.state.currentLevel ? " solved current" : "")}
-                          onClick={ this.changeLevel }
-                          data-level={ i } >{ i + 1 }</span>
-                      );
-                    })
-                  }
-                </div>
-                <div id="labelReset" className="translate" onClick={ this.toggleLevels }>{ messages.labelReset[lang] }</div>
-              </div>
-            </div>
-
-            <h1>Flexbox Froggy</h1>
-            <p id="instructions" dangerouslySetInnerHTML={{__html: dataLevel.instructions[lang]}}></p>
-            <p id="docs"></p>
+            <LevelCounter
+              currentLevel={ this.state.currentLevel }
+              currentLang ={ this.state.currentLang }
+              prevLevel   ={ this.prevLevel }
+              nextLevel   ={ this.nextLevel }
+              changeLevel ={ this.changeLevel }
+              levelsShow  ={ this.state.levelsShow }
+              toggleLevels={ this.toggleLevels } />
+            
+            <Instructions dataLevel={ dataLevel } currentLang ={ this.state.currentLang } />
           </div>
 
-          <div id="editor">
-            <div id="css">
-              <div className="line-numbers">1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</div>
-              <pre id="before" dangerouslySetInnerHTML={{__html: dataLevel.before}}></pre>
-              <textarea 
-                id="code" 
-                onChange={ this.inputAnswer } 
-                style={ styleTextarea } 
-                value={ this.state.currentAnswer }></textarea>
-              <pre id="after" dangerouslySetInnerHTML={{__html: dataLevel.after}}></pre>
-            </div>
-            <button 
-              id="next" 
-              className={ "translate" + (this.state.disabledCheck ? ' disabled' : '') }
-              onClick={ () => (this.state.disabledCheck ? '' : this.nextLevel()) }>{ messages.next[lang] }</button>
-          </div>
-
-          <div id="share">
-            <p className="img-next">
-              <a href="http://cssgridgarden.com"><img src="./images/next-gridgarden.png"/></a>
-              <a href="http://treehouse.7eer.net/c/371033/228915/3944?subId1=flexboxfroggy"><img src="./images/next-treehouse.png"/></a>
-            </p>
-            <p className="social">
-              <span id="tweet">
-                <a href="https://twitter.com/share" className="twitter-share-button" data-url="http://flexboxfroggy.com" data-via="playcodepip">Tweet</a>
-                <a href="https://twitter.com/playcodepip" className="twitter-follow-button" data-show-count="false">Follow @playcodepip</a>
-              </span>
-              <span className="fb-like" data-href="http://flexboxfroggy.com" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></span>
-            </p>
-          </div>
-          <div className="credits">
-            <span id="labelFooter" className="translate">{ messages.labelFooter[lang] } </span>
-            <a href="https://github.com/thomaspark/flexboxfroggy/">GitHub</a> • 
-            <span id="language">
-              <span id="languageActive" className="toggle translate" onClick={ this.toggleLang }>{ messages.languageActive[lang] }</span>
-              <span className={ "tooltip" + (this.state.langShow ? "" : " hide") }>
-                { Object.entries(messages.languageActive).map(item => {
-                  return (
-                    <a 
-                      key={ item[0] } 
-                      href={ "#" + item[0] } 
-                      data-lang={ item[0] }
-                      onClick={ this.changeLang } >{ item[1] }</a> 
-                  );
-                }) }
-              </span>
-            </span>
-          </div>
-          <div className="credits">
-            <span id="gridGarden" className="translate">Want to learn CSS grid? Play</span> <a href="http://cssgridgarden.com">Grid Garden</a>.
-          </div>
+          <Editor
+            dataLevel    ={ dataLevel }
+            currentLang  ={ this.state.currentLang }
+            inputAnswer  ={ this.inputAnswer }
+            currentAnswer={ this.state.currentAnswer }
+            disabledCheck={ this.state.disabledCheck }
+            nextLevel    ={ this.nextLevel } />
+          
+          <Share />
+          
+          <Credits
+            currentLang={ this.state.currentLang }
+            langShow   ={ this.state.langShow }
+            toggleLang ={ this.toggleLang }
+            changeLang ={ this.changeLang } />
         </section>
 
         <section id="view">
           <div id="board">
-            <div id="pond" style={ questionStyle[ '#pond' ] ? questionStyle[ '#pond' ] : '' }>
-              { dataLevel.board.split('').map((item, index) => {
-                let colorItem = this.getColor(item);
-
-                return (
-                  <div 
-                    key={ index } 
-                    className={ "frog " + colorItem }
-                    style={ questionStyle[ '.' + colorItem ] ? questionStyle[ '.' + colorItem ] : {} } >
-                      <div className="bg animated pulse infinite"></div>
-                  </div>
-                );
-              }) }
-            </div>
-            <div id="background" style={ ansverStyle[ '#pond' ] ? ansverStyle[ '#pond' ] : {} }>
-              { dataLevel.board.split('').map((item, index) => {
-                let colorItem = this.getColor(item);
-
-                return (
-                  <div 
-                    key={ index } 
-                    className={ "lilypad " + colorItem }
-                    style={ ansverStyle[ '.' + colorItem ] ? ansverStyle[ '.' + colorItem ] : {} } >
-                      <div className="bg"></div>
-                  </div>
-                );
-              }) }
-            </div>
+            <Board
+              style    ={ questionStyle }
+              dataLevel={ dataLevel }
+              getColor ={ this.getColor }
+              id="pond"
+              classFigurs="frog"
+              classFigureBg="animated pulse infinite" />
+            <Board
+              style    ={ ansverStyle }
+              dataLevel={ dataLevel }
+              getColor ={ this.getColor }
+              id="background"
+              classFigurs="lilypad" />
           </div>
         </section>
       </div>
