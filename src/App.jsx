@@ -20,12 +20,11 @@ class App extends React.Component {
 
     this.state = {
       currentLevel: 0,
-      currentLang: 'ru',
-      currentAnswer: '',
-      correctAnswer: levels[0].style,
-      disabledCheck: true,
       levelsShow: false,
-      langShow: false 
+      currentLang: 'ru',
+      langShow: false,
+      stateUser: Array(levels.length).fill(null).map(() => ({passed: false, answer: ''})),
+      correctAnswer: levels[0].style 
     };
   }
 
@@ -134,17 +133,19 @@ class App extends React.Component {
   // Ответы =========================================================================================
   // Ввод ответа
   inputAnswer(event) {
+    let stateUser = this.state.stateUser.slice();
     let currentAnswer = event.target.value;
     let correctAnswer = this.getStrStyle(this.state.correctAnswer);
-    let disabledCheck = true;
+
+    stateUser[this.state.currentLevel].answer = currentAnswer;
+    stateUser[this.state.currentLevel].passed = false;
 
     if(this.clearStr(correctAnswer) === this.clearStr(currentAnswer)) {
-      disabledCheck = false;
+      stateUser[this.state.currentLevel].passed = true;
     }
 
     this.setState({
-      currentAnswer: currentAnswer,
-      disabledCheck: disabledCheck,
+      stateUser: stateUser
     });
 
     console.log(this.clearStr(correctAnswer), this.clearStr(currentAnswer));
@@ -201,8 +202,8 @@ class App extends React.Component {
           <Editor
             dataLevel    ={ dataLevel }
             currentLang  ={ this.state.currentLang }
-            currentAnswer={ this.state.currentAnswer }
-            disabledCheck={ this.state.disabledCheck }
+            currentAnswer={ this.state.stateUser[this.state.currentLevel].answer }
+            passed       ={ this.state.stateUser[this.state.currentLevel].passed }
             nextLevel    ={ () => this.nextLevel() }
             inputAnswer  ={ (event) => this.inputAnswer(event) } />
           

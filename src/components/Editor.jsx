@@ -20,8 +20,8 @@ function Editor(props) {
       </div>
       <button 
         id="next" 
-        className={ "translate" + (props.disabledCheck ? ' disabled' : '') }
-        onClick={ () => (props.disabledCheck ? '' : props.nextLevel()) }>{ messages.next[props.currentLang] }</button>
+        className={ "translate" + (props.passed ? '' : ' disabled') }
+        onClick={ () => (props.passed ? props.nextLevel() : '') }>{ messages.next[props.currentLang] }</button>
     </div>
   );
 }
