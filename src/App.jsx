@@ -123,11 +123,13 @@ class App extends React.Component {
   getArrayStyle (strStyle) {
     let arrStyle = '{' + strStyle + '}';
 
-    arrStyle = arrStyle.replace(/([\{\}])\s*([^\{\}:;"]*)\s+\{/g, '$1 "$2": {');
-    arrStyle = arrStyle.replace(/([\{;])\s*([^\{\}:;"]*)\s*:/g, '$1 "$2": ');
-    arrStyle = arrStyle.replace(/:\s*([^\{\}"]+)\s*;/g, ': "$1";');
-    arrStyle = arrStyle.replace(/;/g, '');
-    arrStyle = arrStyle.replace(/(["\}])(\s+["\{])/g, '$1,$2');
+    arrStyle = arrStyle.replace(/([\{\}])\s*([^\{\}:;"]*)\s+\{/g, '$1 "$2": {')
+                       .replace(/([\{;])\s*([^\{\}:;"]*)\s*:/g, '$1 "$2": ')
+                       .replace(/:\s*([^\{\}"]+)\s*;/g, ': "$1";')              // добавление кавычек
+                       .replace(/;/g, '')                                       // удаление всех ;
+                       .replace(/(["\}])(\s+["\{])/g, '$1,$2');
+    // преобразование в верблюжью нотацию
+    arrStyle = arrStyle.replace(/-(\w)(\w*":)/g, (match, p1, p2) => p1.toUpperCase() + p2); 
 
     return JSON.parse(arrStyle);
   }
@@ -136,9 +138,9 @@ class App extends React.Component {
   getStrStyle(arrStyle) {
     let strStyle = JSON.stringify(arrStyle);
 
-    strStyle = strStyle.replace(/[\{\}"]/g, '');
-    strStyle = strStyle.replace(/:/g, ': ');
-    strStyle = strStyle.replace(/,/g, '; ');
+    strStyle = strStyle.replace(/[\{\}"]/g, '')
+                       .replace(/:/g, ': ')
+                       .replace(/,/g, '; ');
 
     return strStyle + ';';
   }
@@ -173,11 +175,11 @@ class App extends React.Component {
   clearStr(str) {
     let result = str;
 
-    result = result.replace(/\n/g, '; ');          // замена перевода строк на  ;
-    result = result.replace(/[\s;]+;/g, ';');      // очистка дублируемых ;;
-    result = result.replace(/\s+/g, ' ');          // очисика лишних побелов
-    result = result.replace(/(^\s*)|(\s*$)/g, ''); // удаление пробелов в начале/конце
-    result = result.replace(/([^;])$/, '$1;');     // добавление ; в конце
+    result = result.replace(/\n/g, '; ')          // замена перевода строк на  ;
+                   .replace(/[\s;]+;/g, ';')      // очистка дублируемых ;;
+                   .replace(/\s+/g, ' ')          // очисика лишних побелов
+                   .replace(/(^\s*)|(\s*$)/g, '') // удаление пробелов в начале/конце
+                   .replace(/([^;])$/, '$1;');    // добавление ; в конце
 
     return result;
   }
