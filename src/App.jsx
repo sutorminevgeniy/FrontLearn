@@ -27,14 +27,6 @@ class App extends React.Component {
       levelsShow: false,
       langShow: false 
     };
-
-    this.nextLevel = this.nextLevel.bind(this);
-    this.prevLevel = this.prevLevel.bind(this);
-    this.toggleLevels = this.toggleLevels.bind(this);
-    this.changeLevel = this.changeLevel.bind(this);
-    this.toggleLang = this.toggleLang.bind(this);
-    this.changeLang = this.changeLang.bind(this);
-    this.inputAnswer = this.inputAnswer.bind(this);
   }
 
   // Уровни =========================================================================================
@@ -197,11 +189,11 @@ class App extends React.Component {
             <LevelCounter
               currentLevel={ this.state.currentLevel }
               currentLang ={ this.state.currentLang }
-              prevLevel   ={ this.prevLevel }
-              nextLevel   ={ this.nextLevel }
-              changeLevel ={ this.changeLevel }
               levelsShow  ={ this.state.levelsShow }
-              toggleLevels={ this.toggleLevels } />
+              prevLevel   ={ () => this.prevLevel() }
+              nextLevel   ={ () => this.nextLevel() }
+              toggleLevels={ () => this.toggleLevels() }
+              changeLevel ={ (event) => this.changeLevel(event) } />
             
             <Instructions dataLevel={ dataLevel } currentLang ={ this.state.currentLang } />
           </div>
@@ -209,18 +201,18 @@ class App extends React.Component {
           <Editor
             dataLevel    ={ dataLevel }
             currentLang  ={ this.state.currentLang }
-            inputAnswer  ={ this.inputAnswer }
             currentAnswer={ this.state.currentAnswer }
             disabledCheck={ this.state.disabledCheck }
-            nextLevel    ={ this.nextLevel } />
+            nextLevel    ={ () => this.nextLevel() }
+            inputAnswer  ={ (event) => this.inputAnswer(event) } />
           
           <Share />
           
           <Credits
             currentLang={ this.state.currentLang }
             langShow   ={ this.state.langShow }
-            toggleLang ={ this.toggleLang }
-            changeLang ={ this.changeLang } />
+            toggleLang ={ () => this.toggleLang() }
+            changeLang ={ (event) => this.changeLang(event) } />
         </section>
 
         <section id="view">
@@ -228,14 +220,14 @@ class App extends React.Component {
             <Board
               style    ={ questionStyle }
               dataLevel={ dataLevel }
-              getColor ={ this.getColor }
+              getColor ={ (arg) => this.getColor(arg) }
               id="pond"
               classFigurs="frog"
               classFigureBg="animated pulse infinite" />
             <Board
               style    ={ ansverStyle }
               dataLevel={ dataLevel }
-              getColor ={ this.getColor }
+              getColor ={ (arg) => this.getColor(arg) }
               id="background"
               classFigurs="lilypad" />
           </div>
