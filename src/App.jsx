@@ -47,13 +47,7 @@ class App extends React.Component {
     let nextLevel = this.state.currentLevel;
 
     if(nextLevel < (levels.length - 1)) {
-      nextLevel++;
-      this.setState({
-        currentLevel: nextLevel,
-        currentAnswer: '',
-        correctAnswer: levels[nextLevel].style,
-        disabledCheck: true
-      });
+      this.setState({ currentLevel: ++nextLevel });
     }
   }
 
@@ -62,12 +56,7 @@ class App extends React.Component {
     let prevLevel = this.state.currentLevel;
 
     if(prevLevel > 0) {
-      prevLevel--;
-      this.setState({
-        currentLevel: prevLevel,
-        currentAnswer: '',
-        correctAnswer: levels[prevLevel].style,
-      });
+      this.setState({ currentLevel: --prevLevel });
     }
   }
 
@@ -80,11 +69,7 @@ class App extends React.Component {
   changeLevel(event) {
     let level = parseInt(event.target.dataset.level);
 
-    this.setState({
-      currentLevel: level,
-      currentAnswer: '',
-      correctAnswer: levels[level].style,
-    });
+    this.setState({ currentLevel: level });
   }
 
   // Языки ==========================================================================================
