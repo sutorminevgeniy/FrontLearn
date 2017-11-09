@@ -18,12 +18,25 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    let stateUser = Array(levels.length).fill(null).map((item, i) => {
+      let questionStyle = this.getArrayStyle( levels[i].before + levels[i].after );
+      let strStyleAnswer = this.getStrStyle( levels[i].style );
+      let ansverStyle = this.getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
+
+      return {
+        passed: false,
+        answer: '',
+        ansverStyle,
+        questionStyle
+      };
+    });
+
     this.state = {
       currentLevel: 0,
       levelsShow: false,
       currentLang: 'ru',
       langShow: false,
-      stateUser: Array(levels.length).fill(null).map(() => ({passed: false, answer: ''})),
+      stateUser: stateUser,
       correctAnswer: levels[0].style 
     };
   }
@@ -140,6 +153,12 @@ class App extends React.Component {
     stateUser[this.state.currentLevel].answer = currentAnswer;
     stateUser[this.state.currentLevel].passed = false;
 
+    try {
+      stateUser[this.state.currentLevel].questionStyle = this.getArrayStyle( levels[this.state.currentLevel].before + this.clearStr(currentAnswer) + levels[this.state.currentLevel].after );
+    } catch (err) {
+      console.log('Стиль не корректен для конвертации: ', currentAnswer);
+    }
+
     if(this.clearStr(correctAnswer) === this.clearStr(currentAnswer)) {
       stateUser[this.state.currentLevel].passed = true;
     }
@@ -147,17 +166,18 @@ class App extends React.Component {
     this.setState({
       stateUser: stateUser
     });
-
-    console.log(this.clearStr(correctAnswer), this.clearStr(currentAnswer));
+    console.log('Верный ответ: ',correctAnswer);
   }
 
   // очистка строки от лишних пробельных символов
   clearStr(str) {
     let result = str;
 
-    result = result.replace(/\s+/g, ' ');
-    result = result.replace(/^\s*/, '');
-    result = result.replace(/\s*$/, '');
+    result = result.replace(/\n/g, '; ');          // замена перевода строк на  ;
+    result = result.replace(/[\s;]+;/g, ';');      // очистка дублируемых ;;
+    result = result.replace(/\s+/g, ' ');          // очисика лишних побелов
+    result = result.replace(/(^\s*)|(\s*$)/g, ''); // удаление пробелов в начале/конце
+    result = result.replace(/([^;])$/, '$1;');     // добавление ; в конце
 
     return result;
   }
@@ -177,18 +197,15 @@ class App extends React.Component {
   }
 
   render() {
-    let dataLevel = levels[this.state.currentLevel];
-    
-    let questionStyle = this.getArrayStyle( dataLevel.before + dataLevel.after );
-    let strStyleAnswer = this.getStrStyle( dataLevel.style );
-    let ansverStyle = this.getArrayStyle( dataLevel.before + strStyleAnswer + dataLevel.after );
+    let currentLevel = this.state.currentLevel;
+    let dataLevel = levels[currentLevel];
 
     return (
       <div>
         <section id="sidebar">
           <div>
             <LevelCounter
-              currentLevel={ this.state.currentLevel }
+              currentLevel={ currentLevel }
               currentLang ={ this.state.currentLang }
               levelsShow  ={ this.state.levelsShow }
               prevLevel   ={ () => this.prevLevel() }
@@ -202,8 +219,8 @@ class App extends React.Component {
           <Editor
             dataLevel    ={ dataLevel }
             currentLang  ={ this.state.currentLang }
-            currentAnswer={ this.state.stateUser[this.state.currentLevel].answer }
-            passed       ={ this.state.stateUser[this.state.currentLevel].passed }
+            currentAnswer={ this.state.stateUser[currentLevel].answer }
+            passed       ={ this.state.stateUser[currentLevel].passed }
             nextLevel    ={ () => this.nextLevel() }
             inputAnswer  ={ (event) => this.inputAnswer(event) } />
           
@@ -219,14 +236,14 @@ class App extends React.Component {
         <section id="view">
           <div id="board">
             <Board
-              style    ={ questionStyle }
+              style    ={ this.state.stateUser[currentLevel].questionStyle }
               dataLevel={ dataLevel }
               getColor ={ (arg) => this.getColor(arg) }
               id="pond"
               classFigurs="frog"
               classFigureBg="animated pulse infinite" />
             <Board
-              style    ={ ansverStyle }
+              style    ={ this.state.stateUser[currentLevel].ansverStyle }
               dataLevel={ dataLevel }
               getColor ={ (arg) => this.getColor(arg) }
               id="background"
