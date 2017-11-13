@@ -88,7 +88,7 @@ class App extends React.Component {
 
   // Фигуры =========================================================================================
   // Получение цвета
-  getColor(color) {
+  getColor(color = '') {
     switch (color) {
       case 'g':
         return 'green';
@@ -99,8 +99,6 @@ class App extends React.Component {
       case 'r':
         return 'red';
         break;
-      default:
-        return '';
     }
   }
 
