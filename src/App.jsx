@@ -12,7 +12,7 @@ import './style.scss';
 import './animate.scss';
 
 import LevelCounter from './components/LevelCounter';
-import Instructions from './components/Instructions';
+import InstructionsContainer from './container/InstructionsContainer';
 import Editor       from './components/Editor';
 import Share        from './components/Share';
 import Credits      from './components/Credits';
@@ -28,12 +28,12 @@ let stateUser = Array(levels.length).fill(null).map((item, i) => {
 });
 
 const initialState = {
-      currentLevel: 0,
-      levelsShow: false,
-      lang: 'ru',
-      stateUser: stateUser,
-      correctAnswer: levels[0].style 
-    };
+  level: 0,
+  levelsShow: false,
+  lang: 'ru',
+  stateUser: stateUser,
+  correctAnswer: levels[0].style 
+};
 
 const store = createStore(reducer, initialState);
 
@@ -202,7 +202,7 @@ class App extends React.Component {
               toggleLevels={ () => this.toggleLevels() }
               changeLevel ={ (event) => this.changeLevel(event) } />
             
-            <Instructions dataLevel={ dataLevel } currentLang ={ this.state.currentLang } />
+            <InstructionsContainer />
           </div>
 
           <Editor

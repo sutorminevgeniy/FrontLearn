@@ -6,7 +6,6 @@ import LanguageContainer from '../container/LanguageContainer';
 import messages from '../messages';
 
 function CreditsLang(props) {
-      console.log(props);
   return (
     <div>
       <div className="credits">
