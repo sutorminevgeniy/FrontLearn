@@ -11,12 +11,12 @@ import messages from './messages';
 import './style.scss';
 import './animate.scss';
 
-import LevelCounter from './components/LevelCounter';
+import LevelCounterContainer from './container/LevelCounterContainer';
 import InstructionsContainer from './container/InstructionsContainer';
 import Editor       from './components/Editor';
+import Board        from './components/Board';
 import Share        from './components/Share';
 import Credits      from './components/Credits';
-import Board        from './components/Board';
 
 let stateUser = Array(levels.length).fill(null).map((item, i) => {
   return {
@@ -29,7 +29,6 @@ let stateUser = Array(levels.length).fill(null).map((item, i) => {
 
 const initialState = {
   level: 0,
-  levelsShow: false,
   lang: 'ru',
   stateUser: stateUser,
   correctAnswer: levels[0].style 
@@ -56,42 +55,10 @@ class App extends React.Component {
 
     this.state = {
       currentLevel: 0,
-      levelsShow: false,
       currentLang: 'ru',
       stateUser: stateUser,
       correctAnswer: levels[0].style 
     };
-  }
-
-  // Уровни =========================================================================================
-  // Следующий уровень
-  nextLevel() {
-    let nextLevel = this.state.currentLevel;
-
-    if(nextLevel < (levels.length - 1)) {
-      this.setState({ currentLevel: ++nextLevel });
-    }
-  }
-
-  // Предыдущий уровень
-  prevLevel() {
-    let prevLevel = this.state.currentLevel;
-
-    if(prevLevel > 0) {
-      this.setState({ currentLevel: --prevLevel });
-    }
-  }
-
-  // Открытие закрытие окна с уровнями
-  toggleLevels() {
-    this.setState({ levelsShow: !this.state.levelsShow });
-  }
-
-  // Выбор уровня
-  changeLevel(event) {
-    let level = parseInt(event.target.dataset.level);
-
-    this.setState({ currentLevel: level });
   }
 
   // Фигуры =========================================================================================
@@ -176,15 +143,6 @@ class App extends React.Component {
   }
 
   // Построение =====================================================================================
-  // Проверка перед обнавлением состояния или свойств
-  shouldComponentUpdate(nextProps, nextState) {
-    if(this.state.levelsShow) {
-      nextState.levelsShow = false;
-    }
-
-    return true;
-  }
-
   render() {
     let currentLevel = this.state.currentLevel;
     let dataLevel = levels[currentLevel];
@@ -193,15 +151,7 @@ class App extends React.Component {
       <div>
         <section id="sidebar">
           <div>
-            <LevelCounter
-              currentLevel={ currentLevel }
-              currentLang ={ this.state.currentLang }
-              levelsShow  ={ this.state.levelsShow }
-              prevLevel   ={ () => this.prevLevel() }
-              nextLevel   ={ () => this.nextLevel() }
-              toggleLevels={ () => this.toggleLevels() }
-              changeLevel ={ (event) => this.changeLevel(event) } />
-            
+            <LevelCounterContainer />
             <InstructionsContainer />
           </div>
 
