@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Share(props) {
+function Share() {
   return (
     <div id="share">
       <p className="img-next">

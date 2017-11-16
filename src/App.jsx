@@ -1,5 +1,9 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import reducer from './reducers';
 
 import {levels, levelWin} from './levels';
 import messages from './messages';
@@ -13,6 +17,25 @@ import Editor       from './components/Editor';
 import Share        from './components/Share';
 import Credits      from './components/Credits';
 import Board        from './components/Board';
+
+let stateUser = Array(levels.length).fill(null).map((item, i) => {
+  return {
+    passed: false,
+    answer: '',
+    ansverStyle: '',
+    questionStyle: ''
+  };
+});
+
+const initialState = {
+      currentLevel: 0,
+      levelsShow: false,
+      lang: 'ru',
+      stateUser: stateUser,
+      correctAnswer: levels[0].style 
+    };
+
+const store = createStore(reducer, initialState);
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +58,6 @@ class App extends React.Component {
       currentLevel: 0,
       levelsShow: false,
       currentLang: 'ru',
-      langShow: false,
       stateUser: stateUser,
       correctAnswer: levels[0].style 
     };
@@ -70,20 +92,6 @@ class App extends React.Component {
     let level = parseInt(event.target.dataset.level);
 
     this.setState({ currentLevel: level });
-  }
-
-  // Языки ==========================================================================================
-  // Открытие закрытие окна с языками
-  toggleLang() {
-    this.setState({ langShow: !this.state.langShow });
-  }
-
-  // Выбор уровня
-  changeLang(event) {
-    event.preventDefault();
-    let lang = event.target.dataset.lang;
-
-    this.setState({ currentLang: lang });
   }
 
   // Фигуры =========================================================================================
@@ -174,10 +182,6 @@ class App extends React.Component {
       nextState.levelsShow = false;
     }
 
-    if(this.state.langShow) {
-      nextState.langShow = false;
-    }
-
     return true;
   }
 
@@ -211,11 +215,7 @@ class App extends React.Component {
           
           <Share />
           
-          <Credits
-            currentLang={ this.state.currentLang }
-            langShow   ={ this.state.langShow }
-            toggleLang ={ () => this.toggleLang() }
-            changeLang ={ (event) => this.changeLang(event) } />
+          <Credits />
         </section>
 
         <section id="view">
@@ -240,4 +240,8 @@ class App extends React.Component {
   }  
 }
 
-ReactDom.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>, 
+  document.getElementById('root'));
