@@ -1,3 +1,10 @@
+export const INIT_STATE_USER = 'INIT_STATE_USER';
+export function initStateUser() {
+    return {
+        type: INIT_STATE_USER
+    };
+}
+
 export const CHANGE_LANG = 'CHANGE_LANG';
 export function changeLang(lang) {
     return {

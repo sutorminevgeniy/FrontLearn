@@ -1,15 +1,16 @@
+import './style.scss';
+import './animate.scss';
+
+import {levels, levelWin} from './levels';
+import messages from './messages';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import reducer from './reducers';
-
-import {levels, levelWin} from './levels';
-import messages from './messages';
-
-import './style.scss';
-import './animate.scss';
+import { nextLevel, prevLevel, changeLevel, initStateUser } from './actions';
 
 import LevelCounterContainer from './container/LevelCounterContainer';
 import InstructionsContainer from './container/InstructionsContainer';
@@ -18,19 +19,10 @@ import Board        from './components/Board';
 import Share        from './components/Share';
 import Credits      from './components/Credits';
 
-let stateUser = Array(levels.length).fill(null).map((item, i) => {
-  return {
-    passed: false,
-    answer: '',
-    ansverStyle: '',
-    questionStyle: ''
-  };
-});
-
 const initialState = {
   level: 0,
   lang: 'ru',
-  stateUser: stateUser,
+  stateUser: [],
   correctAnswer: levels[0].style 
 };
 
@@ -59,6 +51,10 @@ class App extends React.Component {
       stateUser: stateUser,
       correctAnswer: levels[0].style 
     };
+  }
+
+  componentDidMount() {
+      store.dispatch(initStateUser());
   }
 
   // Фигуры =========================================================================================
