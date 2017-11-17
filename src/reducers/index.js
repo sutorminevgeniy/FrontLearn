@@ -1,12 +1,17 @@
 import {levels, levelWin} from '../levels';
 
-import { CHANGE_LANG, NEXT_LEVEL, PREV_LEVEL, CHANGE_LEVEL, INIT_STATE_USER, INPUT_ANSWER } from '../actions';
+import { CHANGE_LANG, 
+         NEXT_LEVEL, 
+         PREV_LEVEL, 
+         CHANGE_LEVEL, 
+         INIT_STATE_USER, 
+         INPUT_ANSWER } from '../actions';
 
 function reducer(state = {}, action) {
     switch (action.type) {
         case INIT_STATE_USER:
             return Object.assign({}, state, {
-                stateUser: getStateUser()
+                stateUser: initStateUser()
             });
 
         case INPUT_ANSWER:
@@ -41,6 +46,25 @@ function reducer(state = {}, action) {
 
 export default reducer;
 
+// Инициализация ==================================================================================
+// Инициализация пользовательского состояния
+function initStateUser() {
+    let stateUser = Array(levels.length).fill(null).map((item, i) => {
+      let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
+      let strStyleAnswer = getStrStyle( levels[i].style );
+      let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
+
+      return {
+        passed: false,
+        answer: '',
+        ansverStyle,
+        questionStyle
+      };
+    });
+
+    return stateUser;
+}
+
 // Разбор строки стилей в массив
 function getArrayStyle (strStyle) {
     let arrStyle = '{' + strStyle + '}';
@@ -65,23 +89,6 @@ function getStrStyle(arrStyle) {
                        .replace(/,/g, '; ');
 
     return strStyle + ';';
-}
-
-function getStateUser() {
-    let stateUser = Array(levels.length).fill(null).map((item, i) => {
-      let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
-      let strStyleAnswer = getStrStyle( levels[i].style );
-      let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
-
-      return {
-        passed: false,
-        answer: '',
-        ansverStyle,
-        questionStyle
-      };
-    });
-
-    return stateUser;
 }
 
 // Ответы =========================================================================================

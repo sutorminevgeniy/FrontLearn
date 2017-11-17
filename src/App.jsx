@@ -1,16 +1,15 @@
-import './style.scss';
-import './animate.scss';
-
-import {levels, levelWin} from './levels';
-import messages from './messages';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
+import './style.scss';
+import './animate.scss';
+
+import {levels, levelWin} from './levels';
+
 import reducer from './reducers';
-import { nextLevel, prevLevel, changeLevel, initStateUser } from './actions';
+import { initStateUser } from './actions';
 
 import LevelCounterContainer from './container/LevelCounterContainer';
 import InstructionsContainer from './container/InstructionsContainer';
@@ -41,10 +40,7 @@ class App extends React.Component {
       store.dispatch(initStateUser());
   }
 
-
-  // Построение =====================================================================================
   render() {
-    console.log(store.getState().stateUser[store.getState().level]);
     return (
       <div>
         <section id="sidebar">
