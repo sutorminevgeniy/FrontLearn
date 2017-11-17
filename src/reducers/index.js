@@ -1,6 +1,45 @@
 import {levels, levelWin} from '../levels';
 
-import { CHANGE_LANG, NEXT_LEVEL, PREV_LEVEL, CHANGE_LEVEL, INIT_STATE_USER } from '../actions';
+import { CHANGE_LANG, NEXT_LEVEL, PREV_LEVEL, CHANGE_LEVEL, INIT_STATE_USER, INPUT_ANSWER } from '../actions';
+
+function reducer(state = {}, action) {
+    switch (action.type) {
+        case INIT_STATE_USER:
+            return Object.assign({}, state, {
+                stateUser: getStateUser()
+            });
+
+        case INPUT_ANSWER:
+            return Object.assign({}, state, {
+                stateUser: inputAnswer(action.answer, state)
+            });
+
+        case CHANGE_LANG:
+            return Object.assign({}, state, {
+                lang: action.lang
+            });
+
+        case NEXT_LEVEL:
+            return Object.assign({}, state, {
+                level: state.level + 1
+            });
+
+        case PREV_LEVEL:
+            return Object.assign({}, state, {
+                level: state.level - 1
+            });
+
+        case CHANGE_LEVEL:
+            return Object.assign({}, state, {
+                level: action.level
+            });
+
+        default:
+            return state;
+    }
+}
+
+export default reducer;
 
 // Разбор строки стилей в массив
 function getArrayStyle (strStyle) {
@@ -45,36 +84,39 @@ function getStateUser() {
     return stateUser;
 }
 
-function reducer(state = {}, action) {
-    switch (action.type) {
-        case INIT_STATE_USER:
-            return Object.assign({}, state, {
-                stateUser: getStateUser()
-            });
+// Ответы =========================================================================================
+// Ввод ответа
+function inputAnswer(answer, state) {
+    let stateUser = state.stateUser.slice();
+    let correctAnswer = getStrStyle(levels[state.level].style);
 
-        case CHANGE_LANG:
-            return Object.assign({}, state, {
-                lang: action.lang
-            });
+    stateUser[state.level].answer = answer;
+    stateUser[state.level].passed = false;
 
-        case NEXT_LEVEL:
-            return Object.assign({}, state, {
-                level: state.level + 1
-            });
-
-        case PREV_LEVEL:
-            return Object.assign({}, state, {
-                level: state.level - 1
-            });
-
-        case CHANGE_LEVEL:
-            return Object.assign({}, state, {
-                level: action.level
-            });
-
-        default:
-            return state;
+    try {
+      stateUser[state.level].questionStyle = getArrayStyle( levels[state.level].before + clearStr(answer) + levels[state.level].after );
+    } catch (err) {
+      console.log('Стиль не корректен для конвертации: ', answer);
     }
+
+    if(clearStr(correctAnswer) === clearStr(answer)) {
+      stateUser[state.level].passed = true;
+    }
+
+    console.log('Верный ответ: ',correctAnswer);
+
+    return stateUser;
 }
 
-export default reducer;
+  // очистка строки от лишних пробельных символов
+function clearStr(str) {
+    let result = str;
+
+    result = result.replace(/\n/g, '; ')          // замена перевода строк на  ;
+                   .replace(/[\s;]+;/g, ';')      // очистка дублируемых ;;
+                   .replace(/\s+/g, ' ')          // очисика лишних побелов
+                   .replace(/(^\s*)|(\s*$)/g, '') // удаление пробелов в начале/конце
+                   .replace(/([^;])$/, '$1;');    // добавление ; в конце
+
+    return result;
+}

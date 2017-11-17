@@ -5,6 +5,14 @@ export function initStateUser() {
     };
 }
 
+export const INPUT_ANSWER = 'INPUT_ANSWER';
+export function inputAnswer(answer) {
+    return {
+        type: INPUT_ANSWER,
+        answer
+    };
+}
+
 export const CHANGE_LANG = 'CHANGE_LANG';
 export function changeLang(lang) {
     return {

@@ -1,7 +1,7 @@
-import React from 'react';
-
 import {levels, levelWin} from '../levels';
 import messages from '../messages';
+
+import React from 'react';
 
 class LevelCounter extends React.Component {
   constructor(props) {
