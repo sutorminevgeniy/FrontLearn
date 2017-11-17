@@ -15,7 +15,7 @@ import { nextLevel, prevLevel, changeLevel, initStateUser } from './actions';
 import LevelCounterContainer from './container/LevelCounterContainer';
 import InstructionsContainer from './container/InstructionsContainer';
 import EditorContainer       from './container/EditorContainer';
-import Board        from './components/Board';
+import BoardContainer        from './container/BoardContainer';
 import Share        from './components/Share';
 import Credits      from './components/Credits';
 
@@ -23,8 +23,8 @@ let stateUser = Array(levels.length).fill(null).map((item, i) => {
   return {
     passed: false,
     answer: '',
-    ansverStyle: '',
-    questionStyle: ''
+    ansverStyle: {},
+    questionStyle: {}
   };
 });
 
@@ -41,28 +41,10 @@ class App extends React.Component {
       store.dispatch(initStateUser());
   }
 
-  // Фигуры =========================================================================================
-  // Получение цвета
-  getColor(color = '') {
-    switch (color) {
-      case 'g':
-        return 'green';
-        break;
-      case 'y':
-        return 'yellow';
-        break;
-      case 'r':
-        return 'red';
-        break;
-    }
-  }
 
   // Построение =====================================================================================
   render() {
-
-    let currentLevel = '0';
-    let dataLevel = levels[currentLevel];
-
+    console.log(store.getState().stateUser[store.getState().level]);
     return (
       <div>
         <section id="sidebar">
@@ -79,7 +61,17 @@ class App extends React.Component {
         </section>
 
         <section id="view">
-
+          <div id="board">
+            <BoardContainer
+              styleFigurs  ="questionStyle"
+              id           ="pond"
+              classFigurs  ="frog"
+              classFigureBg="animated pulse infinite" />
+            <BoardContainer
+              styleFigurs="ansverStyle"
+              id         ="background"
+              classFigurs="lilypad" />
+          </div>
         </section>
       </div>
     );      
@@ -93,18 +85,3 @@ ReactDOM.render(
   document.getElementById('root'));
 
 
-          // <div id="board">
-          //   <Board
-          //     style    ={ store.getState().stateUser[currentLevel].questionStyle }
-          //     dataLevel={ dataLevel }
-          //     getColor ={ (arg) => this.getColor(arg) }
-          //     id="pond"
-          //     classFigurs="frog"
-          //     classFigureBg="animated pulse infinite" />
-          //   <Board
-          //     style    ={ store.getState().stateUser[currentLevel].ansverStyle }
-          //     dataLevel={ dataLevel }
-          //     getColor ={ (arg) => this.getColor(arg) }
-          //     id="background"
-          //     classFigurs="lilypad" />
-          // </div>

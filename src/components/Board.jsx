@@ -1,16 +1,18 @@
 import React from 'react';
 
 function Board(props) {
+  let style = props.state.stateUser[props.state.level][props.styleFigurs]
+  
   return (
-    <div id={ props.id } style={ props.style[ '#pond' ] ? props.style[ '#pond' ] : '' }>
+    <div id={ props.id } style={ style[ '#pond' ] ? style[ '#pond' ] : {} }>
       { props.dataLevel.board.split('').map((item, index) => {
-        let colorItem = props.getColor(item);
+        let colorItem = getColor(item);
 
         return (
           <div 
             key={ index } 
             className={ props.classFigurs + ' ' + colorItem }
-            style={ props.style[ '.' + colorItem ] ? props.style[ '.' + colorItem ] : {} } >
+            style={ style[ '.' + colorItem ] ? style[ '.' + colorItem ] : {} } >
               <div className={ "bg " + props.classFigureBg }></div>
           </div>
         );
@@ -20,3 +22,19 @@ function Board(props) {
 }
 
 export default Board;
+
+  // Фигуры =========================================================================================
+  // Получение цвета
+function  getColor(color = '') {
+    switch (color) {
+      case 'g':
+        return 'green';
+        break;
+      case 'y':
+        return 'yellow';
+        break;
+      case 'r':
+        return 'red';
+        break;
+    }
+  }
