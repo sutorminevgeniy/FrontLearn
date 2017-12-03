@@ -5,8 +5,9 @@ import { nextLevel, prevLevel, changeLevel } from '../actions';
 import LevelCounter from '../components/LevelCounter';
 
 function mapStateToProps(state) {
+   console.log(state);
     return {
-        state
+        state: state.reducer
     };
 }
 

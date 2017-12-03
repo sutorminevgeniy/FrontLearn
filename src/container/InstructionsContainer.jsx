@@ -7,7 +7,7 @@ import {levels} from '../levels';
 
 function mapStateToProps(state) {
   return {
-    content: levels[state.level].instructions[state.lang]
+    content: levels[state.reducer.level].instructions[state.reducer.lang]
   };
 }
 

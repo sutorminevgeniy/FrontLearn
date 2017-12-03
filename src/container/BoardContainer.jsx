@@ -6,10 +6,10 @@ import Board from '../components/Board';
 import {levels} from '../levels';
 
 function mapStateToProps(state) {
-  let dataLevel = levels[state.level];
+  let dataLevel = levels[state.reducer.level];
 
   return {
-    state,
+    state: state.reducer,
     dataLevel
   };
 }

@@ -7,7 +7,22 @@ import { CHANGE_LANG,
          INIT_STATE_USER, 
          INPUT_ANSWER } from '../actions';
 
-function reducer(state = {}, action) {
+let stateUser = Array(levels.length).fill(null).map((item, i) => {
+  return {
+    passed: false,
+    answer: '',
+    ansverStyle: {},
+    questionStyle: {}
+  };
+});
+
+const initialState = {
+  level: 0,
+  lang: 'ru',
+  stateUser: stateUser
+};
+
+function reducer(state = initialState, action) {
     switch (action.type) {
         case INIT_STATE_USER:
             return Object.assign({}, state, {

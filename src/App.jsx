@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+import { Router, Route, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+
+import createHistory from 'history/createBrowserHistory'
 
 import './style.scss';
 import './animate.scss';
@@ -18,22 +22,16 @@ import BoardContainer        from './container/BoardContainer';
 import Share        from './components/Share';
 import Credits      from './components/Credits';
 
-let stateUser = Array(levels.length).fill(null).map((item, i) => {
-  return {
-    passed: false,
-    answer: '',
-    ansverStyle: {},
-    questionStyle: {}
-  };
-});
+const store = createStore(
+  combineReducers({
+    reducer,
+    routing: routerReducer
+  })
+)
 
-const initialState = {
-  level: 0,
-  lang: 'ru',
-  stateUser: stateUser
-};
-
-const store = createStore(reducer, initialState);
+// Create an enhanced history that syncs navigation events with the store 
+// const history = syncHistoryWithStore(browserHistory, store)
+const history = createHistory()
 
 class App extends React.Component {
   componentDidMount() {
@@ -76,8 +74,12 @@ class App extends React.Component {
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={history}>
+      <Route path="/" component={App} />
+    </Router>
   </Provider>, 
   document.getElementById('root'));
+
+
 
 
