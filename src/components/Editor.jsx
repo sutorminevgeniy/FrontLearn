@@ -1,8 +1,8 @@
-import {levels, levelWin} from '../levels';
+import {levels, levelWin} from '../data/levels';
 
 import React from 'react';
 
-import messages from '../messages';
+import messages from '../data/messages';
 
 class Editor extends React.Component {
   constructor(props) {

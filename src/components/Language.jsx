@@ -1,6 +1,6 @@
 import React from 'react';
 
-import messages from '../messages';
+import messages from '../data/messages';
 
 class Language extends React.Component {
   constructor(props) {

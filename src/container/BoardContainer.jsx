@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Board from '../components/Board';
 
-import {levels} from '../levels';
+import {levels} from '../data/levels';
 
 function mapStateToProps(state) {
   let dataLevel = levels[state.reducer.level];

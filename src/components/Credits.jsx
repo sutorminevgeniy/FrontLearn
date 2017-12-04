@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import LanguageContainer from '../container/LanguageContainer';
 
-import messages from '../messages';
+import messages from '../data/messages';
 
 function CreditsLang(props) {
   return (

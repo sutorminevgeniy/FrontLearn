@@ -1,5 +1,5 @@
-import {levels, levelWin} from '../levels';
-import messages from '../messages';
+import {levels, levelWin} from '../data/levels';
+import messages from '../data/messages';
 
 import React from 'react';
 

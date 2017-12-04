@@ -1,4 +1,4 @@
-import {levels, levelWin} from '../levels';
+import {levels, levelWin} from '../data/levels';
 
 import { CHANGE_LANG, 
          NEXT_LEVEL, 

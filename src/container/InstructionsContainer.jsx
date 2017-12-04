@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Instructions from '../components/Instructions';
 
-import {levels} from '../levels';
+import {levels} from '../data/levels';
 
 function mapStateToProps(state) {
   return {

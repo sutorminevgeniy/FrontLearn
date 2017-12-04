@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
 import createHistory from 'history/createBrowserHistory'
+import { Route, Link, Switch } from 'react-router-dom';
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
+
+
 
 import './style.scss';
 import './animate.scss';
 
-import {levels, levelWin} from './levels';
+import {levels, levelWin} from './data/levels';
 
 import reducer from './reducers';
 import { initStateUser } from './actions';
@@ -22,16 +24,21 @@ import BoardContainer        from './container/BoardContainer';
 import Share        from './components/Share';
 import Credits      from './components/Credits';
 
+// Создание выбранной вами истории для браузера
+const history = createHistory();
+
+// Создаем middleware для перехвата и отправки действий навигации
+const middleware = routerMiddleware(history);
+
+
 const store = createStore(
   combineReducers({
     reducer,
     routing: routerReducer
-  })
+  }),
+  applyMiddleware(middleware)
 )
 
-// Create an enhanced history that syncs navigation events with the store 
-// const history = syncHistoryWithStore(browserHistory, store)
-const history = createHistory()
 
 class App extends React.Component {
   componentDidMount() {
@@ -40,12 +47,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="page">
         <section id="sidebar">
           <div>
             <LevelCounterContainer />
             <InstructionsContainer />
           </div>
+
+          <a href="/about">About</a>
 
           <EditorContainer />
           
@@ -72,14 +81,25 @@ class App extends React.Component {
   }  
 }
 
+const Links = () => (
+  <nav>
+    <Link to='/'>Home</Link>
+    <Link to='/about'>About</Link>
+    <Link to='/lesson'>Lesson</Link>
+    <Link to='/lesson/xx/zzz'>Contact</Link>
+  </nav>
+);
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={App} />
-    </Router>
+    <ConnectedRouter history={history}>
+      <div>
+        <Links />
+
+        <Route exact path='/' render={() => <h1>Home</h1>}/>
+        <Route path='/about' render={() => <h1>About</h1>}/>
+        <Route path='/lesson/:page?/:subpage?' component={App}/>
+      </div>
+    </ConnectedRouter>
   </Provider>, 
   document.getElementById('root'));
-
-
-
-
