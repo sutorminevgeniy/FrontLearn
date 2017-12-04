@@ -4,14 +4,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
 import createHistory from 'history/createBrowserHistory'
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link, NavLink, Switch } from 'react-router-dom';
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
-
-
 
 import './style.scss';
 import './animate.scss';
 
+import topics from './data/topics';
 import {levels, levelWin} from './data/levels';
 
 import reducer from './reducers';
@@ -81,6 +80,22 @@ class App extends React.Component {
   }  
 }
 
+function Topics(){
+  return (
+    <nav>
+      {topics.map(topic => 
+          <NavLink
+              key={topic.id}
+              to={`/lesson/${topic.id}`}
+              className="mdc-list-item"
+              activeClassName="mdc-temporary-drawer--selected">
+                  {topic.title}
+          </NavLink>
+      )}
+    </nav> 
+  );
+}
+
 const Links = () => (
   <nav>
     <Link to='/'>Home</Link>
@@ -98,7 +113,8 @@ ReactDOM.render(
 
         <Route exact path='/' render={() => <h1>Home</h1>}/>
         <Route path='/about' render={() => <h1>About</h1>}/>
-        <Route path='/lesson/:page?/:subpage?' component={App}/>
+        <Route exact path='/lesson' component={Topics}/>
+        <Route exact path='/lesson/:page?/:subpage?' component={App}/>
       </div>
     </ConnectedRouter>
   </Provider>, 
