@@ -11,13 +11,15 @@ import './style.scss';
 import './animate.scss';
 
 import topics from './data/topics';
+import lessons from './data/lessons';
 import {levels, levelWin} from './data/levels';
 
 import reducer from './reducers';
 
 import LessonContainer from './container/LessonContainer';
 import Sidenav from './components/Sidenav';
-import Credits      from './components/Credits';
+import Credits from './components/Credits';
+import Lessons from './components/Lessons';
 
 
 import { initStateUser } from './actions';
@@ -84,14 +86,11 @@ class App extends React.Component {
   }  
 }
 
-function Topics(){
+function Topics(props){
   return (
     <div className="topics">
       <Sidenav topics={topics} />
-
-      <section id="view">
-        <Share />
-      </section>
+      <Lessons  data={lessons} {...props} />
     </div> 
   );
 }
@@ -101,7 +100,6 @@ const Links = () => (
     <Link to='/'>Home</Link>
     <Link to='/about'>About</Link>
     <Link to='/lessons'>Lesson</Link>
-    <Link to='/lessons/xx/zzz'>Contact</Link>
   </nav>
 );
 
@@ -111,7 +109,7 @@ ReactDOM.render(
       <div>
         <Links />
 
-        <Route exact path='/'  component={Topics}/>
+        <Route exact path='/'  render={() => <h1>Home</h1>}/>
         <Route path='/about' render={() => <h1>About</h1>}/>
         <Route exact path='/lessons/:topic?' component={Topics}/>
         <Route path='/lessons/:topic/:subpage' component={LessonContainer}/>
