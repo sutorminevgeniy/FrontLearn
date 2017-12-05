@@ -14,6 +14,12 @@ import topics from './data/topics';
 import {levels, levelWin} from './data/levels';
 
 import reducer from './reducers';
+
+import LessonContainer from './container/LessonContainer';
+import Sidenav from './components/Sidenav';
+import Credits      from './components/Credits';
+
+
 import { initStateUser } from './actions';
 
 import LevelCounterContainer from './container/LevelCounterContainer';
@@ -21,14 +27,12 @@ import InstructionsContainer from './container/InstructionsContainer';
 import EditorContainer       from './container/EditorContainer';
 import BoardContainer        from './container/BoardContainer';
 import Share        from './components/Share';
-import Credits      from './components/Credits';
 
 // Создание выбранной вами истории для браузера
 const history = createHistory();
 
 // Создаем middleware для перехвата и отправки действий навигации
 const middleware = routerMiddleware(history);
-
 
 const store = createStore(
   combineReducers({
@@ -82,17 +86,13 @@ class App extends React.Component {
 
 function Topics(){
   return (
-    <nav>
-      {topics.map(topic => 
-          <NavLink
-              key={topic.id}
-              to={`/lesson/${topic.id}`}
-              className="mdc-list-item"
-              activeClassName="mdc-temporary-drawer--selected">
-                  {topic.title}
-          </NavLink>
-      )}
-    </nav> 
+    <div className="topics">
+      <Sidenav topics={topics} />
+
+      <section id="view">
+        <Share />
+      </section>
+    </div> 
   );
 }
 
@@ -100,8 +100,8 @@ const Links = () => (
   <nav>
     <Link to='/'>Home</Link>
     <Link to='/about'>About</Link>
-    <Link to='/lesson'>Lesson</Link>
-    <Link to='/lesson/xx/zzz'>Contact</Link>
+    <Link to='/lessons'>Lesson</Link>
+    <Link to='/lessons/xx/zzz'>Contact</Link>
   </nav>
 );
 
@@ -111,10 +111,12 @@ ReactDOM.render(
       <div>
         <Links />
 
-        <Route exact path='/' render={() => <h1>Home</h1>}/>
+        <Route exact path='/'  component={Topics}/>
         <Route path='/about' render={() => <h1>About</h1>}/>
-        <Route exact path='/lesson' component={Topics}/>
-        <Route exact path='/lesson/:page?/:subpage?' component={App}/>
+        <Route exact path='/lessons/:topic?' component={Topics}/>
+        <Route path='/lessons/:topic/:subpage' component={LessonContainer}/>
+
+        <Credits />
       </div>
     </ConnectedRouter>
   </Provider>, 
