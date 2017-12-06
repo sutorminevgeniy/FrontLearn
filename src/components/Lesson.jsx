@@ -4,8 +4,6 @@ import LevelCounterContainer from '../container/LevelCounterContainer';
 import InstructionsContainer from '../container/InstructionsContainer';
 import EditorContainer       from '../container/EditorContainer';
 import BoardContainer        from '../container/BoardContainer';
-import Share        from '../components/Share';
-import Credits      from '../components/Credits';
 
 
 class Lesson extends React.Component {

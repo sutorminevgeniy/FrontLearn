@@ -1,121 +1,37 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-
-import createHistory from 'history/createBrowserHistory'
-import { Route, Link, NavLink, Switch } from 'react-router-dom';
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
-
-import './style.scss';
-import './animate.scss';
-
-import topics from './data/topics';
-import lessons from './data/lessons';
-import {levels, levelWin} from './data/levels';
-
-import reducer from './reducers';
+import { Route, Switch } from 'react-router-dom';
 
 import LessonContainer from './container/LessonContainer';
-import Sidenav from './components/Sidenav';
+
+import Toolbar from './components/Toolbar';
 import Credits from './components/Credits';
-import Lessons from './components/Lessons';
 
-
-import { initStateUser } from './actions';
-
-import LevelCounterContainer from './container/LevelCounterContainer';
-import InstructionsContainer from './container/InstructionsContainer';
-import EditorContainer       from './container/EditorContainer';
-import BoardContainer        from './container/BoardContainer';
-import Share        from './components/Share';
-
-// Создание выбранной вами истории для браузера
-const history = createHistory();
-
-// Создаем middleware для перехвата и отправки действий навигации
-const middleware = routerMiddleware(history);
-
-const store = createStore(
-  combineReducers({
-    reducer,
-    routing: routerReducer
-  }),
-  applyMiddleware(middleware)
-)
-
+import Home from './pages/Home';
+import About from './pages/About';
+import Topics from './pages/Topics';
+import NotFound from './pages/NotFound';
 
 class App extends React.Component {
-  componentDidMount() {
-      store.dispatch(initStateUser());
-  }
-
   render() {
     return (
-      <div className="page">
-        <section id="sidebar">
-          <div>
-            <LevelCounterContainer />
-            <InstructionsContainer />
-          </div>
+      <div>
+        <Toolbar user={null} />
 
-          <a href="/about">About</a>
+        <div className="content">
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/about' component={About} />
+            <Route exact path='/lessons/:topic?' component={Topics} />
+            <Route path='/lessons/:topic/:subpage' component={LessonContainer} />
 
-          <EditorContainer />
-          
-          <Share />
-          
-          <Credits />
-        </section>
+            <Route component={NotFound} />
+          </Switch>
+        </div>
 
-        <section id="view">
-          <div id="board">
-            <BoardContainer
-              styleFigurs  ="questionStyle"
-              id           ="pond"
-              classFigurs  ="frog"
-              classFigureBg="animated pulse infinite" />
-            <BoardContainer
-              styleFigurs="ansverStyle"
-              id         ="background"
-              classFigurs="lilypad" />
-          </div>
-        </section>
+        <Credits />
       </div>
     );      
   }  
 }
 
-function Topics(props){
-  return (
-    <div className="topics">
-      <Sidenav topics={topics} />
-      <Lessons  data={lessons} {...props} />
-    </div> 
-  );
-}
-
-const Links = () => (
-  <nav>
-    <Link to='/'>Home</Link>
-    <Link to='/about'>About</Link>
-    <Link to='/lessons'>Lesson</Link>
-  </nav>
-);
-
-ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
-        <Links />
-
-        <Route exact path='/'  render={() => <h1>Home</h1>}/>
-        <Route path='/about' render={() => <h1>About</h1>}/>
-        <Route exact path='/lessons/:topic?' component={Topics}/>
-        <Route path='/lessons/:topic/:subpage' component={LessonContainer}/>
-
-        <Credits />
-      </div>
-    </ConnectedRouter>
-  </Provider>, 
-  document.getElementById('root'));
+export default App;

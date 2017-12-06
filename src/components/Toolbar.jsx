@@ -13,7 +13,7 @@ function Toolbar({ user }) {
                     <nav className="mdc-tab-bar">
                         <ToolbarLink exact to="/" className="mdc-tab">Главная</ToolbarLink>
                         <ToolbarLink to="/about" className="mdc-tab">О проекте</ToolbarLink>
-                        <ToolbarLink to="/books" className="mdc-tab">Книги</ToolbarLink>
+                        <ToolbarLink to="/lessons" className="mdc-tab">Уроки</ToolbarLink>
                         {user ?
                             <ToolbarLink to="/logout" className="mdc-tab">Выйти</ToolbarLink>
                             :
