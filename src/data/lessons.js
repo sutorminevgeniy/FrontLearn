@@ -1,6 +1,6 @@
 const lessons = [
   {
-    id_lesson: "froggy",
+    lessonId: "froggy",
     title: "Flexbox Froggy",
     topic: "css",
     author:"Thomas Park",
@@ -944,7 +944,7 @@ const lessons = [
     }
   },
   {
-    id_lesson: "gridgarden",
+    lessonId: "gridgarden",
     title: "Flexbox Froggy",
     topic: "css",
     author:"Thomas Park",
@@ -1888,7 +1888,7 @@ const lessons = [
     }
   },
   {
-    id_lesson: "froggy_html",
+    lessonId: "froggy_html",
     title: "Froggy html",
     topic: "html",
     author:"Thomas Park",
@@ -2832,7 +2832,7 @@ const lessons = [
     }
   },
   {
-    id_lesson: "froggy_javascript",
+    lessonId: "froggy_javascript",
     title: "Froggy javascript",
     topic: "javascript",
     author:"Thomas Park",

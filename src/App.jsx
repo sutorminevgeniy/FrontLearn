@@ -22,7 +22,7 @@ class App extends React.Component {
             <Route exact path='/' component={Home} />
             <Route path='/about' component={About} />
             <Route exact path='/lessons/:topic?' component={Topics} />
-            <Route path='/lessons/:topic/:subpage' component={LessonContainer} />
+            <Route path='/lessons/:topic/:lessonId' component={LessonContainer} />
 
             <Route component={NotFound} />
           </Switch>

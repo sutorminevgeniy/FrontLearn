@@ -15,7 +15,7 @@ function Card({ lessons }) {
             </div>
 
             <section className="mdc-card__actions">
-                <Link to={`/lessons/${lessons.topic}/${lessons.id_lesson}`} className="mdc-button mdc-card__action">Пройти</Link>
+                <Link to={`/lessons/${lessons.topic}/${lessons.lessonId}`} className="mdc-button mdc-card__action">Пройти</Link>
             </section>
         </div>
     );

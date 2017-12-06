@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        initStateUser: () => dispatch(initStateUser())
+        initStateUser: (lessonId) => dispatch(initStateUser(lessonId))
     };
 }
 

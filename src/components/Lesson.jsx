@@ -7,12 +7,11 @@ import BoardContainer        from '../container/BoardContainer';
 
 
 class Lesson extends React.Component {
-  componentDidMount() {
-      this.props.initStateUser();
+  componentWillMount() {
+      this.props.initStateUser( this.props.match.params.lessonId );
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="page">
         <section id="sidebar">

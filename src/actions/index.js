@@ -1,7 +1,8 @@
 export const INIT_STATE_USER = 'INIT_STATE_USER';
-export function initStateUser() {
+export function initStateUser(lessonId) {
     return {
-        type: INIT_STATE_USER
+        type: INIT_STATE_USER,
+        lessonId
     };
 }
 

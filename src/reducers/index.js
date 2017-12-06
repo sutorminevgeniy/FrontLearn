@@ -1,4 +1,4 @@
-import {levels, levelWin} from '../data/levels';
+import lessons from '../data/lessons';
 
 import { CHANGE_LANG, 
          NEXT_LEVEL, 
@@ -7,27 +7,22 @@ import { CHANGE_LANG,
          INIT_STATE_USER, 
          INPUT_ANSWER } from '../actions';
 
-let stateUser = Array(levels.length).fill(null).map((item, i) => {
-  return {
+const initialState = {
+  level: 0,
+  lang: 'ru',
+  lesson: {},
+  stateUser: [{
     passed: false,
     answer: '',
     ansverStyle: {},
     questionStyle: {}
-  };
-});
-
-const initialState = {
-  level: 0,
-  lang: 'ru',
-  stateUser: stateUser
+  }]
 };
 
 function reducer(state = initialState, action) {
     switch (action.type) {
         case INIT_STATE_USER:
-            return Object.assign({}, state, {
-                stateUser: initStateUser()
-            });
+            return initStateUser(action.lessonId, state);
 
         case INPUT_ANSWER:
             return Object.assign({}, state, {
@@ -63,21 +58,27 @@ export default reducer;
 
 // Инициализация ==================================================================================
 // Инициализация пользовательского состояния
-function initStateUser() {
-    let stateUser = Array(levels.length).fill(null).map((item, i) => {
-      let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
-      let strStyleAnswer = getStrStyle( levels[i].style );
-      let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
+function initStateUser(lessonId, state) {
+  let resState = Object.assign({}, state);
+  resState.lesson = lessons.filter(lesson => lesson.lessonId === lessonId)[0];
+  let levels = resState.lesson.levels;
 
-      return {
-        passed: false,
-        answer: '',
-        ansverStyle,
-        questionStyle
-      };
-    });
+  resState.stateUser = Array(levels.length).fill(null).map((item, i) => {
+    let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
+    let strStyleAnswer = getStrStyle( levels[i].style );
+    let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
 
-    return stateUser;
+    return {
+      passed: false,
+      answer: '',
+      ansverStyle,
+      questionStyle
+    };
+  });
+
+  resState.level = 0;
+
+  return resState;
 }
 
 // Разбор строки стилей в массив
@@ -110,6 +111,7 @@ function getStrStyle(arrStyle) {
 // Ввод ответа
 function inputAnswer(answer, state) {
     let stateUser = state.stateUser.slice();
+    let levels = state.lesson.levels;
     let correctAnswer = getStrStyle(levels[state.level].style);
 
     stateUser[state.level].answer = answer;
