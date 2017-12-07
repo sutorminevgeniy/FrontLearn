@@ -1,6 +1,7 @@
-import lessons from '../data/lessons';
+import datalLessons from '../data/datalLessons';
 
 import { CHANGE_LANG, 
+         NEXT_BUTTON, 
          NEXT_LEVEL, 
          PREV_LEVEL, 
          CHANGE_LEVEL, 
@@ -10,16 +11,12 @@ import { CHANGE_LANG,
 const initialState = {
   level: 0,
   lang: 'ru',
+  statusWin: false,
   lesson: {},
-  stateUser: [{
-    passed: false,
-    answer: '',
-    ansverStyle: {},
-    questionStyle: {}
-  }]
+  stateUser: []
 };
 
-function reducer(state = initialState, action) {
+function lesson(state = initialState, action) {
     switch (action.type) {
         case INIT_STATE_USER:
             return initStateUser(action.lessonId, state);
@@ -34,19 +31,25 @@ function reducer(state = initialState, action) {
                 lang: action.lang
             });
 
+        case NEXT_BUTTON:
+            return nextButton(state);
+
         case NEXT_LEVEL:
             return Object.assign({}, state, {
-                level: state.level + 1
+                level: state.level + 1,
+                statusWin : false
             });
 
         case PREV_LEVEL:
             return Object.assign({}, state, {
-                level: state.level - 1
+                level: state.level - 1,
+                statusWin : false
             });
 
         case CHANGE_LEVEL:
             return Object.assign({}, state, {
-                level: action.level
+                level: action.level,
+                statusWin : false
             });
 
         default:
@@ -54,13 +57,13 @@ function reducer(state = initialState, action) {
     }
 }
 
-export default reducer;
+export default lesson;
 
 // Инициализация ==================================================================================
 // Инициализация пользовательского состояния
-function initStateUser(lessonId, state) {
+function initStateUser(lessonId, state = initialState) {
   let resState = Object.assign({}, state);
-  resState.lesson = lessons.filter(lesson => lesson.lessonId === lessonId)[0];
+  resState.lesson = datalLessons.filter(lesson => lesson.lessonId === lessonId)[0];
   let levels = resState.lesson.levels;
 
   resState.stateUser = Array(levels.length).fill(null).map((item, i) => {
@@ -143,4 +146,18 @@ function clearStr(str) {
                    .replace(/([^;])$/, '$1;');    // добавление ; в конце
 
     return result;
+}
+
+// следующий уровень
+function nextButton(state = initialState) {
+  let resState = Object.assign({}, state);
+  let resIndex = resState.stateUser.findIndex( lesson => !lesson.passed );
+  
+  if(resIndex === -1) {
+    resState.statusWin = true;
+  } else {
+    resState.level = resIndex;
+  }
+  
+  return resState;
 }

@@ -6,39 +6,42 @@ import EditorContainer       from '../container/EditorContainer';
 import BoardContainer        from '../container/BoardContainer';
 
 
-class Lesson extends React.Component {
-  componentWillMount() {
-      this.props.initStateUser( this.props.match.params.lessonId );
-  }
+function Lesson (props) {
+  let lang = props.state.lang;
+  let level = props.state.level; 
+  let levelData = ( 
+    props.state.statusWin ? 
+    props.state.lesson.levelWin : 
+    props.state.lesson.levels[level] );
 
-  render() {
-    return (
-      <div className="page">
-        <section id="sidebar">
-          <div>
-            <LevelCounterContainer />
-            <InstructionsContainer />
-          </div>
+  return (
+    <div className="page">
+      <section id="sidebar">
+        <div>
+          <LevelCounterContainer />
+          <InstructionsContainer content={levelData.instructions[lang]}/>
+        </div>
 
-          <EditorContainer />
-        </section>
+        {!props.state.statusWin && <EditorContainer />}
+      </section>
 
-        <section id="view">
-          <div id="board">
-            <BoardContainer
-              styleFigurs  ="questionStyle"
-              id           ="pond"
-              classFigurs  ="frog"
-              classFigureBg="animated pulse infinite" />
-            <BoardContainer
-              styleFigurs="ansverStyle"
-              id         ="background"
-              classFigurs="lilypad" />
-          </div>
-        </section>
-      </div>
-    );      
-  }  
+      <section id="view">
+        <div id="board">
+          <BoardContainer
+            levelData = { levelData }
+            styleFigurs  ={ props.state.statusWin ? "ansverStyle" : "questionStyle"}
+            id           ="pond"
+            classFigurs  ="frog"
+            classFigureBg="animated pulse infinite" />
+          <BoardContainer
+            levelData = { levelData }
+            styleFigurs="ansverStyle"
+            id         ="background"
+            classFigurs="lilypad" />
+        </div>
+      </section>
+    </div>
+  );      
 }
 
 export default Lesson;

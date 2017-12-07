@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { nextLevel, inputAnswer } from '../actions';
+import { nextButton, inputAnswer } from '../actions';
 import Editor from '../components/Editor';
 
 function mapStateToProps(state) {
     return {
-        state: state.reducer
+        state: state.lesson
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        nextLevel: () => dispatch(nextLevel()),
+        nextButton: () => dispatch(nextButton()),
         inputAnswer: answer => dispatch(inputAnswer(answer))
     };
 }

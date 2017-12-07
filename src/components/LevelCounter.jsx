@@ -1,4 +1,3 @@
-import {levels, levelWin} from '../data/levels';
 import messages from '../data/messages';
 
 import React from 'react';
@@ -19,7 +18,7 @@ class LevelCounter extends React.Component {
 
   // Следующий уровень
   nextLevel() {
-    if(this.props.state.level < (levels.length - 1)) {
+    if(this.props.state.level < (this.props.state.lesson.levels.length - 1)) {
       this.props.nextLevel();
     }
   }
@@ -56,6 +55,7 @@ class LevelCounter extends React.Component {
   render() {
     const lang = this.props.state.lang;
     const level = this.props.state.level;
+    const levels = this.props.state.lesson.levels;
 
     return (
       <div id="level-counter">

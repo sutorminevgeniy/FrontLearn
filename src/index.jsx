@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 
-import reducer from './reducers';
+import lesson from './reducers';
 import App from './App';
 
 import './style.scss';
@@ -20,7 +20,7 @@ const middleware = routerMiddleware(history);
 
 const store = createStore(
   combineReducers({
-    reducer,
+    lesson,
     routing: routerReducer
   }),
   applyMiddleware(middleware)

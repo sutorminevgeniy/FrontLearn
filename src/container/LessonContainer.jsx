@@ -6,7 +6,7 @@ import Lesson from '../components/Lesson';
 
 function mapStateToProps(state) {
     return {
-        state: state.reducer
+        state: state.lesson
     };
 }
 
@@ -16,6 +16,19 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-const LessonContainer = connect(mapStateToProps, mapDispatchToProps)(Lesson);
+const LessonContainerWriper = connect(mapStateToProps)(Lesson);
+
+class LessonWriper extends React.Component {
+  componentWillMount() {
+      this.props.initStateUser( this.props.match.params.lessonId );
+  }
+
+  render() {
+    return <LessonContainerWriper />;      
+  }  
+}
+
+
+const LessonContainer = connect(mapStateToProps, mapDispatchToProps)(LessonWriper);
 
 export default LessonContainer;

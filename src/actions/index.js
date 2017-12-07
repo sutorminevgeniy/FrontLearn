@@ -22,6 +22,12 @@ export function changeLang(lang) {
     };
 }
 
+export const NEXT_BUTTON = 'NEXT_BUTTON';
+export function nextButton() {
+    return {
+        type: NEXT_BUTTON
+    };
+}
 export const NEXT_LEVEL = 'NEXT_LEVEL';
 export function nextLevel() {
     return {

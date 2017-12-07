@@ -6,7 +6,7 @@ import LevelCounter from '../components/LevelCounter';
 
 function mapStateToProps(state) {
     return {
-        state: state.reducer
+        state: state.lesson
     };
 }
 

@@ -1,5 +1,3 @@
-import {levels, levelWin} from '../data/levels';
-
 import React from 'react';
 
 import messages from '../data/messages';
@@ -21,7 +19,7 @@ class Editor extends React.Component {
   }
 
   render() {
-    const dataLevel = levels[this.props.state.level];
+    const dataLevel = this.props.state.lesson.levels[this.props.state.level];
 
     let styleTextarea = { height: ((20 * Object.entries(dataLevel.style).length + 4) + 'px') };
 
@@ -42,7 +40,7 @@ class Editor extends React.Component {
         <button 
           id="next" 
           className={ "translate" + (this.props.state.stateUser[this.props.state.level].passed ? '' : ' disabled') }
-          onClick={ () => (this.props.state.stateUser[this.props.state.level].passed ? this.props.nextLevel() : '') }>{ messages.next[this.props.state.lang] }</button>
+          onClick={ () => (this.props.state.stateUser[this.props.state.level].passed ? this.props.nextButton() : '') }>{ messages.next[this.props.state.lang] }</button>
       </div>
     );
   }
