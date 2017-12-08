@@ -3,8 +3,8 @@ import React from 'react';
 import LevelCounterContainer from '../container/LevelCounterContainer';
 import InstructionsContainer from '../container/InstructionsContainer';
 import EditorContainer       from '../container/EditorContainer';
+import BoardOtherContainer   from '../container/BoardOtherContainer';
 import BoardContainer        from '../container/BoardContainer';
-
 
 function Lesson (props) {
   let lang = props.state.lang;
@@ -27,6 +27,8 @@ function Lesson (props) {
 
       <section id="view">
         <div id="board">
+          {!props.state.structure && <BoardOtherContainer />}
+
           <BoardContainer
             levelData = { levelData }
             styleFigurs  ={ props.state.statusWin ? "ansverStyle" : "questionStyle"}

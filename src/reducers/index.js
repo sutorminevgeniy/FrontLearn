@@ -151,7 +151,12 @@ function clearStr(str) {
 // следующий уровень
 function nextButton(state = initialState) {
   let resState = Object.assign({}, state);
-  let resIndex = resState.stateUser.findIndex( lesson => !lesson.passed );
+  
+  let resIndex = resState.stateUser.findIndex( (lesson, index) => (!lesson.passed && index > resState.level));
+  
+  if(resIndex === -1) {
+    resIndex = resState.stateUser.findIndex( lesson => !lesson.passed );
+  }
   
   if(resIndex === -1) {
     resState.statusWin = true;
