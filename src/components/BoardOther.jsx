@@ -1,17 +1,24 @@
 import React from 'react';
 
 function BoardOther(props) {
+  console.log(props.content);
+  let id = props.content.param.id || "";
+  let className = props.content.param.className || "";  
+  let style = props.content.param.style || {};
   
   return (
-    <BoardItem />
-  );
-}
+    <div id={id} className={className} style={style}>
+      { 'content' in props.content && props.content.content.map((content, index) => {
+        
+        let count = content.count || 1;
 
-function BoardItem(props) {
-
-  
-  return (
-    <div></div>
+        return (
+          Array(count)
+            .fill(null)
+            .map((item, i) => <BoardOther content={content} key={index+i}/>)
+          );
+      })}
+    </div>
   );
 }
 

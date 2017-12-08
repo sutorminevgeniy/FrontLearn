@@ -27,7 +27,9 @@ function Lesson (props) {
 
       <section id="view">
         <div id="board">
-          {!props.state.structure && <BoardOtherContainer />}
+        
+          { 'others' in props.state.lesson.structure.group && 
+                        props.state.lesson.structure.group.others.map((content, index) => <BoardOtherContainer content={content} key={index} />) }
 
           <BoardContainer
             levelData = { levelData }

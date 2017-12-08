@@ -981,25 +981,25 @@ const datalLessons = [
             param: {
               id: "overlay"
             },
-            content: {
+            content: [{
               param: {
                 className: "plot"
               },
               tag: "span",
               count: 25
-            }
+            }]
           },
           {
             param: {
               id: "soil"
             },
-            content: {
+            content: [{
               param: {
                 className: "plot"
               },
               tag: "span",
               count: 25
-            }
+            }]
           }
         ]
       }
