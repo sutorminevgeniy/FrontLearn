@@ -18,6 +18,11 @@ const datalLessons = [
             id: "background"
           }
         }]
+      },
+      color: {
+        g: 'green',
+        y: 'yellow',
+        r: 'red'
       }
     },
     levels: [
@@ -968,13 +973,35 @@ const datalLessons = [
       group: {
         ansver: [{
           param: {
-            id: "pond"
-          }
+            id: "plants"
+          },
+          content: [{
+            param: {
+              className: "plant"
+            },
+            color: true,
+            content: [{
+              param: {
+                className: "bg"
+              }
+            }]
+          }]
         }],
         question: [{
           param: {
-            id: "background"
-          }
+            id: "garden"
+          },
+          content: [{
+            param: {
+              className: "treatment"
+            },
+            color: true,
+            content: [{
+              param: {
+                className: "bg"
+              }
+            }]
+          }]
         }],
         others: [
           {
@@ -1002,6 +1029,10 @@ const datalLessons = [
             }]
           }
         ]
+      },
+      color: {
+        c: "carrot",
+        w: "weed"
       }
     },
     levels: [

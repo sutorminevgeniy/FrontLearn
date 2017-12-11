@@ -16,7 +16,7 @@ function Board(props) {
       style={ style[ '#pond' ] ? style[ '#pond' ] : {} }
     >
       { levelData.board.split('').map((item, index) => {
-        let colorItem = getColor(item);
+        let colorItem = props.state.lesson.structure.color[item];
 
         return (
           <div 
@@ -32,19 +32,3 @@ function Board(props) {
 }
 
 export default Board;
-
-  // Фигуры =========================================================================================
-  // Получение цвета
-function  getColor(color = '') {
-    switch (color) {
-      case 'g':
-        return 'green';
-        break;
-      case 'y':
-        return 'yellow';
-        break;
-      case 'r':
-        return 'red';
-        break;
-    }
-  }

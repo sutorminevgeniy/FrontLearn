@@ -59,7 +59,7 @@ class LevelCounter extends React.Component {
 
     return (
       <div id="level-counter">
-        <span className={ "arrow left" + (level == 0 ? " disabled" : "") } onClick={ this.prevLevel }>◀</span>
+        <span className={ "arrow left" + (level === 0 ? " disabled" : "") } onClick={ this.prevLevel }>◀</span>
 
         <span id="level-indicator" onClick={ this.toggleLevels }>
           <span id="labelLevel" className="translate">{ messages.labelLevel[lang] } </span>
@@ -69,7 +69,7 @@ class LevelCounter extends React.Component {
           <span className="caret">▾</span>
         </span>
 
-        <span className={ "arrow right" + (level == levels.length - 1 ? " disabled" : "")} onClick={ this.nextLevel }>▶</span>
+        <span className={ "arrow right" + (level === levels.length - 1 ? " disabled" : "")} onClick={ this.nextLevel }>▶</span>
 
         <div id="levelsWrapper" className={ "tooltip" + (this.state.levelsShow ? "" : " hide") }>
           <div id="levels">

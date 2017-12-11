@@ -28,8 +28,7 @@ function Lesson (props) {
       <section id="view">
         <div id="board">
         
-          { 'others' in props.state.lesson.structure.group && 
-                        props.state.lesson.structure.group.others.map((content, index) => <BoardOtherContainer content={content} key={index} />) }
+          
 
           <BoardContainer
             levelData = { levelData }
@@ -42,6 +41,32 @@ function Lesson (props) {
             styleFigurs="ansverStyle"
             id         ="background"
             classFigurs="lilypad" />
+
+          { 'others' in props.state.lesson.structure.group && 
+            props.state.lesson.structure.group.others.map((content, index) => <BoardOtherContainer
+              levelData = { levelData } 
+              type="others"  
+              content={content} 
+              key={index} />) }
+
+          { 'ansver' in props.state.lesson.structure.group && 
+            props.state.lesson.structure.group.ansver.
+            map((content, index) => <BoardOtherContainer
+              levelData = { levelData } 
+              type="ansver"  
+              content={content} 
+              key={index} />) 
+          }
+
+          { 'question' in props.state.lesson.structure.group && 
+            props.state.lesson.structure.group.question.
+            map((content, index) => <BoardOtherContainer
+              levelData = { levelData } 
+              type="question"  
+              content={content} 
+              key={index} />) 
+          }
+
         </div>
       </section>
     </div>
