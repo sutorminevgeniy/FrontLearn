@@ -7,10 +7,10 @@ import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 
 import lesson from './reducers';
-import App from './App';
+import App from './App.jsx';
 
-import './style.scss';
-import './animate.scss';
+import './style.css';
+import './animate.css';
 
 // Создание выбранной вами истории для браузера
 const history = createHistory();
