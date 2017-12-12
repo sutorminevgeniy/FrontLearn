@@ -80,6 +80,7 @@ function initStateUser(lessonId, state = initialState) {
   });
 
   resState.level = 0;
+  resState.statusWin = false;
 
   return resState;
 }
@@ -88,12 +89,13 @@ function initStateUser(lessonId, state = initialState) {
 function getArrayStyle (strStyle) {
     let arrStyle = '{' + strStyle + '}';
 
-    arrStyle = arrStyle.replace(/([\{\}])\s*([^\{\}:;"]*)\s+\{/g, '$1 "$2": {')
-                       .replace(/([\{;])\s*([^\{\}:;"]*)\s*:/g, '$1 "$2": ')
-                       .replace(/:\s*([^\{\}"]+)\s*;/g, ': "$1";')              // добавление кавычек
+    arrStyle = arrStyle.replace(/([{}])\s*([^{}:;"]*)\s+{/g, '$1 "$2": {')
+                       .replace(/([{;])\s*([^{}:;"]*)\s*:/g, '$1 "$2": ')
+                       .replace(/:\s*([^{}"]+)\s*;/g, ': "$1";')              // добавление кавычек
                        .replace(/;/g, '')                                       // удаление всех ;
-                       .replace(/(["\}])(\s+["\{])/g, '$1,$2');
+                       .replace(/(["}])(\s+["{])/g, '$1,$2');
     // преобразование в верблюжью нотацию
+    arrStyle = arrStyle.replace(/-(\w)(\w*":)/g, (match, p1, p2) => p1.toUpperCase() + p2);
     arrStyle = arrStyle.replace(/-(\w)(\w*":)/g, (match, p1, p2) => p1.toUpperCase() + p2); 
 
     return JSON.parse(arrStyle);
@@ -103,7 +105,7 @@ function getArrayStyle (strStyle) {
 function getStrStyle(arrStyle) {
     let strStyle = JSON.stringify(arrStyle);
 
-    strStyle = strStyle.replace(/[\{\}"]/g, '')
+    strStyle = strStyle.replace(/[{}"]/g, '')
                        .replace(/:/g, ': ')
                        .replace(/,/g, '; ');
 

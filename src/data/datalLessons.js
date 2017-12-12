@@ -10,13 +10,38 @@ const datalLessons = [
       group: {
         ansver: [{
           param: {
-            id: "pond"
-          }
+            id: "background",
+            classWin: "wrap"
+          },
+          changedSyle: "#pond",
+          content: [{
+            param: {
+              className: "lilypad"
+            },
+            color: true,
+            content: [{
+              param: {
+                className: "bg"
+              }
+            }]
+          }]
         }],
         question: [{
           param: {
-            id: "background"
-          }
+            id: "pond",
+            classWin: "wrap"
+          },
+          content: [{
+            param: {
+              className: "frog"
+            },
+            color: true,
+            content: [{
+              param: {
+                className: "bg animated pulse infinite"
+              }
+            }]
+          }]
         }]
       },
       color: {
@@ -975,11 +1000,16 @@ const datalLessons = [
           param: {
             id: "plants"
           },
+          changedSyle: "#garden",
           content: [{
             param: {
               className: "plant"
             },
             color: true,
+            changedColor: {
+              c: "#water",
+              w: "#poison",
+            },
             content: [{
               param: {
                 className: "bg"
@@ -1788,14 +1818,44 @@ const datalLessons = [
       group: {
         ansver: [{
           param: {
-            id: "pond"
-          }
+            id: "background",
+            classWin: "wrap"
+          },
+          changedSyle: "#pond",
+          content: [{
+            param: {
+              className: "lilypad"
+            },
+            color: true,
+            content: [{
+              param: {
+                className: "bg"
+              }
+            }]
+          }]
         }],
         question: [{
           param: {
-            id: "background"
-          }
+            id: "pond",
+            classWin: "wrap"
+          },
+          content: [{
+            param: {
+              className: "frog"
+            },
+            color: true,
+            content: [{
+              param: {
+                className: "bg animated pulse infinite"
+              }
+            }]
+          }]
         }]
+      },
+      color: {
+        g: 'green',
+        y: 'yellow',
+        r: 'red'
       }
     },
     levels: [
@@ -2746,14 +2806,44 @@ const datalLessons = [
       group: {
         ansver: [{
           param: {
-            id: "pond"
-          }
+            id: "background",
+            classWin: "wrap"
+          },
+          changedSyle: "#pond",
+          content: [{
+            param: {
+              className: "lilypad"
+            },
+            color: true,
+            content: [{
+              param: {
+                className: "bg"
+              }
+            }]
+          }]
         }],
         question: [{
           param: {
-            id: "background"
-          }
+            id: "pond",
+            classWin: "wrap"
+          },
+          content: [{
+            param: {
+              className: "frog"
+            },
+            color: true,
+            content: [{
+              param: {
+                className: "bg animated pulse infinite"
+              }
+            }]
+          }]
         }]
+      },
+      color: {
+        g: 'green',
+        y: 'yellow',
+        r: 'red'
       }
     },
     levels: [

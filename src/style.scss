@@ -50,7 +50,7 @@ body {
 }
 
 h1 {
-  margin: 1em 0 0.5em;
+  margin: 0 0 0.5em;
   text-transform: uppercase;
   font-family: 'Fredoka One', cursive;
   font-size: 28px;
@@ -380,6 +380,11 @@ button {
   }  
 }
 
+
+#view {
+    min-height: 100vh;
+    padding: 1em;
+}
 #board {
   position: relative;
   width: 50vw;
@@ -387,6 +392,8 @@ button {
   min-width: 300px;
   min-height: 300px;
   overflow: hidden;
+  border: 12px solid #6D5720;
+  border-radius: 12px;
 }
 
 #pond,

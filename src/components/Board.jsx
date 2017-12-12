@@ -1,33 +1,43 @@
 import React from 'react';
 
+import BoardItemContainer   from '../container/BoardItemContainer';
+
 function Board(props) {
-  let style = props.state.stateUser[props.state.level][props.styleFigurs];
-  let levelData = props.levelData;
-  
-  let className = '';
-  if(levelData.classes && levelData.classes['#pond, #background']) {
-    className = levelData.classes['#pond, #background'];
-  }
+  let lang = props.state.lang;
+  let level = props.state.level;
+  let levelData = ( 
+    props.state.statusWin ? 
+    props.state.lesson.levelWin : 
+    props.state.lesson.levels[level] );
   
   return (
-    <div 
-      id   ={ props.id } 
-      className ={ className } 
-      style={ style[ '#pond' ] ? style[ '#pond' ] : {} }
-    >
-      { levelData.board.split('').map((item, index) => {
-        let colorItem = props.state.lesson.structure.color[item];
+    <div id="board">
+          { 'others' in props.state.lesson.structure.group && 
+            props.state.lesson.structure.group.others.map((content, index) => <BoardItemContainer
+              levelData = { levelData } 
+              type="others"  
+              content={content} 
+              key={index} />) }
 
-        return (
-          <div 
-            key={ index } 
-            className={ props.classFigurs + ' ' + colorItem }
-            style={ style[ '.' + colorItem ] ? style[ '.' + colorItem ] : {} } >
-              <div className={ "bg " + props.classFigureBg }></div>
-          </div>
-        );
-      }) }
-    </div>
+          { 'ansver' in props.state.lesson.structure.group && 
+            props.state.lesson.structure.group.ansver.
+            map((content, index) => <BoardItemContainer
+              levelData = { levelData } 
+              type="ansver"  
+              content={content} 
+              key={index} />) 
+          }
+
+          { 'question' in props.state.lesson.structure.group && 
+            props.state.lesson.structure.group.question.
+            map((content, index) => <BoardItemContainer
+              levelData = { levelData } 
+              type="question"  
+              content={content} 
+              key={index} />) 
+          }
+
+        </div>
   );
 }
 

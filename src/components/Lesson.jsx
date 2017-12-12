@@ -3,7 +3,6 @@ import React from 'react';
 import LevelCounterContainer from '../container/LevelCounterContainer';
 import InstructionsContainer from '../container/InstructionsContainer';
 import EditorContainer       from '../container/EditorContainer';
-import BoardOtherContainer   from '../container/BoardOtherContainer';
 import BoardContainer        from '../container/BoardContainer';
 
 function Lesson (props) {
@@ -26,48 +25,7 @@ function Lesson (props) {
       </section>
 
       <section id="view">
-        <div id="board">
-        
-          
-
-          <BoardContainer
-            levelData = { levelData }
-            styleFigurs  ={ props.state.statusWin ? "ansverStyle" : "questionStyle"}
-            id           ="pond"
-            classFigurs  ="frog"
-            classFigureBg="animated pulse infinite" />
-          <BoardContainer
-            levelData = { levelData }
-            styleFigurs="ansverStyle"
-            id         ="background"
-            classFigurs="lilypad" />
-
-          { 'others' in props.state.lesson.structure.group && 
-            props.state.lesson.structure.group.others.map((content, index) => <BoardOtherContainer
-              levelData = { levelData } 
-              type="others"  
-              content={content} 
-              key={index} />) }
-
-          { 'ansver' in props.state.lesson.structure.group && 
-            props.state.lesson.structure.group.ansver.
-            map((content, index) => <BoardOtherContainer
-              levelData = { levelData } 
-              type="ansver"  
-              content={content} 
-              key={index} />) 
-          }
-
-          { 'question' in props.state.lesson.structure.group && 
-            props.state.lesson.structure.group.question.
-            map((content, index) => <BoardOtherContainer
-              levelData = { levelData } 
-              type="question"  
-              content={content} 
-              key={index} />) 
-          }
-
-        </div>
+        <BoardContainer />
       </section>
     </div>
   );      
