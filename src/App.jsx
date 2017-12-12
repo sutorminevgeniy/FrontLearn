@@ -30,9 +30,6 @@ class App extends React.Component {
 
         <Credits />
 
-      <div style={{display: "none"}}>
-          <img src="/images/next-flexboxfroggy.png" alt="" />
-        </div>
       </div>
     );      
   }  
