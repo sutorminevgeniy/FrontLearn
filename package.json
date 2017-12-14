@@ -2,7 +2,14 @@
   "name": "frontlearn_cra",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts-with-sass start",
+    "build": "react-scripts-with-sass build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
+    "axios": "^0.17.1",
     "history": "^4.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -10,15 +17,12 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.8",
     "react-scripts": "1.0.17",
-    "redux": "^3.7.2"
-  },
-  "scripts": {
-    "start": "react-scripts-with-sass start",
-    "build": "react-scripts-with-sass build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "redux": "^3.7.2",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "create-react-app-sass": "^1.1.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
