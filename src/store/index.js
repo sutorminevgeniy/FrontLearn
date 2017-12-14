@@ -1,10 +1,12 @@
 import createHistory from 'history/createBrowserHistory';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+
+import { createStore, applyMiddleware } from 'redux';
+
+import { routerMiddleware } from 'react-router-redux';
 import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 
-import lesson from '../reducers';
+import reducer from '../reducers';
 
 
 // Создание выбранной вами истории для браузера
@@ -14,9 +16,6 @@ export const history = createHistory();
 const middleware = routerMiddleware(history);
 
 export const store = createStore(
-  combineReducers({
-    lesson,
-    routing: routerReducer
-  }),
-  applyMiddleware(middleware)
+  reducer,
+  applyMiddleware(middleware, promise, thunk)
 )
