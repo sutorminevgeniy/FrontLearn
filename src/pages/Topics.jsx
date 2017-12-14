@@ -1,18 +1,27 @@
 import React from 'react';
 
-import topics from '../data/topics';
 import datalLessons from '../data/datalLessons';
 
 import Sidenav from '../components/Sidenav';
 import Lessons from '../components/Lessons';
 
-function Topics(props){
-  return (
-    <div className="topics">
-      <Sidenav topics={topics} />
-      <Lessons  data={datalLessons} {...props} />
-    </div> 
-  );
+class Topics extends React.Component {
+  constructor(props) {
+    super(props);
+
+    props.getTopics();
+  }
+
+  render() {
+    console.log(this.props);
+
+    return (
+      <div className="topics">
+        <Sidenav topics={this.props.topics} />
+        <Lessons  data={datalLessons} {...this.props} />
+      </div> 
+    );    
+  } 
 }
 
 export default Topics;

@@ -3,7 +3,6 @@ import React from 'react';
 import BoardItemContainer   from '../container/BoardItemContainer';
 
 function Board(props) {
-  let lang = props.state.lang;
   let level = props.state.level;
   let levelData = ( 
     props.state.statusWin ? 
@@ -13,28 +12,30 @@ function Board(props) {
   return (
     <div id="board">
           { 'others' in props.state.lesson.structure.group && 
-            props.state.lesson.structure.group.others.map((content, index) => <BoardItemContainer
-              levelData = { levelData } 
-              type="others"  
-              content={content} 
-              key={index} />) }
+            props.state.lesson.structure.group.others
+              .map((content, index) => <BoardItemContainer
+                levelData = { levelData } 
+                type="others"  
+                content={content} 
+                key={index} />)
+          }
 
           { 'ansver' in props.state.lesson.structure.group && 
-            props.state.lesson.structure.group.ansver.
-            map((content, index) => <BoardItemContainer
-              levelData = { levelData } 
-              type="ansver"  
-              content={content} 
-              key={index} />) 
+            props.state.lesson.structure.group.ansver
+              .map((content, index) => <BoardItemContainer
+                levelData = { levelData } 
+                type="ansver"  
+                content={content} 
+                key={index} />) 
           }
 
           { 'question' in props.state.lesson.structure.group && 
-            props.state.lesson.structure.group.question.
-            map((content, index) => <BoardItemContainer
-              levelData = { levelData } 
-              type="question"  
-              content={content} 
-              key={index} />) 
+            props.state.lesson.structure.group.question
+              .map((content, index) => <BoardItemContainer
+                levelData = { levelData } 
+                type="question"  
+                content={content} 
+                key={index} />) 
           }
 
         </div>

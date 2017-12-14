@@ -5,8 +5,8 @@ import BoardItemContainer   from '../container/BoardItemContainer';
 function BoardItem(props) {
   //console.log(props);
   let id         = props.content.param.id || "";
-
-  let index     = props.index || 0;
+  let className  = props.content.param.className || ""; 
+  let index      = props.index || 0;
 
   let levelDataBoard = props.levelData.board;
 
@@ -14,6 +14,8 @@ function BoardItem(props) {
   let style      = props.content.param.style || {}; 
   // стили в Editor (stateUser)
   let styleState = props.state.stateUser[props.state.level][props.type + 'Style'] || {};
+
+
   // поиск стилей по id и class
   if(styleState['#' + id]) {
     style = Object.assign({}, style, styleState['#' + id]);
@@ -26,8 +28,6 @@ function BoardItem(props) {
     style = Object.assign({}, style, styleState[props.content.changedSyle]);
   }
 
-  let className  = props.content.param.className || ""; 
-  let color      = props.content.color || false;
   if(props.content.color) {
     className += (' ' + props.state.lesson.structure.color[levelDataBoard[index]]);
     // замена стилей в связи с расхождением тегов в Editor и Board
