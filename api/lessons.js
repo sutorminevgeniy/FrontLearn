@@ -1,4 +1,4 @@
-const datalLessons = [
+const lessons = [
   {
     lessonId: "froggy",
     title: "Flexbox Froggy",
@@ -2963,4 +2963,4 @@ const datalLessons = [
   }
 ];
 
-export default datalLessons;
+module.exports = lessons;

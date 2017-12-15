@@ -6,6 +6,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const topics = require('./api/topics');
+const lessons = require('./api/lessons');
+
+const lessonsTopics = lessons.map(lesson => ({
+  topic: lesson.topic,
+  lessonId: lesson.lessonId,
+  title: lesson.title,
+  author: lesson.author,
+  image: lesson.image,
+  preview_text: lesson.preview_text
+}))
 
 const app = express();
 
@@ -23,7 +33,10 @@ app.use((req, res, next) => {
 });
 
 app.get('/api/topics', (req, res) => {
-    res.send(topics);
+    res.send({
+        topics,
+        lessons: lessonsTopics
+    });
 });
 
 app.post('/api/topics', (req, res) => {

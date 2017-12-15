@@ -32,7 +32,7 @@ class LevelCounter extends React.Component {
 
   // Выбор уровня
   changeLevel(event) {
-    let level = parseInt(event.target.dataset.level);
+    let level = parseInt(event.target.dataset.level, 10);
 
     this.props.changeLevel( level );
   }

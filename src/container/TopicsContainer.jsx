@@ -5,7 +5,8 @@ import Topics from '../pages/Topics';
 
 function mapStateToProps(state) {
     return {
-        topics: state.topics
+        topics: state.topics.topics,
+        lessons: state.topics.lessons
     };
 }
 

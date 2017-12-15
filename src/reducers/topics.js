@@ -1,9 +1,17 @@
 import { GET_TOPICS } from '../actions';
 
-export default function reducer(state = [], action) {
+const initState = {
+  topics: [],
+  lessons: []
+}
+
+export default function reducer(state = initState, action) {
   switch (action.type) {
     case GET_TOPICS:
-      return action.topics;
+      return ({
+        topics: action.topics,
+        lessons: action.lessons,
+      });
 
     default:
       return state;
