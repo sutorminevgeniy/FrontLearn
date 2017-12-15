@@ -1,9 +1,13 @@
-export const INIT_STATE_USER = 'INIT_STATE_USER';
-export function initStateUser(lessonId) {
-    return {
-        type: INIT_STATE_USER,
-        lessonId
-    };
+import axios from 'axios';
+
+export const GET_LESSON = 'GET_LESSON';
+export function getLesson (lessonId) {
+    return axios.get(`/api/lesson/${lessonId}`)
+        .then(response => response.data)
+        .then(lesson => ({
+            type: GET_LESSON,
+            lesson
+        }));
 }
 
 export const INPUT_ANSWER = 'INPUT_ANSWER';

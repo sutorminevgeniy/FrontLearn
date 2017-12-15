@@ -1,25 +1,23 @@
-import datalLessons from '../data/datalLessons';
-
-import { CHANGE_LANG, 
+import { GET_LESSON,
+         CHANGE_LANG, 
          NEXT_BUTTON, 
          NEXT_LEVEL, 
          PREV_LEVEL, 
          CHANGE_LEVEL, 
-         INIT_STATE_USER, 
          INPUT_ANSWER } from '../actions';
 
 const initialState = {
   level: 0,
   lang: 'ru',
   statusWin: false,
-  lesson: {},
-  stateUser: []
+  lesson: false,
+  stateUser: false
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case INIT_STATE_USER:
-      return initStateUser(action.lessonId, state);
+    case GET_LESSON:
+      return action.lesson;
 
     case INPUT_ANSWER:
       return Object.assign({}, state, {
@@ -59,32 +57,7 @@ function reducer(state = initialState, action) {
 
 export default reducer;
 
-// Инициализация ==================================================================================
-// Инициализация пользовательского состояния
-function initStateUser(lessonId, state = initialState) {
-  let resState = Object.assign({}, state);
-  resState.lesson = datalLessons.filter(lesson => lesson.lessonId === lessonId)[0];
-  let levels = resState.lesson.levels;
-
-  resState.stateUser = Array(levels.length).fill(null).map((item, i) => {
-    let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
-    let strStyleAnswer = getStrStyle( levels[i].style );
-    let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
-
-    return {
-      passed: false,
-      answer: '',
-      ansverStyle,
-      questionStyle
-    };
-  });
-
-  resState.level = 0;
-  resState.statusWin = false;
-
-  return resState;
-}
-
+// Ответы =========================================================================================
 // Разбор строки стилей в массив
 function getArrayStyle (strStyle) {
     let arrStyle = '{' + strStyle + '}';
@@ -112,7 +85,7 @@ function getStrStyle(arrStyle) {
     return strStyle + ';';
 }
 
-// Ответы =========================================================================================
+
 // Ввод ответа
 function inputAnswer(answer, state) {
     let stateUser = state.stateUser.slice();

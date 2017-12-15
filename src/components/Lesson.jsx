@@ -5,30 +5,36 @@ import InstructionsContainer from '../container/InstructionsContainer';
 import EditorContainer       from '../container/EditorContainer';
 import BoardContainer        from '../container/BoardContainer';
 
-function Lesson (props) {
-  let lang = props.state.lang;
-  let level = props.state.level; 
-  let levelData = ( 
-    props.state.statusWin ? 
-    props.state.lesson.levelWin : 
-    props.state.lesson.levels[level] );
+class Lesson extends React.Component {
+  componentWillMount() {
+    this.props.getLesson( this.props.match.params.lessonId );
+  }
 
-  return (
-    <div className="page">
-      <section id="sidebar">
-        <div>
-          <LevelCounterContainer />
-          <InstructionsContainer content={levelData.instructions[lang]}/>
-        </div>
+  render() {
+    // Вывод пока не подгрузились дданные
+    if(!this.props.state.lesson) {
+      return null;
+    }
 
-        {!props.state.statusWin && <EditorContainer />}
-      </section>
+    // Вывод после загрузки данных
+    return (
+      <div className="page">
+        <section id="sidebar">
+          <div>
+            <LevelCounterContainer />
+            <InstructionsContainer />
+          </div>
 
-      <section id="view">
-        <BoardContainer />
-      </section>
-    </div>
-  );      
+          {!this.props.state.statusWin && <EditorContainer />}
+        </section>
+
+        <section id="view">
+          <BoardContainer />
+        </section>
+      </div>
+    );      
+  }  
 }
+
 
 export default Lesson;

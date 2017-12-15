@@ -4,7 +4,7 @@ import Instructions from '../components/Instructions';
 
 function mapStateToProps(state) {
   return {
-    title: state.lesson.lesson.title
+    lesson: state.lesson
   };
 }
 

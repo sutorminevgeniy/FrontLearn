@@ -1,7 +1,6 @@
-import React from 'react';
 import { connect } from 'react-redux';
 
-import { initStateUser } from '../actions';
+import { getLesson } from '../actions';
 import Lesson from '../components/Lesson';
 
 function mapStateToProps(state) {
@@ -12,23 +11,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        initStateUser: (lessonId) => dispatch(initStateUser(lessonId))
+        getLesson: (lessonId) => dispatch(getLesson(lessonId))
     };
 }
 
-const LessonContainerWriper = connect(mapStateToProps)(Lesson);
-
-class LessonWriper extends React.Component {
-  componentWillMount() {
-      this.props.initStateUser( this.props.match.params.lessonId );
-  }
-
-  render() {
-    return <LessonContainerWriper />;      
-  }  
-}
-
-
-const LessonContainer = connect(mapStateToProps, mapDispatchToProps)(LessonWriper);
+const LessonContainer = connect(mapStateToProps, mapDispatchToProps)(Lesson);
 
 export default LessonContainer;
