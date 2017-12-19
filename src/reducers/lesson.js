@@ -1,5 +1,4 @@
-import { GET_LESSON,
-         CHANGE_LANG, 
+import { GET_LESSON, 
          NEXT_BUTTON, 
          NEXT_LEVEL, 
          PREV_LEVEL, 
@@ -22,11 +21,6 @@ function reducer(state = initialState, action) {
     case INPUT_ANSWER:
       return Object.assign({}, state, {
         stateUser: inputAnswer(action.answer, state)
-      });
-
-    case CHANGE_LANG:
-      return Object.assign({}, state, {
-        lang: action.lang
       });
 
     case NEXT_BUTTON:

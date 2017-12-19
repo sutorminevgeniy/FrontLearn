@@ -5,6 +5,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const messages = require('./api/messages');
 const topics = require('./api/topics');
 const lessons = require('./api/lessons');
 
@@ -30,6 +31,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache');
   next();
+});
+
+app.get('/api/main', (req, res) => {
+  res.send({
+    messages,
+    lang: 'ru'
+  });
 });
 
 app.get('/api/topics', (req, res) => {
@@ -71,7 +79,7 @@ function getLesson(lessonId) {
     questionStyle
   };
   });
-console.log(resState);
+
   return resState;
 }
 

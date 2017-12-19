@@ -18,14 +18,6 @@ export function inputAnswer(answer) {
     };
 }
 
-export const CHANGE_LANG = 'CHANGE_LANG';
-export function changeLang(lang) {
-    return {
-        type: CHANGE_LANG,
-        lang
-    };
-}
-
 export const NEXT_BUTTON = 'NEXT_BUTTON';
 export function nextButton() {
     return {

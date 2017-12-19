@@ -3,9 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 
 import LessonContainer from './container/LessonContainer';
 import TopicsContainer from './container/TopicsContainer';
+import CreditsContainer from './container/CreditsContainer';
 
 import Toolbar from './components/Toolbar';
-import Credits from './components/Credits';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -28,7 +28,7 @@ class App extends React.Component {
           </Switch>
         </div>
 
-        <Credits />
+        <CreditsContainer />
 
       </div>
     );      

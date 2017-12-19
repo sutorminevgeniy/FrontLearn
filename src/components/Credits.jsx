@@ -1,15 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import LanguageContainer from '../container/LanguageContainer';
 
-import messages from '../data/messages';
+function Credits(props) {
+  if(!props.main.lang) return null;
 
-function CreditsLang(props) {
   return (
     <div>
       <div className="credits">
-        <span id="labelFooter" className="translate">{ messages.labelFooter[props.state.lang] } </span>
+        <span id="labelFooter" className="translate">{ props.main.messages.labelFooter[props.main.lang] } </span>
         <a href="https://github.com/thomaspark/flexboxfroggy/">GitHub</a> • 
         <LanguageContainer />
       </div>
@@ -19,10 +18,5 @@ function CreditsLang(props) {
     </div>
   );
 }
-
-function mapStateToProps(state) {
-    return { state };
-}
-const Credits = connect(mapStateToProps)(CreditsLang);
 
 export default Credits;

@@ -5,7 +5,7 @@ import Language from '../components/Language';
 
 function mapStateToProps(state) {
     return {
-        state: state.lesson
+        main: state.main
     };
 }
 

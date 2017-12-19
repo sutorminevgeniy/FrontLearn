@@ -39,7 +39,7 @@ class Language extends React.Component {
   render() {
     return (
       <span id="language">
-        <span id="languageActive" className="toggle translate" onClick={ this.toggleLang }>{ messages.languageActive[this.props.state.lang] }</span>
+        <span id="languageActive" className="toggle translate" onClick={ this.toggleLang }>{ messages.languageActive[this.props.main.lang] }</span>
         <span className={ "tooltip" + (this.state.langShow ? "" : " hide") }>
           { Object.entries(messages.languageActive).map(item => {
             return (
