@@ -5,6 +5,7 @@ import Editor from '../components/Editor';
 
 function mapStateToProps(state) {
     return {
+        main: state.main,
         state: state.lesson
     };
 }

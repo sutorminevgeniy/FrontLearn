@@ -1,7 +1,5 @@
 import React from 'react';
 
-import messages from '../data/messages';
-
 class Editor extends React.Component {
   constructor(props) {
     super(props);
@@ -40,7 +38,7 @@ class Editor extends React.Component {
         <button 
           id="next" 
           className={ "translate" + (this.props.state.stateUser[this.props.state.level].passed ? '' : ' disabled') }
-          onClick={ () => (this.props.state.stateUser[this.props.state.level].passed ? this.props.nextButton() : '') }>{ messages.next[this.props.state.lang] }</button>
+          onClick={ () => (this.props.state.stateUser[this.props.state.level].passed ? this.props.nextButton() : '') }>{ this.props.main.messages.next[this.props.main.lang] }</button>
       </div>
     );
   }

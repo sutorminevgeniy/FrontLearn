@@ -59,7 +59,6 @@ app.listen(app.get('port'), () => console.log(`Server is listening: http://local
 function getLesson(lessonId) {
   let resState = {
     level: 0,
-    lang: 'ru',
     statusWin: false,
     lesson: {},
     stateUser: []

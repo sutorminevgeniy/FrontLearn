@@ -1,7 +1,5 @@
 import React from 'react';
 
-import messages from '../data/messages';
-
 class Language extends React.Component {
   constructor(props) {
     super(props);
@@ -39,9 +37,9 @@ class Language extends React.Component {
   render() {
     return (
       <span id="language">
-        <span id="languageActive" className="toggle translate" onClick={ this.toggleLang }>{ messages.languageActive[this.props.main.lang] }</span>
+        <span id="languageActive" className="toggle translate" onClick={ this.toggleLang }>{ this.props.main.messages.languageActive[this.props.main.lang] }</span>
         <span className={ "tooltip" + (this.state.langShow ? "" : " hide") }>
-          { Object.entries(messages.languageActive).map(item => {
+          { Object.entries(this.props.main.messages.languageActive).map(item => {
             return (
               <a 
                 key={ item[0] } 

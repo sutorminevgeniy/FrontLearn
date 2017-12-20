@@ -1,5 +1,3 @@
-import messages from '../data/messages';
-
 import React from 'react';
 
 class LevelCounter extends React.Component {
@@ -53,7 +51,7 @@ class LevelCounter extends React.Component {
   } 
 
   render() {
-    const lang = this.props.state.lang;
+    const lang = this.props.main.lang;
     const level = this.props.state.level;
     const levels = this.props.state.lesson.levels;
 
@@ -62,9 +60,9 @@ class LevelCounter extends React.Component {
         <span className={ "arrow left" + (level === 0 ? " disabled" : "") } onClick={ this.prevLevel }>◀</span>
 
         <span id="level-indicator" onClick={ this.toggleLevels }>
-          <span id="labelLevel" className="translate">{ messages.labelLevel[lang] } </span>
+          <span id="labelLevel" className="translate">{ this.props.main.messages.labelLevel[lang] } </span>
           <span className="current">{ level + 1 }</span>
-          <span id="labelOf" className="translate"> { messages.labelOf[lang] } </span>
+          <span id="labelOf" className="translate"> { this.props.main.messages.labelOf[lang] } </span>
           <span className="total">{ levels.length } </span>
           <span className="caret">▾</span>
         </span>
@@ -86,7 +84,7 @@ class LevelCounter extends React.Component {
             }
           </div>
 
-          <div id="labelReset" className="translate" onClick={ this.toggleLevels }>{ messages.labelReset[lang] }</div>
+          <div id="labelReset" className="translate" onClick={ this.toggleLevels }>{ this.props.main.messages.labelReset[lang] }</div>
         </div>
       </div>
     );    

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Instructions(props) {
-  let lang = props.lesson.lang;
+  let lang = props.main.lang;
   let level = props.lesson.level; 
   let levelData = ( 
     props.lesson.statusWin ? 
