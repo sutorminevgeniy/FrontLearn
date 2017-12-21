@@ -18,20 +18,22 @@ class Lesson extends React.Component {
 
     // Вывод после загрузки данных
     return (
-      <div className="page">
-        <section id="sidebar">
-          <div>
-            <LevelCounterContainer />
-            <InstructionsContainer />
-          </div>
+      <form action="">
+        <div className="page">
+          <section id="sidebar">
+            <div>
+              <LevelCounterContainer />
+              <InstructionsContainer />
+            </div>
 
-          {!this.props.state.statusWin && <EditorContainer />}
-        </section>
+            {!this.props.state.statusWin && <EditorContainer />}
+          </section>
 
-        <section id="view">
-          <BoardContainer />
-        </section>
-      </div>
+          <section id="view">
+            <BoardContainer />
+          </section>
+        </div>
+      </form>
     );      
   }  
 }

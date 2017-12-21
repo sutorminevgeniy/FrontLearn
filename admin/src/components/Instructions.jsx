@@ -12,7 +12,8 @@ function Instructions(props) {
   return (
     <div>
       <h1>{ props.lesson.lesson.title }</h1>
-      <p id="instructions" dangerouslySetInnerHTML={{__html: levelData.instructions[lang]}}></p>
+      <label htmlFor="instructions">instructions</label><br />
+      <textarea id="instructions" defaultValue={ levelData.instructions[lang] } />
       <p id="docs"></p>
     </div>
   );
