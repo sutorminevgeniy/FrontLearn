@@ -33,13 +33,17 @@ body {
   }
 }
 
-#sidebar {
+#sidebar, #structure {
   width: 50%;
   min-width: 300px;
   position: relative;
   padding: 2em;
   background-color: #43A047;
   font-size: 15px;
+}
+
+#structure {
+  width: 100%;
 }
 
 .hide {
@@ -383,6 +387,7 @@ button {
 
 #view {
     padding: 1em;
+    width: 50%;
 }
 #board {
   position: relative;
@@ -1128,7 +1133,19 @@ button {
 }
 
 
+.fildLesson {
+    padding-bottom: 10px;
 
+    label {
+        display: block;
+        padding-bottom: 5px;
+    }
+
+    textarea {
+        display: block;
+        width: 100%;
+    }
+}
 
 
 @media (min-width: 840px) {

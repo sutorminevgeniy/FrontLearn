@@ -1,7 +1,7 @@
 import React from 'react';
 
 import LevelCounterContainer from '../container/LevelCounterContainer';
-import InstructionsContainer from '../container/InstructionsContainer';
+import StructureContainer from '../container/StructureContainer';
 import EditorContainer       from '../container/EditorContainer';
 import BoardContainer        from '../container/BoardContainer';
 
@@ -20,10 +20,16 @@ class Lesson extends React.Component {
     return (
       <form action="">
         <div className="page">
+          <section id="structure">
+            <div>
+              <StructureContainer />
+            </div>
+          </section>
+        </div>
+        <div className="page">
           <section id="sidebar">
             <div>
               <LevelCounterContainer />
-              <InstructionsContainer />
             </div>
 
             {!this.props.state.statusWin && <EditorContainer />}
