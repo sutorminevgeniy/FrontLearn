@@ -11,7 +11,7 @@ function Instructions(props) {
 
   return (
     <div>
-      <h1>{ props.lesson.lesson.title }</h1>
+      <h1>{ props.lesson.lesson.structure.title }</h1>
       <p id="instructions" dangerouslySetInnerHTML={{__html: levelData.instructions[lang]}}></p>
       <p id="docs"></p>
     </div>

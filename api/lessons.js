@@ -1,12 +1,12 @@
 const lessons = [
   {
-    lessonId: "froggy",
-    title: "Flexbox Froggy",
-    topic: "css",
-    author:"Thomas Park",
-    preview_text: "Краткое описание урока",
-    image: "next-flexboxfroggy.png",
     structure: {
+      lessonId: "froggy",
+      title: "Flexbox Froggy",
+      topic: "css",
+      author:"Thomas Park",
+      preview_text: "Краткое описание урока",
+      image: "next-flexboxfroggy.png",
       group: {
         ansver: [{
           param: {
@@ -988,13 +988,13 @@ const lessons = [
     }
   },
   {
-    lessonId: "gridgarden",
-    title: "Grid Garden",
-    topic: "css",
-    author:"Thomas Park",
-    preview_text: "Краткое описание урока",
-    image: "next-gridgarden.png",
     structure: {
+      lessonId: "gridgarden",
+      title: "Grid Garden",
+      topic: "css",
+      author:"Thomas Park",
+      preview_text: "Краткое описание урока",
+      image: "next-gridgarden.png",
       group: {
         ansver: [{
           param: {
@@ -1808,13 +1808,13 @@ const lessons = [
     }
   },
   {
-    lessonId: "froggy_html",
-    title: "Froggy html",
-    topic: "html",
-    author:"Thomas Park",
-    preview_text: "Краткое описание урока",
-    image: "next-treehouse.png",
     structure: {
+      lessonId: "froggy_html",
+      title: "Froggy html",
+      topic: "html",
+      author:"Thomas Park",
+      preview_text: "Краткое описание урока",
+      image: "next-treehouse.png",
       group: {
         ansver: [{
           param: {
@@ -2796,13 +2796,13 @@ const lessons = [
     }
   },
   {
-    lessonId: "froggy_javascript",
-    title: "Froggy javascript",
-    topic: "javascript",
-    author:"Thomas Park",
-    preview_text: "Краткое описание урока",
-    image: "next-treehouse.png",
     structure: {
+      lessonId: "froggy_javascript",
+      title: "Froggy javascript",
+      topic: "javascript",
+      author:"Thomas Park",
+      preview_text: "Краткое описание урока",
+      image: "next-treehouse.png",
       group: {
         ansver: [{
           param: {

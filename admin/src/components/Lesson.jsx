@@ -1,8 +1,7 @@
 import React from 'react';
 
 import LevelCounterContainer from '../container/LevelCounterContainer';
-import StructureContainer from '../container/StructureContainer';
-import EditorContainer       from '../container/EditorContainer';
+import FieldContainer        from '../container/FieldContainer';
 import BoardContainer        from '../container/BoardContainer';
 
 class Lesson extends React.Component {
@@ -12,7 +11,7 @@ class Lesson extends React.Component {
 
   render() {
     // Вывод пока не подгрузились дданные
-    if(!this.props.state.lesson) {
+    if(!this.props.lesson.lesson) {
       return null;
     }
 
@@ -21,18 +20,28 @@ class Lesson extends React.Component {
       <form action="">
         <div className="page">
           <section id="structure">
-            <div>
-              <StructureContainer />
-            </div>
+            <h1>{ this.props.lesson.lesson.structure.title }</h1>
+            <FieldContainer  path="structure"/>
           </section>
         </div>
+
         <div className="page">
           <section id="sidebar">
             <div>
               <LevelCounterContainer />
             </div>
 
-            {!this.props.state.statusWin && <EditorContainer />}
+            <FieldContainer  path={"levels." + this.props.lesson.level}/>
+          </section>
+
+          <section id="view">
+            <BoardContainer />
+          </section>
+        </div>
+
+        <div className="page">
+          <section id="sidebar">
+            <FieldContainer  path="levelWin"/>
           </section>
 
           <section id="view">

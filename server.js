@@ -10,12 +10,12 @@ const topics = require('./api/topics');
 const lessons = require('./api/lessons');
 
 const lessonsTopics = lessons.map(lesson => ({
-  topic: lesson.topic,
-  lessonId: lesson.lessonId,
-  title: lesson.title,
-  author: lesson.author,
-  image: lesson.image,
-  preview_text: lesson.preview_text
+  topic: lesson.structure.topic,
+  lessonId: lesson.structure.lessonId,
+  title: lesson.structure.title,
+  author: lesson.structure.author,
+  image: lesson.structure.image,
+  preview_text: lesson.structure.preview_text
 }))
 
 const app = express();
@@ -63,7 +63,7 @@ function getLesson(lessonId) {
     lesson: {},
     stateUser: []
   };
-  resState.lesson = lessons.filter(lesson => lesson.lessonId === lessonId)[0];
+  resState.lesson = lessons.filter(lesson => lesson.structure.lessonId === lessonId)[0];
   let levels = resState.lesson.levels;
 
   resState.stateUser = Array(levels.length).fill(null).map((item, i) => {
