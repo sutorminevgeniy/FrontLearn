@@ -3,7 +3,7 @@ import { GET_LESSON,
          NEXT_LEVEL, 
          PREV_LEVEL, 
          CHANGE_LEVEL, 
-         INPUT_ANSWER } from '../actions';
+         SET_VALUE } from '../actions';
 
 const initialState = {
   level: 0,
@@ -18,10 +18,8 @@ function reducer(state = initialState, action) {
     case GET_LESSON:
       return action.lesson;
 
-    case INPUT_ANSWER:
-      return Object.assign({}, state, {
-        stateUser: inputAnswer(action.answer, state)
-      });
+    case SET_VALUE:
+      return setValue(state, action);
 
     case NEXT_BUTTON:
         return nextButton(state);
@@ -51,70 +49,23 @@ function reducer(state = initialState, action) {
 
 export default reducer;
 
-// Ответы =========================================================================================
-// Разбор строки стилей в массив
-function getArrayStyle (strStyle) {
-    let arrStyle = '{' + strStyle + '}';
-
-    arrStyle = arrStyle.replace(/([{}])\s*([^{}:;"]*)\s+{/g, '$1 "$2": {')
-                       .replace(/([{;])\s*([^{}:;"]*)\s*:/g, '$1 "$2": ')
-                       .replace(/:\s*([^{}"]+)\s*;/g, ': "$1";')              // добавление кавычек
-                       .replace(/;/g, '')                                       // удаление всех ;
-                       .replace(/(["}])(\s+["{])/g, '$1,$2');
-    // преобразование в верблюжью нотацию
-    arrStyle = arrStyle.replace(/-(\w)(\w*":)/g, (match, p1, p2) => p1.toUpperCase() + p2);
-    arrStyle = arrStyle.replace(/-(\w)(\w*":)/g, (match, p1, p2) => p1.toUpperCase() + p2); 
-
-    return JSON.parse(arrStyle);
-}
-
-// Разбор массива стилей в строку
-function getStrStyle(arrStyle) {
-    let strStyle = JSON.stringify(arrStyle);
-
-    strStyle = strStyle.replace(/[{}"]/g, '')
-                       .replace(/:/g, ': ')
-                       .replace(/,/g, '; ');
-
-    return strStyle + ';';
-}
-
-
 // Ввод ответа
-function inputAnswer(answer, state) {
-    let stateUser = state.stateUser.slice();
-    let levels = state.lesson.levels;
-    let correctAnswer = getStrStyle(levels[state.level].style);
+function setValue(state, action) {
+    let pathArr = action.path.split('.');
 
-    stateUser[state.level].answer = answer;
-    stateUser[state.level].passed = false;
+    let resState = Object.assign({}, state);
 
-    try {
-      stateUser[state.level].questionStyle = getArrayStyle( levels[state.level].before + clearStr(answer) + levels[state.level].after );
-    } catch (err) {
-      console.log('Стиль не корректен для конвертации: ', answer);
+    let resfield = resState.lesson;
+
+    for (let key in pathArr) {
+      if(typeof resfield[pathArr[key]] === 'object'){
+        resfield = resfield[pathArr[key]];
+      } else {
+        resfield[pathArr[key]] =  action.value;
+      }
     }
 
-    if(clearStr(correctAnswer) === clearStr(answer)) {
-      stateUser[state.level].passed = true;
-    }
-
-    console.log('Верный ответ: ',correctAnswer);
-
-    return stateUser;
-}
-
-  // очистка строки от лишних пробельных символов
-function clearStr(str) {
-    let result = str;
-
-    result = result.replace(/\n/g, '; ')          // замена перевода строк на  ;
-                   .replace(/[\s;]+;/g, ';')      // очистка дублируемых ;;
-                   .replace(/\s+/g, ' ')          // очисика лишних побелов
-                   .replace(/(^\s*)|(\s*$)/g, '') // удаление пробелов в начале/конце
-                   .replace(/([^;])$/, '$1;');    // добавление ; в конце
-
-    return result;
+    return resState;
 }
 
 // следующий уровень

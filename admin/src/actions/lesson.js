@@ -10,11 +10,12 @@ export function getLesson (lessonId) {
         }));
 }
 
-export const INPUT_ANSWER = 'INPUT_ANSWER';
-export function inputAnswer(answer) {
+export const SET_VALUE = 'SET_VALUE';
+export function setValue(path, value) {
     return {
-        type: INPUT_ANSWER,
-        answer
+        type: SET_VALUE,
+        path, 
+        value
     };
 }
 

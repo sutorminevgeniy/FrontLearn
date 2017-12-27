@@ -1,3 +1,5 @@
+$bgcolor: #43A047;
+
 * {
   box-sizing: border-box;
 }
@@ -17,7 +19,7 @@ a[href="#fa"] {
 body {
   min-width: 600px;
   margin: 0;
-  background-color: #43A047;
+  background-color: $bgcolor;
   color: rgba(255, 255, 255, 0.7);
   font-family: 'PT Sans', sans-serif;
 }
@@ -753,11 +755,11 @@ button {
 }
 
 .topics {
-    display: -ms-flexbox;
-    display: flex;
-    max-width: 1024px;
-    margin: 0 auto;
-    padding: 0 1rem;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .mdc-card {
@@ -965,41 +967,41 @@ button {
 
 
 .mdc-toolbar {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;;
-    box-sizing: border-box;
-    background-color: #017066;
-    color: white;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;;
+  box-sizing: border-box;
+  background-color: #017066;
+  color: white;
 }
 
 .mdc-toolbar__row {
-    padding: 0 28px;
-    display: flex;
-    position: relative;
-    align-items: center;
-    width: 100%;
-    height: auto;
-    min-height: 64px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+  padding: 0 28px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  min-height: 64px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .mdc-toolbar__section {
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -ms-flex: 1;
-    flex: 1 1;
-    -ms-flex-align: start;
-    align-items: flex-start;
-    -ms-flex-pack: center;
-    justify-content: center;
-    min-width: 0;
-    height: 100%;
-    z-index: 1;
-    align-items: center;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex: 1;
+  flex: 1 1;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-width: 0;
+  height: 100%;
+  z-index: 1;
+  align-items: center;
 }
 
 .mdc-toolbar__section--align-start {
@@ -1127,7 +1129,7 @@ button {
   min-width: 300px;
   position: relative;
   padding: 2em;
-  background-color: #43A047;
+  background-color: $bgcolor;
   font-size: 15px;
 }
 
@@ -1136,14 +1138,40 @@ button {
 }
 
 .groupLesson {
+  background: darken($bgcolor, 10%);
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 5px;
-  margin: 15px 0 -1px -11px;
+  margin: 15px 0 3px -11px;
   padding: 0px 10px;
 
   legend {
     margin-bottom: -15px;
   } 
+
+  .groupLesson {
+    background: darken($bgcolor, 20%);
+    .groupLesson {
+      background: darken($bgcolor, 30%);
+      .groupLesson {
+        background: darken($bgcolor, 10%);
+        .groupLesson {
+          background: darken($bgcolor, 20%);
+          .groupLesson {
+            background: darken($bgcolor, 30%);
+            .groupLesson {
+              background: darken($bgcolor, 10%);
+              .groupLesson {
+                background: darken($bgcolor, 20%);
+                .groupLesson {
+                  background: darken($bgcolor, 30%);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .fildLesson {

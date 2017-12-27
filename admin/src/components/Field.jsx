@@ -6,12 +6,12 @@ class Field extends React.Component {
   constructor(props) {
     super(props);
 
-    this.inputAnswer = this.inputAnswer.bind(this);
+    this.setValue = this.setValue.bind(this);
   }
 
-  inputAnswer(event) {
-    let answer = event.target.value;
-    this.props.inputAnswer(answer)
+  setValue(event) {
+    let value = event.target.value;
+    this.props.setValue(this.props.path, value)
   }
 
   getItem(path) {
@@ -45,7 +45,10 @@ class Field extends React.Component {
       return (
         <div className="fildLesson">
           <label htmlFor={this.props.path}>{pathItem.key}</label>
-          <textarea id={this.props.path} value={ pathItem.val } />
+          <textarea 
+            id={ this.props.path } 
+            value={ pathItem.val }
+            onChange={ this.setValue } />
         </div>
       );      
     }

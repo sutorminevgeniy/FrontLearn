@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { nextButton, inputAnswer } from '../actions';
+import { setValue } from '../actions';
 import Field from '../components/Field';
 
 function mapStateToProps(state) {
@@ -12,8 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        nextButton: () => dispatch(nextButton()),
-        inputAnswer: answer => dispatch(inputAnswer(answer))
+        setValue: (path, value) => dispatch(setValue(path, value))
     };
 }
 
