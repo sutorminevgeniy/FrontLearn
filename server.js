@@ -5,6 +5,57 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+
+
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: 'localhost',
+  dialect: 'sqlite',
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+  storage: 'api/database.sqlite',
+  operatorsAliases: false
+});
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Соединение установлено.');
+  })
+  .catch(err => {
+    console.error('Ошибка соединения:', err);
+  });
+
+const Topics = sequelize.define('topics', {
+  path: {
+    type: Sequelize.STRING
+  },
+  title: {
+    type: Sequelize.STRING
+  }
+});
+
+
+Topics.sync({force: true}).then(() => {
+  return Topics.create({
+    path: 'css',
+    title: 'CSS'
+  });
+});
+
+Topics.findAll().then(topics => {
+  console.log(topics)
+})
+
+
+
+
+
+
 const messages = require('./api/messages');
 const topics = require('./api/topics');
 const lessons = require('./api/lessons');
@@ -19,8 +70,6 @@ const lessonsTopics = lessons.map(lesson => ({
 }))
 
 const app = express();
-
-let nextId = 5;
 
 app.set('port', (process.env.PORT || 5000));
 
