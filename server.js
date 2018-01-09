@@ -40,16 +40,20 @@ const Topics = sequelize.define('topics', {
 });
 
 
-Topics.sync({force: true}).then(() => {
-  return Topics.create({
-    path: 'css',
-    title: 'CSS'
+Topics.sync({force: true})
+  .then(() => {
+    return Topics.create({
+      path: 'css',
+      title: 'CSS'
+    });
+  })
+  .then(() => {
+    Topics.findAll().then(topics => {
+      console.log(topics)
+    })
   });
-});
 
-Topics.findAll().then(topics => {
-  console.log(topics)
-})
+
 
 
 
