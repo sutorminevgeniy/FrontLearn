@@ -1,14 +1,14 @@
 [
     {
-        "id": "css",
+        "path": "css",
         "title": "css"
     },
     {
-        "id": "html",
+        "path": "html",
         "title": "html"
     },
     {
-        "id": "javascript",
+        "path": "javascript",
         "title": "JavaScript"
     }
 ]

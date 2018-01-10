@@ -241,4 +241,4 @@ const docs = {
   }
 };
 
-export default docs;
+module.exports = docs;
