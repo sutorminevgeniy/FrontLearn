@@ -7,61 +7,27 @@ const bodyParser = require('body-parser');
 
 
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('database', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'sqlite',
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  },
-  storage: 'api/database.sqlite',
-  operatorsAliases: false
-});
+const sequelize = require('./configdb');
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Соединение установлено.');
-  })
-  .catch(err => {
-    console.error('Ошибка соединения:', err);
-  });
+const Topics = sequelize.define('topics', {});
 
-const Topics = sequelize.define('topics', {
-  path: {
-    type: Sequelize.STRING
-  },
-  title: {
-    type: Sequelize.STRING
-  }
-});
+// Topics.findAll({
+//     attributes: ['title', ['path', 'id']]
+//   })
+//   .then(dataTopics => {
+//     let topics = dataTopics;
+//     console.log(dataTopics);
 
+//     topics = topics.map(item => item.get());
 
-Topics.sync({force: true})
-  .then(() => {
-    return Topics.create({
-      path: 'css',
-      title: 'CSS'
-    });
-  })
-  .then(() => {
-    Topics.findAll().then(topics => {
-      console.log(topics)
-    })
-  });
-
-
-
+//     console.log(topics);
+//   });
 
 
 
 
 
 const messages = require('./api/messages');
-const topics = require('./api/topics');
 const lessons = require('./api/lessons');
 
 const lessonsTopics = lessons.map(lesson => ({
@@ -94,10 +60,19 @@ app.get('/api/main', (req, res) => {
 });
 
 app.get('/api/topics', (req, res) => {
-  res.send({
-    topics,
-    lessons: lessonsTopics
-  });
+
+  Topics.findAll({
+      attributes: ['title', 'path']
+    })
+    .then(data => {
+      let topics = data;
+      topics = topics.map(item => item.get());
+
+      res.send({
+        topics,
+        lessons: lessonsTopics
+      });
+    });
 });
 
 app.get('/api/lesson/:lessonId', (req, res) => {
