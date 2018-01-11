@@ -65,7 +65,7 @@ Messages.sync({force: true})
   })
   .then(() => {
     Messages.findAll({
-        attributes: ['name', 'name', 'content']
+        attributes: ['name', 'lang', 'content']
       })
       // .then(messages => {
       //   console.log(messages)
@@ -96,7 +96,7 @@ Docs.sync({force: true})
   })
   .then(() => {
     Docs.findAll({
-        attributes: ['name', 'name', 'content']
+        attributes: ['name', 'lang', 'content']
       })
       .then(docs => {
         console.log(docs)

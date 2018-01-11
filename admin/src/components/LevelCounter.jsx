@@ -55,6 +55,8 @@ class LevelCounter extends React.Component {
     const level = this.props.state.level;
     const levels = this.props.state.lesson.levels;
 
+    if(!this.props.main.messages) return null;
+
     return (
       <div id="level-counter">
         <span className={ "arrow left" + (level === 0 ? " disabled" : "") } onClick={ this.prevLevel }>◀</span>

@@ -10,24 +10,10 @@ const bodyParser = require('body-parser');
 const sequelize = require('./configdb');
 
 const Topics = sequelize.define('topics', {});
-
-// Topics.findAll({
-//     attributes: ['title', ['path', 'id']]
-//   })
-//   .then(dataTopics => {
-//     let topics = dataTopics;
-//     console.log(dataTopics);
-
-//     topics = topics.map(item => item.get());
-
-//     console.log(topics);
-//   });
+const Messages = sequelize.define('messages', {});
 
 
-
-
-
-const messages = require('./api/messages');
+// const messages = require('./api/messages');
 const lessons = require('./api/lessons');
 
 const lessonsTopics = lessons.map(lesson => ({
@@ -53,10 +39,19 @@ app.use((req, res, next) => {
 });
 
 app.get('/api/main', (req, res) => {
-  res.send({
-    messages,
-    lang: 'ru'
-  });
+  Messages.findAll({
+      attributes: ['name', 'lang', 'content']
+    })
+    .then(data => {
+      let messages = shareByLang(data);
+
+      console.log(messages);
+
+      res.send({
+        messages,
+        lang: 'ru'
+      });
+    });
 });
 
 app.get('/api/topics', (req, res) => {
@@ -135,4 +130,16 @@ function getStrStyle(arrStyle) {
              .replace(/,/g, '; ');
 
   return strStyle + ';';
+}
+
+function shareByLang(content) {
+  let result = {};
+
+  content.forEach(item => {
+    let dataItem = item.get();
+    result[dataItem.name] = result[dataItem.name] || {};
+    result[dataItem.name][dataItem.lang] = dataItem.content;
+  });
+
+  return result;
 }
