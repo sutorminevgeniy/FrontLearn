@@ -6,12 +6,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 
-
 const sequelize = require('./configdb');
 
-const Topics = sequelize.define('topics', {});
-const Messages = sequelize.define('messages', {});
-const Structure = sequelize.define('structure', {});
+const Topics         = sequelize.define('topics', {});
+const Messages       = sequelize.define('messages', {});
+const Structure      = sequelize.define('structure', {});
+const Levels         = sequelize.define('levels', {});
+const Instructions   = sequelize.define('instructions', {});
 
 const lessons = require('./api/lessons');
 
@@ -70,6 +71,95 @@ app.get('/api/topics', (req, res) => {
 });
 
 app.get('/api/lesson/:lessonId', (req, res) => {
+  Structure.findOne({
+      attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image', 'group', 'color'],
+      where: {lessonId: req.params.lessonId}
+    })
+    .then(data => {
+      let result = data.get();
+
+      result.group = JSON.parse(result.group);
+      result.color = JSON.parse(result.color);
+
+      // console.log(result);
+      return result
+    });
+
+  Levels.findAll({
+      attributes: ['name', 'board', 'style', 'before', 'after'],
+      where: {lessonId: req.params.lessonId},
+      order: [['level', 'ASC']]
+    })
+    .then(data => {
+      let levels = data;
+          
+      levels = levels.map(item => item.get());
+
+      // console.log(levels)
+
+      return levels;
+    })
+    .then(data => {
+      let levels = data;
+          
+      levels = levels.map(item => item.get());
+
+      console.log(levels)
+
+      return levels;
+    });
+
+  Instructions.findAll({
+      attributes: ['level','lang', 'content'],
+      where: {lessonId: req.params.lessonId},
+      order: [['level', 'ASC']]
+    })
+    .then(data => {
+      let instructions = data;
+          
+      instructions = instructions.map(item => item.get());
+
+      console.log(instructions)
+    });
+
+  /*Levels.findAll({
+      attributes: ['name', 'board', 'style', 'before', 'after'],
+      where: {lessonId: req.params.lessonId},
+      order: [['level', 'ASC']]
+    })
+    .then(data => {
+      let levels = data;
+          
+      levels = levels.map(item => item.get());
+
+      return levels;
+    })
+    .then(data => {
+      let levels = data;
+          
+      Instructions.findAll({
+        attributes: ['level','lang', 'content'],
+        where: {lessonId: req.params.lessonId},
+        order: [['level', 'ASC']]
+      })
+      .then(data => {
+        data.forEach(item => {
+          let dataItem = item.get();
+
+          levels[dataItem.level].instructions = levels[dataItem.level].instructions || {};
+
+          levels[dataItem.level].instructions[dataItem.lang] = dataItem.content
+        });
+
+        console.log(levels)
+      });
+
+      
+
+      return levels;
+    });*/
+
+
   res.send(getLesson(req.params.lessonId));
 });
 
@@ -89,16 +179,16 @@ function getLesson(lessonId) {
   let levels = resState.lesson.levels;
 
   resState.stateUser = Array(levels.length).fill(null).map((item, i) => {
-  let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
-  let strStyleAnswer = getStrStyle( levels[i].style );
-  let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
+    let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
+    let strStyleAnswer = getStrStyle( levels[i].style );
+    let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
 
-  return {
-    passed: false,
-    answer: '',
-    ansverStyle,
-    questionStyle
-  };
+    return {
+      passed: false,
+      answer: '',
+      ansverStyle,
+      questionStyle
+    };
   });
 
   return resState;
