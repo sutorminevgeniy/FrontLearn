@@ -11,17 +11,9 @@ const sequelize = require('./configdb');
 
 const Topics = sequelize.define('topics', {});
 const Messages = sequelize.define('messages', {});
+const Structure = sequelize.define('structure', {});
 
 const lessons = require('./api/lessons');
-
-const lessonsTopics = lessons.map(lesson => ({
-  topic: lesson.structure.topic,
-  lessonId: lesson.structure.lessonId,
-  title: lesson.structure.title,
-  author: lesson.structure.author,
-  image: lesson.structure.image,
-  preview_text: lesson.structure.preview_text
-}))
 
 const app = express();
 
@@ -59,17 +51,21 @@ app.get('/api/topics', (req, res) => {
       let topics = data;
       topics = topics.map(item => item.get());
 
-      res.send({
-        topics,
-        lessons: lessonsTopics
-      });
-
       return topics;
     })
-    .then(data => {
-      let topics = data;
+    .then(topics => {
+      Structure.findAll({
+          attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image']
+        })
+        .then(data => {
+          let lessons = data;
+          lessons = lessons.map(item => item.get());
 
-      console.log(topics);
+          res.send({
+            topics,
+            lessons
+          });
+        });
     });
 });
 
