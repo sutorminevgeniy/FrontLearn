@@ -12,8 +12,6 @@ const sequelize = require('./configdb');
 const Topics = sequelize.define('topics', {});
 const Messages = sequelize.define('messages', {});
 
-
-// const messages = require('./api/messages');
 const lessons = require('./api/lessons');
 
 const lessonsTopics = lessons.map(lesson => ({
@@ -45,8 +43,6 @@ app.get('/api/main', (req, res) => {
     .then(data => {
       let messages = shareByLang(data);
 
-      console.log(messages);
-
       res.send({
         messages,
         lang: 'ru'
@@ -67,6 +63,13 @@ app.get('/api/topics', (req, res) => {
         topics,
         lessons: lessonsTopics
       });
+
+      return topics;
+    })
+    .then(data => {
+      let topics = data;
+
+      console.log(topics);
     });
 });
 

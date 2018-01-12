@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('./configdb');
 
-/*
+
 // topics
 const initTopics = require('./api/topics');
 
@@ -34,14 +34,14 @@ Topics.sync({force: true})
   .then(() => {
     return Topics.bulkCreate(initTopics);
   })
-  .then(() => {
-    Topics.findAll({
-        attributes: ['title', 'path']
-      })
-      // .then(topics => {
-      //   console.log(topics)
-      // });
-  });
+  // .then(() => {
+  //   Topics.findAll({
+  //       attributes: ['title', 'path']
+  //     })
+  //     .then(topics => {
+  //       console.log(topics)
+  //     });
+  // });
 
 
 // messages
@@ -83,10 +83,9 @@ Docs.sync({force: true})
     return Docs.bulkCreate(dataDocs);
   });
 
-*/
 
 const initLessons = require('./api/lessons');
-/*
+
 // structure
 let dataStructure = initLessons.map(item => {
   let result = item.structure;
@@ -146,40 +145,78 @@ Levels.sync({force: true})
   .then(() => {
     return Levels.bulkCreate(dataLevels);
   })
-*/
 
 // instructions
 let dataInstructions = [];
 initLessons.forEach(lesson => {
   lesson.levels.forEach((level, i) => {
-    let result = { lessonId: lesson.structure.lessonId, level: i};
-
     for(let lang in level.instructions) {
+      let result = { lessonId: lesson.structure.lessonId, level: i};
+
       result.lang = lang;
       result.content = level.instructions[lang];
-    }
 
-    dataInstructions.push(result);
+      dataInstructions.push(result);
+    }
   });
 });
 
-console.log(dataInstructions);
+const Instructions = sequelize.define('instructions', {
+    lessonId: { type: Sequelize.STRING },
+    level:    { type: Sequelize.INTEGER },
+    lang:    { type: Sequelize.STRING },
+    content: { type: Sequelize.TEXT }
+  });
+Instructions.sync({force: true})
+  .then(() => {
+    return Instructions.bulkCreate(dataInstructions);
+  });
 
-// const Instructions = sequelize.define('instructions', {
-//     lessonId: { type: Sequelize.STRING },
-//     level:    { type: Sequelize.INTEGER },
-//     lang:    { type: Sequelize.STRING },
-//     content: { type: Sequelize.TEXT }
-//   });
-// Instructions.sync({force: true})
-//   .then(() => {
-//     return Instructions.bulkCreate(dataInstructions);
-//   })
-//   .then(() => {
-//     Levels.findAll({
-//         attributes: ['lessonId', 'level', 'lang', 'content']
-//       })
-//       .then(data => {
-//         console.log(data)
-//       });
-//   });
+
+// levelsWin
+let dataLevelsWin = [];
+initLessons.forEach(lesson => {
+  let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
+  result.style = JSON.stringify(result.style);
+  delete result.instructions;
+
+  dataLevelsWin.push(result);
+});
+
+const LevelsWin = sequelize.define('levelsWin', {
+    lessonId: { type: Sequelize.STRING },
+    name:     { type: Sequelize.STRING },
+    board:    { type: Sequelize.STRING },
+    style:    { type: Sequelize.TEXT },
+    before:   { type: Sequelize.TEXT },
+    after:    { type: Sequelize.TEXT }
+  });
+
+LevelsWin.sync({force: true})
+  .then(() => {
+    return LevelsWin.bulkCreate(dataLevelsWin);
+  })
+
+
+// instructionsWin
+let dataInstructionsWin = [];
+initLessons.forEach(lesson => {
+  for(let lang in lesson.levelWin.instructions) {
+    let result = { lessonId: lesson.structure.lessonId};
+
+    result.lang = lang;
+    result.content = lesson.levelWin.instructions[lang];
+
+    dataInstructionsWin.push(result);
+  }
+});
+
+const InstructionsWin = sequelize.define('instructionsWin', {
+    lessonId: { type: Sequelize.STRING },
+    lang:    { type: Sequelize.STRING },
+    content: { type: Sequelize.TEXT }
+  });
+InstructionsWin.sync({force: true})
+  .then(() => {
+    return InstructionsWin.bulkCreate(dataInstructionsWin);
+  });
