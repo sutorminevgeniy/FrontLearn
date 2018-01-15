@@ -183,7 +183,7 @@ initLessons.forEach(lesson => {
   dataLevelsWin.push(result);
 });
 
-const LevelsWin = sequelize.define('levelsWin', {
+const LevelsWin = sequelize.define('levelWins', {
     lessonId: { type: Sequelize.STRING },
     name:     { type: Sequelize.STRING },
     board:    { type: Sequelize.STRING },
@@ -211,7 +211,7 @@ initLessons.forEach(lesson => {
   }
 });
 
-const InstructionsWin = sequelize.define('instructionsWin', {
+const InstructionsWin = sequelize.define('instructionsWins', {
     lessonId: { type: Sequelize.STRING },
     lang:    { type: Sequelize.STRING },
     content: { type: Sequelize.TEXT }
