@@ -10,6 +10,25 @@ export function getLesson (lessonId) {
         }));
 }
 
+export const EDIT_LESSON = 'EDIT_LESSON';
+export function editLesson (lesson) {
+    return axios.put(`/api/lesson`, { lesson })
+        .then(response => response.data)
+        .then(lesson => ({
+            type: EDIT_LESSON,
+            lesson
+        }));
+}
+
+export const CHANGE_FIELD = 'CHANGE_FIELD';
+export function changeLevel(field, value) {
+    return {
+        type: CHANGE_FIELD,
+        field, 
+        value
+    };
+}
+
 export const SET_VALUE = 'SET_VALUE';
 export function setValue(path, value) {
     return {

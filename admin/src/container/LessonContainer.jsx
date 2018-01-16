@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { getLesson } from '../actions';
+import { getLesson, editLesson } from '../actions';
 import Lesson from '../components/Lesson';
 
 function mapStateToProps(state) {
@@ -11,7 +11,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getLesson: (lessonId) => dispatch(getLesson(lessonId))
+        getLesson: (lessonId) => dispatch(getLesson(lessonId)),
+        editLesson: (lesson) => dispatch(editLesson(lesson))
     };
 }
 

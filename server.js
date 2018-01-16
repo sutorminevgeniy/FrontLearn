@@ -21,8 +21,9 @@ const app = express();
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
 
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache');
@@ -140,6 +141,14 @@ app.get('/api/lesson/:lessonId', (req, res) => {
 
     res.send(getLesson(lesson));
   });    
+});
+
+app.put('/api/lesson', (req, res) => {
+    const lesson = req.body.lesson;
+
+    console.log(req, lesson);
+
+    res.json(lesson);
 });
 
 app.listen(app.get('port'), () => console.log(`Server is listening: http://localhost:${app.get('port')}`));

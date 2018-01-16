@@ -1,4 +1,5 @@
-import { GET_LESSON, 
+import { GET_LESSON,
+         EDIT_LESSON, 
          NEXT_BUTTON, 
          NEXT_LEVEL, 
          PREV_LEVEL, 
@@ -17,6 +18,9 @@ function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_LESSON:
       return action.lesson;
+      
+    case EDIT_LESSON:
+      return state;
 
     case SET_VALUE:
       return setValue(state, action);
