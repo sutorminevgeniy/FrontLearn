@@ -1,10 +1,10 @@
 import { GET_LESSON,
          EDIT_LESSON, 
+         SET_VALUE,
          NEXT_BUTTON, 
          NEXT_LEVEL, 
          PREV_LEVEL, 
-         CHANGE_LEVEL, 
-         SET_VALUE } from '../actions';
+         CHANGE_LEVEL } from '../actions';
 
 const initialState = {
   level: 0,

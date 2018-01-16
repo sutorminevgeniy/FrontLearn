@@ -20,15 +20,6 @@ export function editLesson (lesson) {
         }));
 }
 
-export const CHANGE_FIELD = 'CHANGE_FIELD';
-export function changeLevel(field, value) {
-    return {
-        type: CHANGE_FIELD,
-        field, 
-        value
-    };
-}
-
 export const SET_VALUE = 'SET_VALUE';
 export function setValue(path, value) {
     return {
