@@ -5,22 +5,18 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const messages = require('./api/messages');
-const topics = require('./api/topics');
-const lessons = require('./api/lessons');
 
-const lessonsTopics = lessons.map(lesson => ({
-  topic: lesson.structure.topic,
-  lessonId: lesson.structure.lessonId,
-  title: lesson.structure.title,
-  author: lesson.structure.author,
-  image: lesson.structure.image,
-  preview_text: lesson.structure.preview_text
-}))
+const sequelize = require('./configdb');
+
+const Topics          = sequelize.define('topics', {});
+const Messages        = sequelize.define('messages', {});
+const Structure       = sequelize.define('structure', {});
+const Levels          = sequelize.define('levels', {});
+const Instructions    = sequelize.define('instructions', {});
+const LevelWin       = sequelize.define('levelWins', {});
+const InstructionsWin = sequelize.define('instructionsWins', {});
 
 const app = express();
-
-let nextId = 5;
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -34,21 +30,116 @@ app.use((req, res, next) => {
 });
 
 app.get('/api/main', (req, res) => {
-  res.send({
-    messages,
-    lang: 'ru'
-  });
+  Messages.findAll({
+      attributes: ['name', 'lang', 'content']
+    })
+    .then(data => {
+      let messages = shareByLang(data);
+
+      res.send({
+        messages,
+        lang: 'ru'
+      });
+    });
 });
 
 app.get('/api/topics', (req, res) => {
-  res.send({
-    topics,
-    lessons: lessonsTopics
-  });
+
+  Topics.findAll({
+      attributes: ['title', 'path']
+    })
+    .then(data => {
+      let topics = data;
+      topics = topics.map(item => item.get());
+
+      return topics;
+    })
+    .then(topics => {
+      Structure.findAll({
+          attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image']
+        })
+        .then(data => {
+          let lessons = data;
+          lessons = lessons.map(item => item.get());
+
+          res.send({
+            topics,
+            lessons
+          });
+        });
+    });
 });
 
 app.get('/api/lesson/:lessonId', (req, res) => {
-  res.send(getLesson(req.params.lessonId));
+  let lesson = {};
+
+  let p0 = Structure.findOne({
+      attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image', 'group', 'color'],
+      where: {lessonId: req.params.lessonId}
+    })
+
+  let p1 = Levels.findAll({
+      attributes: ['name', 'board', 'style', 'before', 'after'],
+      where: {lessonId: req.params.lessonId},
+      order: [['level', 'ASC']]
+    })
+
+  let p2 = Instructions.findAll({
+      attributes: ['level','lang', 'content'],
+      where: {lessonId: req.params.lessonId},
+      order: [['level', 'ASC']]
+    })
+
+  let p3 = LevelWin.findOne({
+      attributes: ['name', 'board', 'style', 'before', 'after'],
+      where: {lessonId: req.params.lessonId}
+    })
+
+  let p4 = InstructionsWin.findAll({
+      attributes: ['lang', 'content'],
+      where: {lessonId: req.params.lessonId}
+    })
+
+  Promise.all([p0, p1, p2, p3, p4]).then(datas => { 
+    let structure = datas[0].get();
+
+    structure.group = JSON.parse(structure.group);
+    structure.color = JSON.parse(structure.color);
+
+    lesson.structure = structure;
+
+    let levels = datas[1];
+    levels = levels.map(item => {
+      let level = item.get();
+      level.style = JSON.parse(level.style);
+      level.instructions = {};
+      return level;
+    });
+
+    let instructions = datas[2];
+    instructions.forEach(item => {
+      let dataItem = item.get();
+
+      levels[dataItem.level].instructions[dataItem.lang] = dataItem.content;
+    });
+
+    lesson.levels = levels;
+
+    let levelWin = datas[3].get();
+    levelWin.style = JSON.parse(levelWin.style);
+
+    let instructionsWin = datas[4];
+    instructionsWin.forEach(item => {
+      let dataItem = item.get();
+
+      levelWin.instructions = levelWin.instructions || {};
+      levelWin.instructions[dataItem.lang] = dataItem.content;
+    });
+
+    lesson.levelWin = levelWin;
+
+    res.send(getLesson(lesson));
+  });    
 });
 
 app.listen(app.get('port'), () => console.log(`Server is listening: http://localhost:${app.get('port')}`));
@@ -56,27 +147,29 @@ app.listen(app.get('port'), () => console.log(`Server is listening: http://local
 
 // Инициализация ==================================================================================
 // Инициализация пользовательского состояния
-function getLesson(lessonId) {
+function getLesson(lesson) {
   let resState = {
     level: 0,
     statusWin: false,
     lesson: {},
     stateUser: []
   };
-  resState.lesson = lessons.filter(lesson => lesson.structure.lessonId === lessonId)[0];
+
+  resState.lesson = lesson;
+
   let levels = resState.lesson.levels;
 
   resState.stateUser = Array(levels.length).fill(null).map((item, i) => {
-  let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
-  let strStyleAnswer = getStrStyle( levels[i].style );
-  let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
+    let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
+    let strStyleAnswer = getStrStyle( levels[i].style );
+    let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
 
-  return {
-    passed: false,
-    answer: '',
-    ansverStyle,
-    questionStyle
-  };
+    return {
+      passed: false,
+      answer: '',
+      ansverStyle,
+      questionStyle
+    };
   });
 
   return resState;
@@ -107,4 +200,16 @@ function getStrStyle(arrStyle) {
              .replace(/,/g, '; ');
 
   return strStyle + ';';
+}
+
+function shareByLang(content) {
+  let result = {};
+
+  content.forEach(item => {
+    let dataItem = item.get();
+    result[dataItem.name] = result[dataItem.name] || {};
+    result[dataItem.name][dataItem.lang] = dataItem.content;
+  });
+
+  return result;
 }
