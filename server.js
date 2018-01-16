@@ -75,34 +75,34 @@ app.get('/api/topics', (req, res) => {
 app.get('/api/lesson/:lessonId', (req, res) => {
   let lesson = {};
 
-  let p1 = Structure.findOne({
+  let p0 = Structure.findOne({
       attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image', 'group', 'color'],
       where: {lessonId: req.params.lessonId}
     })
 
-  let p2 = Levels.findAll({
+  let p1 = Levels.findAll({
       attributes: ['name', 'board', 'style', 'before', 'after'],
       where: {lessonId: req.params.lessonId},
       order: [['level', 'ASC']]
     })
 
-  let p3 = Instructions.findAll({
+  let p2 = Instructions.findAll({
       attributes: ['level','lang', 'content'],
       where: {lessonId: req.params.lessonId},
       order: [['level', 'ASC']]
     })
 
-  let p4 = LevelWin.findOne({
+  let p3 = LevelWin.findOne({
       attributes: ['name', 'board', 'style', 'before', 'after'],
       where: {lessonId: req.params.lessonId}
     })
 
-  let p5 = InstructionsWin.findAll({
+  let p4 = InstructionsWin.findAll({
       attributes: ['lang', 'content'],
       where: {lessonId: req.params.lessonId}
     })
 
-  Promise.all([p1, p2, p3, p4, p5]).then(datas => { 
+  Promise.all([p0, p1, p2, p3, p4]).then(datas => { 
     let structure = datas[0].get();
 
     structure.group = JSON.parse(structure.group);
@@ -114,19 +114,15 @@ app.get('/api/lesson/:lessonId', (req, res) => {
     levels = levels.map(item => {
       let level = item.get();
       level.style = JSON.parse(level.style);
+      level.instructions = {};
+      return level;
     });
 
     let instructions = datas[2];
-    console.log(instructions);
     instructions.forEach(item => {
       let dataItem = item.get();
 
-      if('instructions' in levels[dataItem.level]) {
-        levels[dataItem.level].instructions = levels[dataItem.level].instructions;
-      } else {
-        levels[dataItem.level].instructions = {};
-      }
-    //   levels[dataItem.level].instructions[dataItem.lang] = dataItem.content;
+      levels[dataItem.level].instructions[dataItem.lang] = dataItem.content;
     });
 
     lesson.levels = levels;
@@ -144,11 +140,8 @@ app.get('/api/lesson/:lessonId', (req, res) => {
 
     lesson.levelWin = levelWin;
 
-    console.log('++++++++++++ lesson ++++++++++++');
-  console.log(lesson); 
+    res.send(getLesson(lesson));
   });    
-
-  res.send(getLesson(req.params.lessonId));
 });
 
 app.listen(app.get('port'), () => console.log(`Server is listening: http://localhost:${app.get('port')}`));
@@ -156,16 +149,15 @@ app.listen(app.get('port'), () => console.log(`Server is listening: http://local
 
 // Инициализация ==================================================================================
 // Инициализация пользовательского состояния
-function getLesson(lessonId, lesson) {
+function getLesson(lesson) {
   let resState = {
     level: 0,
     statusWin: false,
     lesson: {},
     stateUser: []
   };
-  resState.lesson = lessons.filter(lesson => lesson.structure.lessonId === lessonId)[0];
-  //console.log(resState.lesson);
-  
+
+  resState.lesson = lesson;
 
   let levels = resState.lesson.levels;
 
