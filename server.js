@@ -16,8 +16,6 @@ const Instructions    = sequelize.define('instructions', {});
 const LevelWin       = sequelize.define('levelWins', {});
 const InstructionsWin = sequelize.define('instructionsWins', {});
 
-const lessons = require('./api/lessons');
-
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
