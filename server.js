@@ -5,16 +5,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-
-const sequelize = require('./configdb');
-
-const Topics          = sequelize.define('topics', {});
-const Messages        = sequelize.define('messages', {});
-const Structure       = sequelize.define('structure', {});
-const Levels          = sequelize.define('levels', {});
-const Instructions    = sequelize.define('instructions', {});
-const LevelWin       = sequelize.define('levelWins', {});
-const InstructionsWin = sequelize.define('instructionsWins', {});
+const db = require('./api/db');
 
 const app = express();
 
@@ -31,7 +22,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/api/main', (req, res) => {
-  Messages.findAll({
+  db.Messages.findAll({
       attributes: ['name', 'lang', 'content']
     })
     .then(data => {
@@ -74,32 +65,32 @@ app.get('/api/topics', (req, res) => {
 app.get('/api/lesson/:lessonId', (req, res) => {
   let lesson = {};
 
-  let p0 = Structure.findOne({
+  let p0 = db.Structure.findOne({
       attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image', 'group', 'color'],
       where: {lessonId: req.params.lessonId}
-    })
+    });
 
-  let p1 = Levels.findAll({
+  let p1 = db.Levels.findAll({
       attributes: ['name', 'board', 'style', 'before', 'after'],
       where: {lessonId: req.params.lessonId},
       order: [['level', 'ASC']]
-    })
+    });
 
-  let p2 = Instructions.findAll({
+  let p2 = db.Instructions.findAll({
       attributes: ['level','lang', 'content'],
       where: {lessonId: req.params.lessonId},
       order: [['level', 'ASC']]
-    })
+    });
 
-  let p3 = LevelWin.findOne({
+  let p3 = db.LevelWin.findOne({
       attributes: ['name', 'board', 'style', 'before', 'after'],
       where: {lessonId: req.params.lessonId}
-    })
+    });
 
-  let p4 = InstructionsWin.findAll({
+  let p4 = db.InstructionsWin.findAll({
       attributes: ['lang', 'content'],
       where: {lessonId: req.params.lessonId}
-    })
+    });
 
   Promise.all([p0, p1, p2, p3, p4]).then(datas => { 
     let structure = datas[0].get();
@@ -146,7 +137,18 @@ app.get('/api/lesson/:lessonId', (req, res) => {
 app.put('/api/lesson', (req, res) => {
     const lesson = req.body.lesson;
 
-    console.log(req, lesson);
+    lesson.structure.group = JSON.stringify(lesson.structure.group);
+    lesson.structure.color = JSON.stringify(lesson.structure.color);
+
+    db.Structure.update( lesson.structure, 
+        { fields: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image', 'group', 'color'],
+          where: {lessonId: lesson.structure.lessonId} })
+      .then((data) => {
+        console.log(data);
+    });
+
+
+    console.log(lesson.structure);
 
     res.json(lesson);
 });

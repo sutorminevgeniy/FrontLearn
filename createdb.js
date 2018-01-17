@@ -1,30 +1,25 @@
-const Sequelize = require('sequelize');
-const sequelize = require('./configdb');
+const db = require('./api/db');
 
 
 // topics
 const initTopics = require('./api/topics');
 
-const Topics = sequelize.define('topics', {
-    path:  { type: Sequelize.STRING },
-    title: { type: Sequelize.STRING }
-  });
-Topics.sync({force: true})
+db.Topics.sync({force: true})
   // .then(() => {
-  //   return Topics.create({
+  //   return db.Topics.create({
   //     path:  'css',
   //     title: 'CSS'
   //   });
   // })
   // .then(() => {
-  //   return Topics.bulkCreate([
+  //   return db.Topics.bulkCreate([
   //     {path: 'css', title: 'CSS'},
   //     {path: 'html', title: 'HTML'},
   //     {path: 'javascript', title: 'JavaScript'}
   //   ]);
   // })
   // .then(() => {
-  //   Topics.findAll({
+  //   db.Topics.findAll({
   //       attributes: ['title', ['path', 'id']]
   //     })
   //     .then(topics => {
@@ -32,10 +27,10 @@ Topics.sync({force: true})
   //     });
   // })
   .then(() => {
-    return Topics.bulkCreate(initTopics);
+    return db.Topics.bulkCreate(initTopics);
   })
   // .then(() => {
-  //   Topics.findAll({
+  //   db.Topics.findAll({
   //       attributes: ['title', 'path']
   //     })
   //     .then(topics => {
@@ -53,14 +48,9 @@ for(let name in initMessages) {
   }
 }
 
-const Messages = sequelize.define('messages', {
-    name:    { type: Sequelize.STRING },
-    lang:    { type: Sequelize.STRING },
-    content: { type: Sequelize.TEXT }
-  });
-Messages.sync({force: true})
+db.Messages.sync({force: true})
   .then(() => {
-    return Messages.bulkCreate(dataMessage);
+    return db.Messages.bulkCreate(dataMessage);
   });
 
 
@@ -73,14 +63,9 @@ for(let name in initDocs) {
   }
 }
 
-const Docs = sequelize.define('docs', {
-    name:    { type: Sequelize.STRING },
-    lang:    { type: Sequelize.STRING },
-    content: { type: Sequelize.TEXT }
-  });
-Docs.sync({force: true})
+db.Docs.sync({force: true})
   .then(() => {
-    return Docs.bulkCreate(dataDocs);
+    return db.Docs.bulkCreate(dataDocs);
   });
 
 
@@ -96,27 +81,9 @@ let dataStructure = initLessons.map(item => {
   return result;
 });
 
-const Structure = sequelize.define('structure', {
-    lessonId:     { type: Sequelize.STRING },
-    title:        { type: Sequelize.STRING },
-    topic:        { type: Sequelize.STRING },
-    author:       { type: Sequelize.STRING },
-    preview_text: { type: Sequelize.STRING },
-    image:        { type: Sequelize.STRING },
-    group:        { type: Sequelize.TEXT },
-    color:        { type: Sequelize.TEXT }
-  });
-Structure.sync({force: true})
+db.Structure.sync({force: true})
   .then(() => {
-    return Structure.bulkCreate(dataStructure);
-  })
-  .then(() => {
-    Structure.findAll({
-        attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image', 'group', 'color']
-      })
-      .then(data => {
-        console.log(data)
-      });
+    return db.Structure.bulkCreate(dataStructure);
   });
 
 // levels
@@ -131,19 +98,9 @@ initLessons.forEach(lesson => {
   });
 });
 
-const Levels = sequelize.define('levels', {
-    lessonId: { type: Sequelize.STRING },
-    level:    { type: Sequelize.INTEGER },
-    name:     { type: Sequelize.STRING },
-    board:    { type: Sequelize.STRING },
-    style:    { type: Sequelize.TEXT },
-    before:   { type: Sequelize.TEXT },
-    after:    { type: Sequelize.TEXT }
-  });
-
-Levels.sync({force: true})
+db.Levels.sync({force: true})
   .then(() => {
-    return Levels.bulkCreate(dataLevels);
+    return db.Levels.bulkCreate(dataLevels);
   })
 
 // instructions
@@ -161,19 +118,13 @@ initLessons.forEach(lesson => {
   });
 });
 
-const Instructions = sequelize.define('instructions', {
-    lessonId: { type: Sequelize.STRING },
-    level:    { type: Sequelize.INTEGER },
-    lang:    { type: Sequelize.STRING },
-    content: { type: Sequelize.TEXT }
-  });
-Instructions.sync({force: true})
+db.Instructions.sync({force: true})
   .then(() => {
-    return Instructions.bulkCreate(dataInstructions);
+    return db.Instructions.bulkCreate(dataInstructions);
   });
 
 
-// levelsWin
+// levelWin
 let dataLevelsWin = [];
 initLessons.forEach(lesson => {
   let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
@@ -183,18 +134,9 @@ initLessons.forEach(lesson => {
   dataLevelsWin.push(result);
 });
 
-const LevelsWin = sequelize.define('levelWins', {
-    lessonId: { type: Sequelize.STRING },
-    name:     { type: Sequelize.STRING },
-    board:    { type: Sequelize.STRING },
-    style:    { type: Sequelize.TEXT },
-    before:   { type: Sequelize.TEXT },
-    after:    { type: Sequelize.TEXT }
-  });
-
-LevelsWin.sync({force: true})
+db.LevelWin.sync({force: true})
   .then(() => {
-    return LevelsWin.bulkCreate(dataLevelsWin);
+    return db.LevelWin.bulkCreate(dataLevelsWin);
   })
 
 
@@ -211,12 +153,7 @@ initLessons.forEach(lesson => {
   }
 });
 
-const InstructionsWin = sequelize.define('instructionsWins', {
-    lessonId: { type: Sequelize.STRING },
-    lang:    { type: Sequelize.STRING },
-    content: { type: Sequelize.TEXT }
-  });
-InstructionsWin.sync({force: true})
+db.InstructionsWin.sync({force: true})
   .then(() => {
-    return InstructionsWin.bulkCreate(dataInstructionsWin);
+    return db.InstructionsWin.bulkCreate(dataInstructionsWin);
   });
