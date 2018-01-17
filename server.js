@@ -37,7 +37,7 @@ app.get('/api/main', (req, res) => {
 
 app.get('/api/topics', (req, res) => {
 
-  Topics.findAll({
+  db.Topics.findAll({
       attributes: ['title', 'path']
     })
     .then(data => {
@@ -47,7 +47,7 @@ app.get('/api/topics', (req, res) => {
       return topics;
     })
     .then(topics => {
-      Structure.findAll({
+      db.Structure.findAll({
           attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image']
         })
         .then(data => {
@@ -135,22 +135,64 @@ app.get('/api/lesson/:lessonId', (req, res) => {
 });
 
 app.put('/api/lesson', (req, res) => {
-    const lesson = req.body.lesson;
+  const lesson = req.body.lesson;
 
-    lesson.structure.group = JSON.stringify(lesson.structure.group);
-    lesson.structure.color = JSON.stringify(lesson.structure.color);
+  // structure
+  lesson.structure.group = JSON.stringify(lesson.structure.group);
+  lesson.structure.color = JSON.stringify(lesson.structure.color);
 
-    db.Structure.update( lesson.structure, 
-        { fields: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image', 'group', 'color'],
-          where: {lessonId: lesson.structure.lessonId} })
-      .then((data) => {
-        console.log(data);
-    });
+  db.Structure.update(
+    lesson.structure, 
+    { where: {lessonId: lesson.structure.lessonId} });
 
+  // levels
+  lesson.levels.forEach((level, i) => {
+    let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
+    result.style = JSON.stringify(result.style);
+    
+    delete result.instructions;
 
-    console.log(lesson.structure);
+    db.Levels.update(
+      result, 
+      { where: {lessonId: lesson.structure.lessonId, level: i} });
+  });
 
-    res.json(lesson);
+  // instructions
+  lesson.levels.forEach((level, i) => {
+    for(let lang in level.instructions) {
+      db.Instructions.update(
+      { lessonId: lesson.structure.lessonId, 
+        level: i, 
+        lang, 
+        content: level.instructions[lang]}, 
+      { where: {lessonId: lesson.structure.lessonId, 
+                level: i, 
+                lang} });
+    }
+  });
+
+  // levelWin
+  let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
+  result.style = JSON.stringify(result.style);
+  delete result.instructions;
+
+  db.LevelWin.update(
+    result, 
+    { where: {lessonId: lesson.structure.lessonId} });
+
+  // instructionsWin
+  for(let lang in lesson.levelWin.instructions) {
+    db.InstructionsWin.update(
+      { lessonId: lesson.structure.lessonId, 
+        lang, 
+        content: lesson.levelWin.instructions[lang] }, 
+      { where: {lessonId: lesson.structure.lessonId, 
+                lang } });
+  }
+
+  console.log(lesson.structure);
+
+  res.json(lesson);
 });
 
 app.listen(app.get('port'), () => console.log(`Server is listening: http://localhost:${app.get('port')}`));
