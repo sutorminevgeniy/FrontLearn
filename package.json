@@ -19,7 +19,9 @@
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
     "redux-promise": "^0.5.3",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "sequelize": "^4.28.6",
+    "sqlite3": "^3.1.13"
   },
   "devDependencies": {
     "create-react-app-sass": "^1.1.0"

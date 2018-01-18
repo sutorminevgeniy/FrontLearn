@@ -10,6 +10,16 @@ export function getLesson (lessonId) {
         }));
 }
 
+export const EDIT_LESSON = 'EDIT_LESSON';
+export function editLesson (lesson) {
+    return axios.put(`/api/lesson`, { lesson })
+        .then(response => response.data)
+        .then(lesson => ({
+            type: EDIT_LESSON,
+            lesson
+        }));
+}
+
 export const SET_VALUE = 'SET_VALUE';
 export function setValue(path, value) {
     return {
