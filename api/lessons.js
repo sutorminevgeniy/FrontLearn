@@ -58,7 +58,7 @@ const lessons = [
           'ru': '<p>Добро пожаловать в Flexbox Froggy. Игра, в которой тебе нужно помочь лягушонку Фроги и его друзьям написанием CSS кода! Направь этого лягушонка на лилию справа используя свойство <code>justify-content</code>, которое выравнивает элементы горизонтально и принимает следующие значения:</p><ul><li><code>flex-start</code>: Элементы выравниваются по левой стороне контейнера.</li><li><code>flex-end</code>: Элементы выравниваются по правой стороне контейнера.</li><li><code>center</code>: Элементы выравниваются по центру контейнера.</li><li><code>space-between</code>: Элементы отображаются с одинаковыми отступами между ними.</li><li><code>space-around</code>: Элементы отображаются с одинаковыми отступами вокруг них.</li></ul><p>Например, <code>justify-content: flex-end;</code> сдвинет лягушонка вправо.</p>'
         },
         board: 'g',
-        style: {'justify-content': 'flex-end'},
+        ansver: {'justify-content': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -69,7 +69,7 @@ const lessons = [
           'ru': '<p>Используй <code>justify-content</code> еще раз, чтоб помочь этим лягушатам попасть на их лилии. Помни, что это свойство CSS выравнивает элементы горизонтально и принимает следующие значения:</p><ul><li><code>flex-start</code>: Элементы выравниваются по левой стороне контейнера.</li><li><code>flex-end</code>: Элементы выравниваются по правой стороне контейнера.</li><li><code>center</code>: Элементы выравниваются по центру контейнера.</li><li><code>space-between</code>: Элементы отображаются с одинаковыми отступами между ними.</li><li><code>space-around</code>: Элементы отображаются с одинаковыми отступами вокруг них.</li></ul>'
         },
         board: 'gy',
-        style: {'justify-content': 'center'},
+        ansver: {'justify-content': 'center'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -80,7 +80,7 @@ const lessons = [
           'ru': '<p>Помоги всем трем лягушатам найти их лилии, просто используя <code>justify-content</code>. В этот раз, у лилий много пространства вокруг.</p><p>Если ты чувствуешь, что забыл возможные значения свойства, ты можешь навести курсор на название свойства, чтоб посмотреть их. Попробуй навести курсор на <code>justify-content</code>.</p>'
         },
         board: 'gyr',
-        style: {'justify-content': 'space-around'},
+        ansver: {'justify-content': 'space-around'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -91,7 +91,7 @@ const lessons = [
           'ru': '<p>Теперь лилии по краям уплыли к берегам, увеличив пространство между ними. Используй <code>justify-content</code>. В этот раз, у лилий одинаковое расстояние между ними.</p>'
         },
         board: 'gyr',
-        style: {'justify-content': 'space-between'},
+        ansver: {'justify-content': 'space-between'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -102,7 +102,7 @@ const lessons = [
           'ru': '<p>Теперь используй <code>align-items</code> чтоб помочь лягушатам добратся к нижней части пруда. Это CSS свойство выравнивает элементы вертикально и принимает следующие значения:</p><ul><li><code>flex-start</code>: Элементы выравниваются по верхнему краю контейнера.</li><li><code>flex-end</code>: Элементы выравниваются по нижнему краю контейнера.</li><li><code>center</code>: Элементы выравниваются вертикально по центру контейнера.</li><li><code>baseline</code>: Элементы отображаются на базовой линии контейнера.</li><li><code>stretch</code>: Элементы растягиваются, чтоб заполнить контейнер.</li></ul>'
         },
         board: 'gyr',
-        style: {'align-items': 'flex-end'},
+        ansver: {'align-items': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -113,7 +113,7 @@ const lessons = [
           'ru': '<p>Направь лягушонка в центр пруда, используя <code>justify-content</code> и <code>align-items</code> вместе.</p>'
         },
         board: 'g',
-        style: {'justify-content': 'center', 'align-items': 'center'},
+        ansver: {'justify-content': 'center', 'align-items': 'center'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -124,7 +124,7 @@ const lessons = [
           'ru': '<p>Лягушатам снова нужно пересечь пруд. В этот раз к лилиям, с достаточно большим пространством вокруг них. Используй комбинацию <code>justify-content</code> и <code>align-items</code>.</p>'
         },
         board: 'gyr',
-        style: {'justify-content': 'space-around', 'align-items': 'flex-end'},
+        ansver: {'justify-content': 'space-around', 'align-items': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -135,7 +135,7 @@ const lessons = [
           'ru': '<p>Лягушатам нужно выстроиться в порядке их лилий, используя <code>flex-direction</code>. Это CSS свойство задает направление, в котором будут расположены элементы в контейнере и принимает следующие значения:</p><ul><li><code>row</code>: Элементы размещаются по направлению текста.</li><li><code>row-reverse</code>: Элементы отображаются в обратном порядке к направлению текста.</li><li><code>column</code>: Элементы распологаются сверху вниз.</li><li><code>column-reverse</code>: Элементы распологаются снизу вверх.</li></ul>'
         },
         board: 'gyr',
-        style: {'flex-direction': 'row-reverse'},
+        ansver: {'flex-direction': 'row-reverse'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -146,7 +146,7 @@ const lessons = [
           'ru': '<p>Помоги лягушатам расположиться на своих лилиях используя <code>flex-direction</code>. Это CSS свойство задает направление, в котором будут расположены элементы в контейнере и принимает следующие значения:</p><ul><li><code>row</code>: Элементы размещаются по направлению текста.</li><li><code>row-reverse</code>: Элементы отображаются в обратном порядке к направлению текста.</li><li><code>column</code>: Элементы распологаются сверху вниз.</li><li><code>column-reverse</code>: Элементы распологаются снизу вверх.</li></ul>'
         },
         board: 'gyr',
-        style: {'flex-direction': 'column'},
+        ansver: {'flex-direction': 'column'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -157,7 +157,7 @@ const lessons = [
           'ru': '<p>Помоги лягушатам попасть на свои лилии. Хоть и кажется, что они почти на своих местах, все же придется применить и <code>flex-direction</code> и <code>justify-content</code>, чтоб поместить их на свои лилии.</p><p>Заметь, что когда ты устанавливаешь направление в обратном порядке для ряда или колонки, начало (start) и конец (end) тоже меняются местами.</p>'
         },
         board: 'gyr',
-        style: {'flex-direction': 'row-reverse', 'justify-content': 'flex-end'},
+        ansver: {'flex-direction': 'row-reverse', 'justify-content': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -168,7 +168,7 @@ const lessons = [
           'ru': '<p>Помоги лягушатам найти их лилии с помощью <code>flex-direction</code> и <code>justify-content</code>.</p><p>Заметь, когда в качестве направления выбрана колонка, то <code>justify-content</code> влияет на вертикальное выравнивание, а <code>align-items</code> на горизонтальное.</p>'
         },
         board: 'gyr',
-        style: {'flex-direction': 'column', 'justify-content': 'flex-end'},
+        ansver: {'flex-direction': 'column', 'justify-content': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -179,7 +179,7 @@ const lessons = [
           'ru': '<p>Помоги лягушатам найти их лилии с помощью <code>flex-direction</code> и <code>justify-content</code>.</p>'
         },
         board: 'gyr',
-        style: {'flex-direction': 'column-reverse', 'justify-content': 'space-between'},
+        ansver: {'flex-direction': 'column-reverse', 'justify-content': 'space-between'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -190,7 +190,7 @@ const lessons = [
           'ru': '<p>Помоги лягушатам найти их лилии с помощью <code>flex-direction</code>, <code>justify-content</code> и <code>align-items</code>.</p>'
         },
         board: 'gyr',
-        style: {'flex-direction': 'row-reverse', 'justify-content': 'center', 'align-items': 'flex-end'},
+        ansver: {'flex-direction': 'row-reverse', 'justify-content': 'center', 'align-items': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -203,7 +203,7 @@ const lessons = [
         board: 'gyr',
         selector: '> :nth-child(2)',
         classes: {'#pond, #background': 'wrap'},
-        style: {'order': '2'},
+        ansver: {'order': '2'},
         before: "#pond {\n  display: flex;\n}\n\n.yellow {\n",
         after: "}"
       },
@@ -216,7 +216,7 @@ const lessons = [
         board: 'gggrg',
         selector: '> :nth-child(4)',
         classes: {'#pond, #background': 'wrap'},
-        style: {'order': '-1'},
+        ansver: {'order': '-1'},
         before: "#pond {\n  display: flex;\n}\n\n.red {\n",
         after: "}"
       },
@@ -228,7 +228,7 @@ const lessons = [
         },
         board: 'ggygg',
         selector: '> :nth-child(3)',
-        style: {'align-self': 'flex-end'},
+        ansver: {'align-self': 'flex-end'},
         before: "#pond {\n  display: flex;\n  align-items: flex-start;\n}\n\n.yellow {\n",
         after: "}"
       },
@@ -240,7 +240,7 @@ const lessons = [
         },
         board: 'ygygg',
         selector: '> .yellow',
-        style: {'align-self': 'flex-end', 'order': '2'},
+        ansver: {'align-self': 'flex-end', 'order': '2'},
         before: "#pond {\n  display: flex;\n  align-items: flex-start;\n}\n\n.yellow {\n",
         after: "}"
       },
@@ -251,7 +251,7 @@ const lessons = [
           'ru': '<p>О нет! Лягушат сплющило на одном ряду лилий. Раздвинь их с помощью свойства <code>flex-wrap</code>, которое принимает следующие значения:</p><ul><li><code>nowrap</code>: Размеры элементов устанавливаются автоматически, чтоб они поместились в один ряд.</li><li><code>wrap</code>: Элементы автоматически переносятся на новую строку.</li><li><code>wrap-reverse</code>: Элементы автоматически переносятся на новую строку, но строки расположены в обратном порядке.</li></ul>'
         },
         board: 'ygggggr',
-        style: {'flex-wrap': 'wrap'},
+        ansver: {'flex-wrap': 'wrap'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -262,7 +262,7 @@ const lessons = [
           'ru': '<p>Помоги этой армии лягушат выстроиться в три колонки с помощью комбинации <code>flex-direction</code> и <code>flex-wrap</code>.</p>'
         },
         board: 'gggggrrrrryyyyy',
-        style: {'flex-direction': 'column', 'flex-wrap': 'wrap'},
+        ansver: {'flex-direction': 'column', 'flex-wrap': 'wrap'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -273,7 +273,7 @@ const lessons = [
           'ru': '<p>Два свойства <code>flex-direction</code> и <code>flex-wrap</code> используются так часто вместе, что было создано свойство <code>flex-flow</code> для их комбинирования. Это свойство принимает значения двух этих свойств, разделеные пробелом.</p><p>Например, ты можешь использовать <code>flex-flow: row wrap</code>, чтоб элементы располагались в ряд и автоматически переносились на новую строку.</p><p>Попробуй использовать <code>flex-flow</code>, чтоб повторить предыдущий уровень.</p>'
         },
         board: 'gggggrrrrryyyyy',
-        style: {'flex-flow': 'column wrap'},
+        ansver: {'flex-flow': 'column wrap'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -285,7 +285,7 @@ const lessons = [
         },
         board: 'ggggggggggggggg',
         classes: {'#pond, #background': 'wrap'},
-        style: {'align-content': 'flex-start'},
+        ansver: {'align-content': 'flex-start'},
         before: "#pond {\n  display: flex;\n  flex-wrap: wrap;\n",
         after: "}"
       },
@@ -297,7 +297,7 @@ const lessons = [
         },
         board: 'ggggggggggggggg',
         classes: {'#pond, #background': 'wrap'},
-        style: {'align-content': 'flex-end'},
+        ansver: {'align-content': 'flex-end'},
         before: "#pond {\n  display: flex;\n  flex-wrap: wrap;\n",
         after: "}"
       },
@@ -309,7 +309,7 @@ const lessons = [
         },
         board: 'rgggyrgggyrgggy',
         classes: {'#pond, #background': 'wrap'},
-        style: {'flex-direction': 'column-reverse', 'align-content': 'center'},
+        ansver: {'flex-direction': 'column-reverse', 'align-content': 'center'},
         before: "#pond {\n  display: flex;\n  flex-wrap: wrap;\n",
         after: "}"
       },
@@ -320,7 +320,7 @@ const lessons = [
           'ru': '<p>Доставь лягушат по домам в последний раз, используя CSS свойства, которые ты выучил:</p><ul><li><code>justify-content</code></li><li><code>align-items</code></li><li><code>flex-direction</code></li><li><code>order</code></li><li><code>align-self</code></li><li><code>flex-wrap</code></li><li><code>flex-flow</code></li><li><code>align-content</code></li></ul>'
         },
         board: 'rggggyy',
-        style: {'flex-direction': 'column-reverse', 'flex-wrap': 'wrap-reverse', 'align-content': 'space-between', 'justify-content': 'center'},
+        ansver: {'flex-direction': 'column-reverse', 'flex-wrap': 'wrap-reverse', 'align-content': 'space-between', 'justify-content': 'center'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       }
@@ -333,7 +333,7 @@ const lessons = [
       },
       board: 'gyrgyrgyrgyrgyrgyrgyrgyrg',
       classes: {'#pond, #background': 'wrap'},
-      style: {},
+      ansver: {},
       before: "#pond {\n  display: flex;\n",
       after: "}"
     }
@@ -425,7 +425,7 @@ const lessons = [
         },
         board: 'c',
         selector: '> :nth-child(1)',
-        style: {'grid-column-start': '3'},
+        ansver: {'grid-column-start': '3'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
         after: "}"
       },
@@ -437,7 +437,7 @@ const lessons = [
         },
         board: 'w',
         selector: '> :nth-child(1)',
-        style: {'grid-column-start': '5'},
+        ansver: {'grid-column-start': '5'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#poison {\n",
         after: "}"
       },
@@ -450,7 +450,7 @@ const lessons = [
         board: 'c',
         classes: {'#garden > *, #plants > *': 'grid-column-start-1'},
         selector: '> :nth-child(1)',
-        style: {'grid-column-end': '4'},
+        ansver: {'grid-column-end': '4'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column-start: 1;\n",
         after: "}"
       },
@@ -463,7 +463,7 @@ const lessons = [
         board: 'c',
         classes: {'#garden > *, #plants > *': 'grid-column-start-5'},
         selector: '> :nth-child(1)',
-        style: {'grid-column-end': '2'},
+        ansver: {'grid-column-end': '2'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column-start: 5;\n",
         after: "}"
       },
@@ -471,12 +471,12 @@ const lessons = [
         name: 'grid-column-end 3',
         instructions: {
           'en': '<p>If you want to count grid lines from the right instead of the left, you can give <code>grid-column-start</code> and <code>grid-column-end</code> negative values. For example, you can set it to -1 to specify the first grid line from the right.</p><p>Try setting <code>grid-column-end</code> to a negative value.</p>',
-          'ru': '<p>Если вы хотите посчитать grid строки справа налево вместо слева направо, вы можете дать <code>grid-column-start</code> и <code>grid-column-end</code> отрицательные значения. Например, вы можете присвоить значение равное -1 чтобы указать 1-ую grid строку начиная справа.</p><p>Попробуйте присвоить <code>grid-column-end</code> отрицательное значение.</p>',
+          'ru': '<p>Если вы хотите посчитать grid строки справа налево вместо слева направо, вы можете дать <code>grid-column-start</code> и <code>grid-column-end</code> отрицательные значения. Например, вы можете присвоить значение равное -1 чтобы указать 1-ую grid строку начиная справа.</p><p>Попробуйте присвоить <code>grid-column-end</code> отрицательное значение.</p>'
         },
         board: 'c',
         classes: {'#garden > *, #plants > *': 'grid-column-start-1'},
         selector: '> :nth-child(1)',
-        style: {'grid-column-end': '-2'},
+        ansver: {'grid-column-end': '-2'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column-start: 1;\n",
         after: "}"
       },
@@ -488,7 +488,7 @@ const lessons = [
         },
         board: 'w',
         selector: '> :nth-child(1)',
-        style: {'grid-column-start': '-3'},
+        ansver: {'grid-column-start': '-3'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#poison {\n",
         after: "}"
       },
@@ -496,12 +496,12 @@ const lessons = [
         name: 'grid-column-end 4',
         instructions: {
           'en': '<p>Instead of defining a grid item based on the start and end positions of the grid lines, you can define it based on your desired column width using the <code>span</code> keyword. Keep in mind that <code>span</code> only works with positive values.</p><p>For example, water these carrots with the rule <code>grid-column-end: span 2;</code>.</p>',
-          'ru': '<p>Вместо определения grid элемента базируясь на начальной и конечной позициях grid строк, вы можете определять их с помощью необходимой вам широты строк, используя <code>span</code>. Помните, что <code>span</code> работает только с положительными значениями.</p><p>Для примера, полейте эту морковь используя свойсво <code>grid-column-end: span 2;</code>.</p>',
+          'ru': '<p>Вместо определения grid элемента базируясь на начальной и конечной позициях grid строк, вы можете определять их с помощью необходимой вам широты строк, используя <code>span</code>. Помните, что <code>span</code> работает только с положительными значениями.</p><p>Для примера, полейте эту морковь используя свойсво <code>grid-column-end: span 2;</code>.</p>'
         },
         board: 'c',
         classes: {'#garden > *, #plants > *': 'grid-column-start-2'},
         selector: '> :nth-child(1)',
-        style: {'grid-column-end': 'span 2'},
+        ansver: {'grid-column-end': 'span 2'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column-start: 2;\n",
         after: "}"
       },
@@ -514,7 +514,7 @@ const lessons = [
         board: 'c',
         classes: {'#garden > *, #plants > *': 'grid-column-start-1'},
         selector: '> :nth-child(1)',
-        style: {'grid-column-end': 'span 5'},
+        ansver: {'grid-column-end': 'span 5'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column-start: 1;\n",
         after: "}"
       },
@@ -522,24 +522,24 @@ const lessons = [
         name: 'grid-column-start 4',
         instructions: {
           'en': '<p>You can also use the <code>span</code> keyword with <code>grid-column-start</code> to set your item\'s width relative to the end position.</p>',
-          'ru': '<p>Вы также можете использовать <code>span</code> вместе с <code>grid-column-start</code> для того, чтобы присвоить значение широты вашего grid элемента относительно конечной позиции.'
+          'ru': '<p>Вы также можете использовать <code>span</code> вместе с <code>grid-column-start</code> для того, чтобы присвоить значение широты вашего grid элемента относительно конечной позиции.</p>'
         },
         board: 'c',
         classes: {'#garden > *, #plants > *': 'grid-column-end-6'},
         selector: '> :nth-child(1)',
-        style: {'grid-column-start': 'span 3'},
+        ansver: {'grid-column-start': 'span 3'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
         after: "  grid-column-end: 6;\n}"
       },
       {
         name: 'grid-column 1',
         instructions: {
-          'en': '<p>Typing both <code>grid-column-start</code> and <code>grid-column-end</code> every time can get tiring. Fortunately, <code>grid-column</code> is a shorthand property that can accept both values at once, separated by a slash.</p><p>For example, <code>grid-column: 2 / 4;</code> will set the grid item to start on the 2nd vertical grid line and end on the 4th grid line.</p>'/\'分开就好。</p><p>比如说：<code>grid-column: 2 / 4;</code>就会设置网格项从第二列开始，到第四列结束。</p>',
+          'en': '<p>Typing both <code>grid-column-start</code> and <code>grid-column-end</code> every time can get tiring. Fortunately, <code>grid-column</code> is a shorthand property that can accept both values at once, separated by a slash.</p><p>For example, <code>grid-column: 2 / 4;</code> will set the grid item to start on the 2nd vertical grid line and end on the 4th grid line.</p>',
           'ru': '<p>Печатать вместе <code>grid-column-start</code> и <code>grid-column-end</code> каждый раз немного утомляет. К счастью, <code>grid-column</code> является коротким свойством которое принимает оба значения сразу через слеш  "/"  .</p><p>Например, <code>grid-column: 2 / 4;</code> скажет grid элементу начаться на 2-ой вертикальной grid линии и закончиться на 4-ой вертикальной grid линии.</p>'
         },
         board: 'c',
         selector: '> :nth-child(1)',
-        style: {'grid-column': '4 / 6'},
+        ansver: {'grid-column': '4 / 6'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
         after: "}"
       },
@@ -551,7 +551,7 @@ const lessons = [
         },
         board: 'c',
         selector: '> :nth-child(1)',
-        style: {'grid-column': '2 / 5'},
+        ansver: {'grid-column': '2 / 5'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
         after: "}"
       },
@@ -563,7 +563,7 @@ const lessons = [
         },
         board: 'c',
         selector: '> :nth-child(1)',
-        style: {'grid-row-start': '3'},
+        ansver: {'grid-row-start': '3'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
         after: "}"
       },
@@ -575,7 +575,7 @@ const lessons = [
         },
         board: 'c',
         selector: '> :nth-child(1)',
-        style: {'grid-row': '3 / 6'},
+        ansver: {'grid-row': '3 / 6'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
         after: "}"
       },
@@ -587,7 +587,7 @@ const lessons = [
         },
         board: 'w',
         selector: '> :nth-child(1)',
-        style: {'grid-column': '2', 'grid-row': '5'},
+        ansver: {'grid-column': '2', 'grid-row': '5'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#poison {\n",
         after: "}"
       },
@@ -599,7 +599,7 @@ const lessons = [
         },
         board: 'c',
         selector: '> :nth-child(1)',
-        style: {'grid-column': '2 / 6', 'grid-row': '1 / 6'},
+        ansver: {'grid-column': '2 / 6', 'grid-row': '1 / 6'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
         after: "}"
       },
@@ -611,7 +611,7 @@ const lessons = [
         },
         board: 'c',
         selector: '> :nth-child(1)',
-        style: {'grid-area': '1 / 2 / 4 / 6'},
+        ansver: {'grid-area': '1 / 2 / 4 / 6'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
         after: "}"
       },
@@ -624,7 +624,7 @@ const lessons = [
         board: 'cc',
         classes: {'#garden > :nth-child(2), #plants > :nth-child(2)': 'grid-column-4'},
         selector: '> :nth-child(1)',
-        style: {'grid-area': '2 / 3 / 5 / 6'},
+        ansver: {'grid-area': '2 / 3 / 5 / 6'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water-1 {\n  grid-area: 1 / 4 / 6 / 5;\n}\n\n#water-2 {\n",
         after: "}"
       },
@@ -636,7 +636,7 @@ const lessons = [
         },
         board: 'cwccc',
         selector: '> :nth-child(2)',
-        style: {'order': '2'},
+        ansver: {'order': '2'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  order: 0;\n}\n\n#poison {\n",
         after: "}"
       },
@@ -648,7 +648,7 @@ const lessons = [
         },
         board: 'wcwcwcwcwc',
         selector: '> :nth-child(odd)',
-        style: {'order': '-1'},
+        ansver: {'order': '-1'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  order: 0;\n}\n\n.poison {\n",
         after: "}"
       },
@@ -659,7 +659,7 @@ const lessons = [
           'ru': '<p>До этого момента ваш сад имел grid сетку с пятью столбцами по 20% широты, и пятью строками, каждый по 20% высоты.</p><p>Это было сделано благодаря свойствам <code>grid-template-columns: 20% 20% 20% 20% 20%;</code> и <code>grid-template-rows: 20% 20% 20% 20% 20%;</code> Каждое свойство имеет пять значений, которые создают 5 столбцов, где ширина каждого равна 20% от обшей широты сада.</p><p>Но вы можете изменять grid сетку как вам вздумается. Присвойте <code>grid-template-columns</code> новое значение, чтобы полить вашу морковь. Вам необходимо поставить значение широты 1-го столбца равное 50%.</p>'
         },
         board: 'c',
-        style: {'grid-template-columns': '50% 50%'},
+        ansver: {'grid-template-columns': '50% 50%'},
         before: "#garden {\n  display: grid;\n",
         after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column: 1;\n  grid-row: 1;\n}"
       },
@@ -671,7 +671,7 @@ const lessons = [
         },
         board: 'c',
         classes: {'#plants': 'grid-template-columns-repeat-8-12'},
-        style: {'grid-template-columns': 'repeat(8, 12.5%)'},
+        ansver: {'grid-template-columns': 'repeat(8, 12.5%)'},
         before: "#garden {\n  display: grid;\n",
         after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column: 1;\n  grid-row: 1;\n}"
       },
@@ -683,7 +683,7 @@ const lessons = [
         },
         board: 'cwc',
         classes: {'#plants': 'grid-template-columns-100px-3em-40p'},
-        style: {'grid-template-columns': '100px 3em 40%;'},
+        ansver: {'grid-template-columns': '100px 3em 40%;'},
         before: "#garden {\n  display: grid;\n",
         after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}"
       },
@@ -695,7 +695,7 @@ const lessons = [
         },
         board: 'wc',
         classes: {'#plants': 'grid-template-columns-1fr-5fr'},
-        style: {'grid-template-columns': '1fr 5fr;'},
+        ansver: {'grid-template-columns': '1fr 5fr;'},
         before: "#garden {\n  display: grid;\n",
         after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}"
       },
@@ -711,7 +711,7 @@ const lessons = [
           '#plants > :nth-child(1), #garden > :nth-child(1)': 'grid-area-1-1-6-2',
           '#plants > :nth-child(2), #garden > :nth-child(2)': 'grid-area-1-5-6-6'
         },
-        style: {'grid-template-columns': '50px 1fr 1fr 1fr 50px;'},
+        ansver: {'grid-template-columns': '50px 1fr 1fr 1fr 50px;'},
         before: "#garden {\n  display: grid;\n",
         after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-area: 1 / 1 / 6 / 2;\n}\n\n#poison {\n  grid-area: 1 / 5 / 6 / 6;\n}"
       },
@@ -723,7 +723,7 @@ const lessons = [
         },
         board: 'wcw',
         classes: {'#plants': 'grid-template-columns-6', '#garden, #overlay': 'grid-template-rows-100p'},
-        style: {'grid-template-columns': '75px 3fr 2fr;'},
+        ansver: {'grid-template-columns': '75px 3fr 2fr;'},
         before: "#garden {\n  display: grid;\n",
         after: "  grid-template-rows: 100%;\n}"
       },
@@ -738,7 +738,7 @@ const lessons = [
           '#plants': 'grid-template-rows-50px-0-0-0-1fr',
           '#plants > :nth-child(1), #garden > :nth-child(1)': 'grid-area-5-1-6-6'
         },
-        style: {'grid-template-rows': '1fr 100px;'},
+        ansver: {'grid-template-rows': '1fr 100px;'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n",
         after: "}\n\n#water {\n  grid-column: 1 / 6;\n  grid-row: 5 / 6;\n}"
       },
@@ -749,7 +749,7 @@ const lessons = [
           'ru': '<p><code>grid-template</code> является короткой вариантом комбинации <code>grid-template-rows</code> и <code>grid-template-columns</code>.</p><p>Например, <code>grid-template: 50% 50% / 200px;</code> создаст grid сетку с 2-мя строками, по 50% каждая, и одним столбцом шириной 200 пикселей.</p><p>Попробуйте использовать <code>grid-template</code> чтобы полить зону, включающую в себя верхние 60% и левые 200 пикселей вашего сада.</p>'
         },
         board: 'c',
-        style: {'grid-template': '60% 1fr / 200px 1fr'},
+        ansver: {'grid-template': '60% 1fr / 200px 1fr'},
         before: "#garden {\n  display: grid;\n",
         after: "}\n\n#water {\n  grid-column: 1;\n  grid-row: 1;\n}"
       },
@@ -761,7 +761,7 @@ const lessons = [
         },
         board: 'wc',
         classes: {'#plants': 'grid-template-2'},
-        style: {'grid-template': '1fr 50px / 20% 1fr'},
+        ansver: {'grid-template': '1fr 50px / 20% 1fr'},
         before: "#garden {\n  display: grid;\n",
         after: "}"
       }
@@ -774,7 +774,7 @@ const lessons = [
       },
       board: '',
       classes: {'#garden, #plants, #overlay': 'win'},
-      style: {},
+      ansver: {},
       before: "#pond {\n  display: flex;\n",
       after: "}"
     }
@@ -838,7 +838,7 @@ const lessons = [
           'ru': '<p>Добро пожаловать в Flexbox Froggy. Игра, в которой тебе нужно помочь лягушонку Фроги и его друзьям написанием CSS кода! Направь этого лягушонка на лилию справа используя свойство <code>justify-content</code>, которое выравнивает элементы горизонтально и принимает следующие значения:</p><ul><li><code>flex-start</code>: Элементы выравниваются по левой стороне контейнера.</li><li><code>flex-end</code>: Элементы выравниваются по правой стороне контейнера.</li><li><code>center</code>: Элементы выравниваются по центру контейнера.</li><li><code>space-between</code>: Элементы отображаются с одинаковыми отступами между ними.</li><li><code>space-around</code>: Элементы отображаются с одинаковыми отступами вокруг них.</li></ul><p>Например, <code>justify-content: flex-end;</code> сдвинет лягушонка вправо.</p>'
         },
         board: 'g',
-        style: {'justify-content': 'flex-end'},
+        ansver: {'justify-content': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -849,7 +849,7 @@ const lessons = [
           'ru': '<p>Используй <code>justify-content</code> еще раз, чтоб помочь этим лягушатам попасть на их лилии. Помни, что это свойство CSS выравнивает элементы горизонтально и принимает следующие значения:</p><ul><li><code>flex-start</code>: Элементы выравниваются по левой стороне контейнера.</li><li><code>flex-end</code>: Элементы выравниваются по правой стороне контейнера.</li><li><code>center</code>: Элементы выравниваются по центру контейнера.</li><li><code>space-between</code>: Элементы отображаются с одинаковыми отступами между ними.</li><li><code>space-around</code>: Элементы отображаются с одинаковыми отступами вокруг них.</li></ul>'
         },
         board: 'gy',
-        style: {'justify-content': 'center'},
+        ansver: {'justify-content': 'center'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -860,7 +860,7 @@ const lessons = [
           'ru': '<p>Помоги всем трем лягушатам найти их лилии, просто используя <code>justify-content</code>. В этот раз, у лилий много пространства вокруг.</p><p>Если ты чувствуешь, что забыл возможные значения свойства, ты можешь навести курсор на название свойства, чтоб посмотреть их. Попробуй навести курсор на <code>justify-content</code>.</p>'
         },
         board: 'gyr',
-        style: {'justify-content': 'space-around'},
+        ansver: {'justify-content': 'space-around'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -871,7 +871,7 @@ const lessons = [
           'ru': '<p>Теперь лилии по краям уплыли к берегам, увеличив пространство между ними. Используй <code>justify-content</code>. В этот раз, у лилий одинаковое расстояние между ними.</p>',
         },
         board: 'gyr',
-        style: {'justify-content': 'space-between'},
+        ansver: {'justify-content': 'space-between'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -882,7 +882,7 @@ const lessons = [
           'ru': '<p>Теперь используй <code>align-items</code> чтоб помочь лягушатам добратся к нижней части пруда. Это CSS свойство выравнивает элементы вертикально и принимает следующие значения:</p><ul><li><code>flex-start</code>: Элементы выравниваются по верхнему краю контейнера.</li><li><code>flex-end</code>: Элементы выравниваются по нижнему краю контейнера.</li><li><code>center</code>: Элементы выравниваются вертикально по центру контейнера.</li><li><code>baseline</code>: Элементы отображаются на базовой линии контейнера.</li><li><code>stretch</code>: Элементы растягиваются, чтоб заполнить контейнер.</li></ul>',
         },
         board: 'gyr',
-        style: {'align-items': 'flex-end'},
+        ansver: {'align-items': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -893,7 +893,7 @@ const lessons = [
           'ru': '<p>Направь лягушонка в центр пруда, используя <code>justify-content</code> и <code>align-items</code> вместе.</p>',
         },
         board: 'g',
-        style: {'justify-content': 'center', 'align-items': 'center'},
+        ansver: {'justify-content': 'center', 'align-items': 'center'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -904,7 +904,7 @@ const lessons = [
           'ru': '<p>Лягушатам снова нужно пересечь пруд. В этот раз к лилиям, с достаточно большим пространством вокруг них. Используй комбинацию <code>justify-content</code> и <code>align-items</code>.</p>',
         },
         board: 'gyr',
-        style: {'justify-content': 'space-around', 'align-items': 'flex-end'},
+        ansver: {'justify-content': 'space-around', 'align-items': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -915,7 +915,7 @@ const lessons = [
           'ru': '<p>Лягушатам нужно выстроиться в порядке их лилий, используя <code>flex-direction</code>. Это CSS свойство задает направление, в котором будут расположены элементы в контейнере и принимает следующие значения:</p><ul><li><code>row</code>: Элементы размещаются по направлению текста.</li><li><code>row-reverse</code>: Элементы отображаются в обратном порядке к направлению текста.</li><li><code>column</code>: Элементы распологаются сверху вниз.</li><li><code>column-reverse</code>: Элементы распологаются снизу вверх.</li></ul>',
         },
         board: 'gyr',
-        style: {'flex-direction': 'row-reverse'},
+        ansver: {'flex-direction': 'row-reverse'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -926,7 +926,7 @@ const lessons = [
           'ru': '<p>Помоги лягушатам расположиться на своих лилиях используя <code>flex-direction</code>. Это CSS свойство задает направление, в котором будут расположены элементы в контейнере и принимает следующие значения:</p><ul><li><code>row</code>: Элементы размещаются по направлению текста.</li><li><code>row-reverse</code>: Элементы отображаются в обратном порядке к направлению текста.</li><li><code>column</code>: Элементы распологаются сверху вниз.</li><li><code>column-reverse</code>: Элементы распологаются снизу вверх.</li></ul>',
         },
         board: 'gyr',
-        style: {'flex-direction': 'column'},
+        ansver: {'flex-direction': 'column'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -937,7 +937,7 @@ const lessons = [
           'ru': '<p>Помоги лягушатам попасть на свои лилии. Хоть и кажется, что они почти на своих местах, все же придется применить и <code>flex-direction</code> и <code>justify-content</code>, чтоб поместить их на свои лилии.</p><p>Заметь, что когда ты устанавливаешь направление в обратном порядке для ряда или колонки, начало (start) и конец (end) тоже меняются местами.</p>',
         },
         board: 'gyr',
-        style: {'flex-direction': 'row-reverse', 'justify-content': 'flex-end'},
+        ansver: {'flex-direction': 'row-reverse', 'justify-content': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -948,7 +948,7 @@ const lessons = [
           'ru': '<p>Помоги лягушатам найти их лилии с помощью <code>flex-direction</code> и <code>justify-content</code>.</p><p>Заметь, когда в качестве направления выбрана колонка, то <code>justify-content</code> влияет на вертикальное выравнивание, а <code>align-items</code> на горизонтальное.</p>',
         },
         board: 'gyr',
-        style: {'flex-direction': 'column', 'justify-content': 'flex-end'},
+        ansver: {'flex-direction': 'column', 'justify-content': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -959,7 +959,7 @@ const lessons = [
           'ru': '<p>Помоги лягушатам найти их лилии с помощью <code>flex-direction</code> и <code>justify-content</code>.</p>',
         },
         board: 'gyr',
-        style: {'flex-direction': 'column-reverse', 'justify-content': 'space-between'},
+        ansver: {'flex-direction': 'column-reverse', 'justify-content': 'space-between'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -970,7 +970,7 @@ const lessons = [
           'ru': '<p>Помоги лягушатам найти их лилии с помощью <code>flex-direction</code>, <code>justify-content</code> и <code>align-items</code>.</p>',
         },
         board: 'gyr',
-        style: {'flex-direction': 'row-reverse', 'justify-content': 'center', 'align-items': 'flex-end'},
+        ansver: {'flex-direction': 'row-reverse', 'justify-content': 'center', 'align-items': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -983,7 +983,7 @@ const lessons = [
         board: 'gyr',
         selector: '> :nth-child(2)',
         classes: {'#pond, #background': 'wrap'},
-        style: {'order': '2'},
+        ansver: {'order': '2'},
         before: "#pond {\n  display: flex;\n}\n\n.yellow {\n",
         after: "}"
       },
@@ -996,7 +996,7 @@ const lessons = [
         board: 'gggrg',
         selector: '> :nth-child(4)',
         classes: {'#pond, #background': 'wrap'},
-        style: {'order': '-1'},
+        ansver: {'order': '-1'},
         before: "#pond {\n  display: flex;\n}\n\n.red {\n",
         after: "}"
       },
@@ -1008,7 +1008,7 @@ const lessons = [
         },
         board: 'ggygg',
         selector: '> :nth-child(3)',
-        style: {'align-self': 'flex-end'},
+        ansver: {'align-self': 'flex-end'},
         before: "#pond {\n  display: flex;\n  align-items: flex-start;\n}\n\n.yellow {\n",
         after: "}"
       },
@@ -1020,7 +1020,7 @@ const lessons = [
         },
         board: 'ygygg',
         selector: '> .yellow',
-        style: {'align-self': 'flex-end', 'order': '2'},
+        ansver: {'align-self': 'flex-end', 'order': '2'},
         before: "#pond {\n  display: flex;\n  align-items: flex-start;\n}\n\n.yellow {\n",
         after: "}"
       },
@@ -1031,7 +1031,7 @@ const lessons = [
           'ru': '<p>О нет! Лягушат сплющило на одном ряду лилий. Раздвинь их с помощью свойства <code>flex-wrap</code>, которое принимает следующие значения:</p><ul><li><code>nowrap</code>: Размеры элементов устанавливаются автоматически, чтоб они поместились в один ряд.</li><li><code>wrap</code>: Элементы автоматически переносятся на новую строку.</li><li><code>wrap-reverse</code>: Элементы автоматически переносятся на новую строку, но строки расположены в обратном порядке.</li></ul>',
         },
         board: 'ygggggr',
-        style: {'flex-wrap': 'wrap'},
+        ansver: {'flex-wrap': 'wrap'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -1042,7 +1042,7 @@ const lessons = [
           'ru': '<p>Помоги этой армии лягушат выстроиться в три колонки с помощью комбинации <code>flex-direction</code> и <code>flex-wrap</code>.</p>',
         },
         board: 'gggggrrrrryyyyy',
-        style: {'flex-direction': 'column', 'flex-wrap': 'wrap'},
+        ansver: {'flex-direction': 'column', 'flex-wrap': 'wrap'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -1053,7 +1053,7 @@ const lessons = [
           'ru': '<p>Два свойства <code>flex-direction</code> и <code>flex-wrap</code> используются так часто вместе, что было создано свойство <code>flex-flow</code> для их комбинирования. Это свойство принимает значения двух этих свойств, разделеные пробелом.</p><p>Например, ты можешь использовать <code>flex-flow: row wrap</code>, чтоб элементы располагались в ряд и автоматически переносились на новую строку.</p><p>Попробуй использовать <code>flex-flow</code>, чтоб повторить предыдущий уровень.</p>',
         },
         board: 'gggggrrrrryyyyy',
-        style: {'flex-flow': 'column wrap'},
+        ansver: {'flex-flow': 'column wrap'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -1065,7 +1065,7 @@ const lessons = [
         },
         board: 'ggggggggggggggg',
         classes: {'#pond, #background': 'wrap'},
-        style: {'align-content': 'flex-start'},
+        ansver: {'align-content': 'flex-start'},
         before: "#pond {\n  display: flex;\n  flex-wrap: wrap;\n",
         after: "}"
       },
@@ -1077,7 +1077,7 @@ const lessons = [
         },
         board: 'ggggggggggggggg',
         classes: {'#pond, #background': 'wrap'},
-        style: {'align-content': 'flex-end'},
+        ansver: {'align-content': 'flex-end'},
         before: "#pond {\n  display: flex;\n  flex-wrap: wrap;\n",
         after: "}"
       },
@@ -1089,7 +1089,7 @@ const lessons = [
         },
         board: 'rgggyrgggyrgggy',
         classes: {'#pond, #background': 'wrap'},
-        style: {'flex-direction': 'column-reverse', 'align-content': 'center'},
+        ansver: {'flex-direction': 'column-reverse', 'align-content': 'center'},
         before: "#pond {\n  display: flex;\n  flex-wrap: wrap;\n",
         after: "}"
       },
@@ -1100,7 +1100,7 @@ const lessons = [
           'ru': '<p>Доставь лягушат по домам в последний раз, используя CSS свойства, которые ты выучил:</p><ul><li><code>justify-content</code></li><li><code>align-items</code></li><li><code>flex-direction</code></li><li><code>order</code></li><li><code>align-self</code></li><li><code>flex-wrap</code></li><li><code>flex-flow</code></li><li><code>align-content</code></li></ul>',
         },
         board: 'rggggyy',
-        style: {'flex-direction': 'column-reverse', 'flex-wrap': 'wrap-reverse', 'align-content': 'space-between', 'justify-content': 'center'},
+        ansver: {'flex-direction': 'column-reverse', 'flex-wrap': 'wrap-reverse', 'align-content': 'space-between', 'justify-content': 'center'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       }
@@ -1113,7 +1113,7 @@ const lessons = [
       },
       board: 'gyrgyrgyrgyrgyrgyrgyrgyrg',
       classes: {'#pond, #background': 'wrap'},
-      style: {},
+      ansver: {},
       before: "#pond {\n  display: flex;\n",
       after: "}"
     }
@@ -1174,21 +1174,21 @@ const lessons = [
         name: 'justify-content 1',
         instructions: {
           'en': '<p>The code does not execute properly. Try to figure out why.</p>',
-          'ru': '<p>Добро пожаловать в Flexbox Froggy. Игра, в которой тебе нужно помочь лягушонку Фроги и его друзьям написанием CSS кода! Направь этого лягушонка на лилию справа используя свойство <code>justify-content</code>, которое выравнивает элементы горизонтально и принимает следующие значения:</p><ul><li><code>flex-start</code>: Элементы выравниваются по левой стороне контейнера.</li><li><code>flex-end</code>: Элементы выравниваются по правой стороне контейнера.</li><li><code>center</code>: Элементы выравниваются по центру контейнера.</li><li><code>space-between</code>: Элементы отображаются с одинаковыми отступами между ними.</li><li><code>space-around</code>: Элементы отображаются с одинаковыми отступами вокруг них.</li></ul><p>Например, <code>justify-content: flex-end;</code> сдвинет лягушонка вправо.</p>'
+          'ru': '<p>Код не выполняется должным образом. Попытайтесь выяснить, почему.</p>'
         },
         board: 'g',
-        style: {'justify-content': 'flex-end'},
+        ansver: {'justify-content': 'flex-end'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
       {
         name: 'justify-content 2',
         instructions: {
-          'en': '<p>Use <code>justify-content</code> again to help these frogs get to their lilypads. Remember that this CSS property aligns items horizontally and accepts the following values:</p><ul><li><code>flex-start</code>: Items align to the left side of the container.</li><li><code>flex-end</code>: Items align to the right side of the container.</li><li><code>center</code>: Items align at the center of the container.</li><li><code>space-between</code>: Items display with equal spacing between them.</li><li><code>space-around</code>: Items display with equal spacing around them.</li></ul>',
-          'ru': '<p>Используй <code>justify-content</code> еще раз, чтоб помочь этим лягушатам попасть на их лилии. Помни, что это свойство CSS выравнивает элементы горизонтально и принимает следующие значения:</p><ul><li><code>flex-start</code>: Элементы выравниваются по левой стороне контейнера.</li><li><code>flex-end</code>: Элементы выравниваются по правой стороне контейнера.</li><li><code>center</code>: Элементы выравниваются по центру контейнера.</li><li><code>space-between</code>: Элементы отображаются с одинаковыми отступами между ними.</li><li><code>space-around</code>: Элементы отображаются с одинаковыми отступами вокруг них.</li></ul>'
+          'en': '<p>The code does not execute properly. Try to figure out why.</p>',
+          'ru': '<p>Код не выполняется должным образом. Попытайтесь выяснить, почему.</p>'
         },
         board: 'gy',
-        style: {'justify-content': 'center'},
+        ansver: {'justify-content': 'center'},
         before: "#pond {\n  display: flex;\n",
         after: "}"
       }
@@ -1201,7 +1201,7 @@ const lessons = [
       },
       board: 'gyrgyrgyrgyrgyrgyrgyrgyrg',
       classes: {'#pond, #background': 'wrap'},
-      style: {},
+      ansver: {},
       before: "#pond {\n  display: flex;\n",
       after: "}"
     }

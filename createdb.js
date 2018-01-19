@@ -91,7 +91,7 @@ let dataLevels = [];
 initLessons.forEach(lesson => {
   lesson.levels.forEach((level, i) => {
     let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
-    result.style = JSON.stringify(result.style);
+    result.ansver = JSON.stringify(result.ansver);
     delete result.instructions;
 
     dataLevels.push(result);
@@ -128,7 +128,7 @@ db.Instructions.sync({force: true})
 let dataLevelsWin = [];
 initLessons.forEach(lesson => {
   let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
-  result.style = JSON.stringify(result.style);
+  result.ansver = JSON.stringify(result.ansver);
   delete result.instructions;
 
   dataLevelsWin.push(result);

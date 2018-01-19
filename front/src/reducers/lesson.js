@@ -84,7 +84,7 @@ function getStrStyle(arrStyle) {
 function inputAnswer(answer, state) {
     let stateUser = state.stateUser.slice();
     let levels = state.lesson.levels;
-    let correctAnswer = getStrStyle(levels[state.level].style);
+    let correctAnswer = getStrStyle(levels[state.level].ansver);
 
     stateUser[state.level].answer = answer;
     stateUser[state.level].passed = false;

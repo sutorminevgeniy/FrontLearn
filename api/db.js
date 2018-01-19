@@ -54,7 +54,8 @@ const Levels = sequelize.define('levels', {
     level:    { type: Sequelize.INTEGER },
     name:     { type: Sequelize.STRING },
     board:    { type: Sequelize.STRING },
-    style:    { type: Sequelize.TEXT },
+    ansver:    { type: Sequelize.TEXT },
+    defansver:    { type: Sequelize.TEXT },
     before:   { type: Sequelize.TEXT },
     after:    { type: Sequelize.TEXT }
   });
@@ -70,7 +71,7 @@ const LevelWin = sequelize.define('levelWins', {
     lessonId: { type: Sequelize.STRING },
     name:     { type: Sequelize.STRING },
     board:    { type: Sequelize.STRING },
-    style:    { type: Sequelize.TEXT },
+    ansver:    { type: Sequelize.TEXT },
     before:   { type: Sequelize.TEXT },
     after:    { type: Sequelize.TEXT }
   });
