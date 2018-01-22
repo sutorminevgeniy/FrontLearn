@@ -103,7 +103,7 @@ app.get('/api/lesson/:lessonId', (req, res) => {
     let levels = datas[1];
     levels = levels.map(item => {
       let level = item.get();
-      if(lesson.structure.topic !== 'javascript'){
+      if(lesson.structure.topic === 'css'){
         level.ansver = JSON.parse(level.ansver);
       }
       level.instructions = {};
@@ -150,7 +150,7 @@ app.put('/api/lesson', (req, res) => {
   // levels
   lesson.levels.forEach((level, i) => {
     let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
-    if(lesson.structure.topic !== 'javascript'){
+    if(lesson.structure.topic === 'css'){
       result.ansver = JSON.stringify(result.ansver);
     }
     delete result.instructions;
@@ -220,7 +220,7 @@ function getLesson(lesson) {
     let ansverStyle = [];
     let answer = '';
 
-    if(lesson.structure.topic !== 'javascript'){
+    if(lesson.structure.topic === 'css'){
       questionStyle = getArrayStyle( levels[i].before + levels[i].after );
       let strStyleAnswer = getStrStyle( levels[i].ansver );
       ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );

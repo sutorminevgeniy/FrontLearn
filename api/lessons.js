@@ -841,7 +841,7 @@ const lessons = [
         ansver: `<p>text text text 1</p>
 <p>text text text 2</p>`,
         defansver: `text text text 1
-        text text text 2`,
+text text text 2`,
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -858,8 +858,8 @@ const lessons = [
   <li>item3</li>
 </ul>   `,
         defansver: `item1
-        item2
-        item3`,
+item2
+item3`,
         before: "#pond {\n  display: flex;\n",
         after: "}"
       },
@@ -876,8 +876,8 @@ const lessons = [
   <li>item3</li>
 </ol>   `,
         defansver: `item1
-        item2
-        item3`,
+item2
+item3`,
         before: "#pond {\n  display: flex;\n",
         after: "}"
       }

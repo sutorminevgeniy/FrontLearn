@@ -87,7 +87,7 @@ function inputAnswer(answer, state) {
     let levels = state.lesson.levels;
     let correctAnswer = levels[state.level].ansver;
 
-    if(state.lesson.structure.topic !== 'javascript'){
+    if(state.lesson.structure.topic === 'css'){
       correctAnswer = getStrStyle(correctAnswer);
     }
 
