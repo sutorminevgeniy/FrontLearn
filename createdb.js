@@ -91,7 +91,9 @@ let dataLevels = [];
 initLessons.forEach(lesson => {
   lesson.levels.forEach((level, i) => {
     let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
-    result.ansver = JSON.stringify(result.ansver);
+    if(lesson.structure.topic === 'css'){
+      result.ansver = JSON.stringify(result.ansver);
+    }
     delete result.instructions;
 
     dataLevels.push(result);

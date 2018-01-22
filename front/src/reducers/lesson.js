@@ -82,9 +82,14 @@ function getStrStyle(arrStyle) {
 
 // Ввод ответа
 function inputAnswer(answer, state) {
+    console.log(state.stateUser, state.stateUser.slice());
     let stateUser = state.stateUser.slice();
     let levels = state.lesson.levels;
-    let correctAnswer = getStrStyle(levels[state.level].ansver);
+    let correctAnswer = levels[state.level].ansver;
+
+    if(state.lesson.structure.topic !== 'javascript'){
+      correctAnswer = getStrStyle(correctAnswer);
+    }
 
     stateUser[state.level].answer = answer;
     stateUser[state.level].passed = false;

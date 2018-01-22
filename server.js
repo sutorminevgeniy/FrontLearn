@@ -95,8 +95,6 @@ app.get('/api/lesson/:lessonId', (req, res) => {
   Promise.all([p0, p1, p2, p3, p4]).then(datas => { 
     let structure = datas[0].get();
 
-    console.log(p0, p1, p2, p3, p4);
-
     structure.group = JSON.parse(structure.group);
     structure.color = JSON.parse(structure.color);
 
@@ -105,7 +103,9 @@ app.get('/api/lesson/:lessonId', (req, res) => {
     let levels = datas[1];
     levels = levels.map(item => {
       let level = item.get();
-      level.ansver = JSON.parse(level.ansver);
+      if(lesson.structure.topic !== 'javascript'){
+        level.ansver = JSON.parse(level.ansver);
+      }
       level.instructions = {};
       return level;
     });
@@ -150,8 +150,9 @@ app.put('/api/lesson', (req, res) => {
   // levels
   lesson.levels.forEach((level, i) => {
     let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
-    result.ansver = JSON.stringify(result.ansver);
-    
+    if(lesson.structure.topic !== 'javascript'){
+      result.ansver = JSON.stringify(result.ansver);
+    }
     delete result.instructions;
 
     db.Levels.update(
@@ -215,13 +216,21 @@ function getLesson(lesson) {
   let levels = resState.lesson.levels;
 
   resState.stateUser = Array(levels.length).fill(null).map((item, i) => {
-    let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
-    let strStyleAnswer = getStrStyle( levels[i].ansver );
-    let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
+    let questionStyle = [];
+    let ansverStyle = [];
+    let answer = '';
+
+    if(lesson.structure.topic !== 'javascript'){
+      questionStyle = getArrayStyle( levels[i].before + levels[i].after );
+      let strStyleAnswer = getStrStyle( levels[i].ansver );
+      ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
+    } else {
+      answer = levels[i].defansver;
+    }
 
     return {
       passed: false,
-      answer: '',
+      answer,
       ansverStyle,
       questionStyle
     };
