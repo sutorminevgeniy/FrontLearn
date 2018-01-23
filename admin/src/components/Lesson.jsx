@@ -50,7 +50,7 @@ constructor(props) {
           </section>
 
           <section id="view">
-            <BoardContainer />
+            {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer />}
           </section>
         </div>
 
@@ -60,7 +60,7 @@ constructor(props) {
           </section>
 
           <section id="view">
-            <BoardContainer />
+            {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer />}
           </section>
         </div>
       </form>

@@ -761,21 +761,11 @@ button {
 }
 
 .content {
+  display: -ms-flexbox;
   display: flex;
-
-  main:first-child {
-    max-width: 1024px;
-    margin: 25px auto;
-    padding: 0 1rem;
-  }  
-}
-
-.topics {
-    display: -ms-flexbox;
-    display: flex;
-    max-width: 1024px;
-    margin: 0 auto;
-    padding: 0 1rem;
+  max-width: 1200px;
+  margin: 25px auto;
+  padding: 0 1rem;
 }
 
 .mdc-card {

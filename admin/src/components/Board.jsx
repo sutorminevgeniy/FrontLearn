@@ -8,6 +8,14 @@ function Board(props) {
     props.state.statusWin ? 
     props.state.lesson.levelWin : 
     props.state.lesson.levels[level] );
+
+  if(props.state.lesson.structure.topic === 'html'){
+    return (
+      <div id="board">
+        <div id="backgroundHTML" className="htmlBoard" dangerouslySetInnerHTML={{__html: props.state.stateUser[props.state.level].answer}}></div>  
+      </div>
+    );
+  }
   
   return (
     <div id="board">
