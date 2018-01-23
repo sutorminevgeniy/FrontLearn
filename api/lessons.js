@@ -834,22 +834,22 @@ const lessons = [
       {
         name: 'justify-content 1',
         instructions: {
-          'en': '<p>Welcome to Flexbox Froggy, a game where you help Froggy and friends by writing CSS code! Guide this frog to the lilypad on the right by using the <code>justify-content</code> property, which aligns items horizontally and accepts the following values:</p><ul><li><code>flex-start</code>: Items align to the left side of the container.</li><li><code>flex-end</code>: Items align to the right side of the container.</li><li><code>center</code>: Items align at the center of the container.</li><li><code>space-between</code>: Items display with equal spacing between them.</li><li><code>space-around</code>: Items display with equal spacing around them.</li></ul><p>For example, <code>justify-content: flex-end;</code> will move the frog to the right. <img src="https://code.org/api/hour/begin_flexbox_froggy.png"></p>',
-          'ru': '<p>Добро пожаловать в Flexbox Froggy. Игра, в которой тебе нужно помочь лягушонку Фроги и его друзьям написанием CSS кода! Направь этого лягушонка на лилию справа используя свойство <code>justify-content</code>, которое выравнивает элементы горизонтально и принимает следующие значения:</p><ul><li><code>flex-start</code>: Элементы выравниваются по левой стороне контейнера.</li><li><code>flex-end</code>: Элементы выравниваются по правой стороне контейнера.</li><li><code>center</code>: Элементы выравниваются по центру контейнера.</li><li><code>space-between</code>: Элементы отображаются с одинаковыми отступами между ними.</li><li><code>space-around</code>: Элементы отображаются с одинаковыми отступами вокруг них.</li></ul><p>Например, <code>justify-content: flex-end;</code> сдвинет лягушонка вправо.</p>'
+          'en': '<p>Build paragraph</p><p>text text text 1</p>',
+          'ru': '<p>Создать абзацы</p><p>text text text 2</p>'
         },
         board: 'g',
         ansver: `<p>text text text 1</p>
 <p>text text text 2</p>`,
         defansver: `text text text 1
 text text text 2`,
-        before: "#pond {\n  display: flex;\n",
-        after: "}"
+        before: "",
+        after: ""
       },
       {
         name: 'justify-content 2',
         instructions: {
-          'en': '<p>Use <code>justify-content</code> again to help these frogs get to their lilypads. Remember that this CSS property aligns items horizontally and accepts the following values:</p><ul><li><code>flex-start</code>: Items align to the left side of the container.</li><li><code>flex-end</code>: Items align to the right side of the container.</li><li><code>center</code>: Items align at the center of the container.</li><li><code>space-between</code>: Items display with equal spacing between them.</li><li><code>space-around</code>: Items display with equal spacing around them.</li></ul>',
-          'ru': '<p>Используй <code>justify-content</code> еще раз, чтоб помочь этим лягушатам попасть на их лилии. Помни, что это свойство CSS выравнивает элементы горизонтально и принимает следующие значения:</p><ul><li><code>flex-start</code>: Элементы выравниваются по левой стороне контейнера.</li><li><code>flex-end</code>: Элементы выравниваются по правой стороне контейнера.</li><li><code>center</code>: Элементы выравниваются по центру контейнера.</li><li><code>space-between</code>: Элементы отображаются с одинаковыми отступами между ними.</li><li><code>space-around</code>: Элементы отображаются с одинаковыми отступами вокруг них.</li></ul>'
+          'en': '<p>Build paragraph</p><p>text text text 1</p>',
+          'ru': '<p>Создать абзацы</p><p>text text text 2</p>'
         },
         board: 'gy',
         ansver: `<ul>
@@ -860,14 +860,14 @@ text text text 2`,
         defansver: `item1
 item2
 item3`,
-        before: "#pond {\n  display: flex;\n",
-        after: "}"
+        before: "",
+        after: ""
       },
       {
         name: 'justify-content 3',
         instructions: {
-          'en': '<p>Help all three frogs find their lilypads just by using <code>justify-content</code>. This time, the lilypads have lots of space all around them.</p><p>If you find yourself forgetting the possible values for a property, you can hover over the property name to view them. Try hovering over <code>justify-content</code>.</p>',
-          'ru': '<p>Помоги всем трем лягушатам найти их лилии, просто используя <code>justify-content</code>. В этот раз, у лилий много пространства вокруг.</p><p>Если ты чувствуешь, что забыл возможные значения свойства, ты можешь навести курсор на название свойства, чтоб посмотреть их. Попробуй навести курсор на <code>justify-content</code>.</p>'
+          'en': '<p>Build paragraph</p><p>text text text 1</p>',
+          'ru': '<p>Создать абзацы</p><p>text text text 2</p>'
         },
         board: 'gyr',
         ansver: `<ol>
@@ -878,8 +878,8 @@ item3`,
         defansver: `item1
 item2
 item3`,
-        before: "#pond {\n  display: flex;\n",
-        after: "}"
+        before: "",
+        after: ""
       }
     ],
     levelWin: {
@@ -891,8 +891,8 @@ item3`,
       board: 'gyrgyrgyrgyrgyrgyrgyrgyrg',
       classes: {'#pond, #background': 'wrap'},
       ansver: {},
-      before: "#pond {\n  display: flex;\n",
-      after: "}"
+      before: "",
+      after: ""
     }
   },
   {

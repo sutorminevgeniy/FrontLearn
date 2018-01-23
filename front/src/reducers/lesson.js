@@ -82,7 +82,6 @@ function getStrStyle(arrStyle) {
 
 // Ввод ответа
 function inputAnswer(answer, state) {
-    console.log(state.stateUser, state.stateUser.slice());
     let stateUser = state.stateUser.slice();
     let levels = state.lesson.levels;
     let correctAnswer = levels[state.level].ansver;
