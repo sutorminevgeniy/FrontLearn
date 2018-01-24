@@ -40,17 +40,15 @@ constructor(props) {
           </section>
         </div>
 
+        <LevelCounterContainer />
+
         <div className="page">
           <section id="sidebar">
-            <div>
-              <LevelCounterContainer />
-            </div>
-
             <FieldContainer  path={"levels." + this.props.lesson.level}/>
           </section>
 
           <section id="view">
-            <BoardContainer />
+            {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer />}
           </section>
         </div>
 
@@ -60,7 +58,7 @@ constructor(props) {
           </section>
 
           <section id="view">
-            <BoardContainer />
+            {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer />}
           </section>
         </div>
       </form>

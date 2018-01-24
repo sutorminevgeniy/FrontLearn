@@ -19,7 +19,7 @@ class Editor extends React.Component {
   render() {
     const dataLevel = this.props.state.lesson.levels[this.props.state.level];
 
-    let styleTextarea = { height: ((20 * Object.entries(dataLevel.style).length + 4) + 'px') };
+    let styleTextarea = { height: ((20 * Object.entries(dataLevel.ansver).length + 4) + 'px') };
 
     return (
       <div id="editor">
