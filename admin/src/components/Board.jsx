@@ -5,14 +5,18 @@ import BoardItemContainer   from '../container/BoardItemContainer';
 function Board(props) {
   let level = props.state.level;
   let levelData = ( 
-    props.state.statusWin ? 
+    (props.state.statusWin || props.level === "levelWin") ? 
     props.state.lesson.levelWin : 
     props.state.lesson.levels[level] );
 
   if(props.state.lesson.structure.topic === 'html'){
+    let htmlData = ( 
+      (props.state.statusWin || props.level === "levelWin") ? 
+      props.state.lesson.levelWin.answer : 
+      props.state.stateUser[props.state.level].answer );
     return (
       <div id="board">
-        <div id="backgroundHTML" className="htmlBoard" dangerouslySetInnerHTML={{__html: props.state.stateUser[props.state.level].answer}}></div>  
+        <div id="backgroundHTML" className="htmlBoard" dangerouslySetInnerHTML={{__html: htmlData}}></div>  
       </div>
     );
   }

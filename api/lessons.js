@@ -786,49 +786,7 @@ const lessons = [
       topic: "html",
       author:"Thomas Park",
       preview_text: "Краткое описание урока",
-      image: "next-treehouse.png",
-      group: {
-        ansver: [{
-          param: {
-            id: "background",
-            classWin: "wrap"
-          },
-          changedSyle: "#pond",
-          content: [{
-            param: {
-              className: "lilypad"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg"
-              }
-            }]
-          }]
-        }],
-        question: [{
-          param: {
-            id: "pond",
-            classWin: "wrap"
-          },
-          content: [{
-            param: {
-              className: "frog"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg animated pulse infinite"
-              }
-            }]
-          }]
-        }]
-      },
-      color: {
-        g: 'green',
-        y: 'yellow',
-        r: 'red'
-      }
+      image: "next-treehouse.png"
     },
     levels: [
       {
@@ -837,7 +795,6 @@ const lessons = [
           'en': '<p>Build paragraph</p><p>text text text 1</p>',
           'ru': '<p>Создать абзацы</p><p>text text text 2</p>'
         },
-        board: 'g',
         ansver: `<p>text text text 1</p>
 <p>text text text 2</p>`,
         defansver: `text text text 1
@@ -851,7 +808,6 @@ text text text 2`,
           'en': '<p>Build paragraph</p><p>text text text 1</p>',
           'ru': '<p>Создать абзацы</p><p>text text text 2</p>'
         },
-        board: 'gy',
         ansver: `<ul>
   <li>item1</li>
   <li>item2</li>
@@ -869,7 +825,6 @@ item3`,
           'en': '<p>Build paragraph</p><p>text text text 1</p>',
           'ru': '<p>Создать абзацы</p><p>text text text 2</p>'
         },
-        board: 'gyr',
         ansver: `<ol>
   <li>item1</li>
   <li>item2</li>
@@ -888,9 +843,7 @@ item3`,
         'en': '<p>You win! Thanks to your mastery of flexbox, you were able to help all of the frogs to their lilypads. Just look how hoppy they are!</p><p>If you found this ribbeting, be sure to visit <a href="http://cssgridgarden.com/">Grid Garden</a> to learn about another powerful new feature of CSS layout. You can also check out my other projects on <a href="http://thomaspark.co">my blog</a> or <a href="http://twitter.com/thomashpark">Twitter</a>.</p><p>Want to keep learning while supporting Flexbox Froggy? Try out the topnotch web design and coding courses offered by <a href="http://treehouse.7eer.net/c/371033/228915/3944?subId1=flexboxfroggy">Treehouse</a>. And be sure to share Flexbox Froggy with your friends!</p>',
         'ru': '<p>Ты выиграл! Благодарим тебя за мастерство flexbox, ты смог помочь всем лягушатам добраться до их лилий. Просто взгляни, как они счастливы!</p><p>Если тебе понравилось, зацени мои другие проекты в моем <a href="http://thomaspark.co">блоге</a> или <a href="http://twitter.com/thomashpark">твитере</a>, и не забудь поделится этой игрой со своими друзьями!</p>',
       },
-      board: 'gyrgyrgyrgyrgyrgyrgyrgyrg',
-      classes: {'#pond, #background': 'wrap'},
-      ansver: {},
+      ansver: '<h2>Winner</h2>',
       before: "",
       after: ""
     }
@@ -902,49 +855,7 @@ item3`,
       topic: "javascript",
       author:"Thomas Park",
       preview_text: "Краткое описание урока",
-      image: "next-treehouse.png",
-      group: {
-        ansver: [{
-          param: {
-            id: "background",
-            classWin: "wrap"
-          },
-          changedSyle: "#pond",
-          content: [{
-            param: {
-              className: "lilypad"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg"
-              }
-            }]
-          }]
-        }],
-        question: [{
-          param: {
-            id: "pond",
-            classWin: "wrap"
-          },
-          content: [{
-            param: {
-              className: "frog"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg animated pulse infinite"
-              }
-            }]
-          }]
-        }]
-      },
-      color: {
-        g: 'green',
-        y: 'yellow',
-        r: 'red'
-      }
+      image: "next-treehouse.png"
     },
     levels: [
       {
@@ -986,9 +897,7 @@ item3`,
         'en': '<p>You win! Thanks to your mastery of flexbox, you were able to help all of the frogs to their lilypads. Just look how hoppy they are!</p><p>If you found this ribbeting, be sure to visit <a href="http://cssgridgarden.com/">Grid Garden</a> to learn about another powerful new feature of CSS layout. You can also check out my other projects on <a href="http://thomaspark.co">my blog</a> or <a href="http://twitter.com/thomashpark">Twitter</a>.</p><p>Want to keep learning while supporting Flexbox Froggy? Try out the topnotch web design and coding courses offered by <a href="http://treehouse.7eer.net/c/371033/228915/3944?subId1=flexboxfroggy">Treehouse</a>. And be sure to share Flexbox Froggy with your friends!</p>',
         'ru': '<p>Ты выиграл! Благодарим тебя за мастерство flexbox, ты смог помочь всем лягушатам добраться до их лилий. Просто взгляни, как они счастливы!</p><p>Если тебе понравилось, зацени мои другие проекты в моем <a href="http://thomaspark.co">блоге</a> или <a href="http://twitter.com/thomashpark">твитере</a>, и не забудь поделится этой игрой со своими друзьями!</p>',
       },
-      board: 'gyrgyrgyrgyrgyrgyrgyrgyrg',
-      classes: {'#pond, #background': 'wrap'},
-      ansver: {},
+      ansver: '',
       before: "",
       after: ""
     }

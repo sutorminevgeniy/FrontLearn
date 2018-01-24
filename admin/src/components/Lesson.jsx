@@ -48,7 +48,7 @@ constructor(props) {
           </section>
 
           <section id="view">
-            {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer />}
+            {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer level = "level" />}
           </section>
         </div>
 
@@ -58,7 +58,7 @@ constructor(props) {
           </section>
 
           <section id="view">
-            {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer />}
+            {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer level = "levelWin" />}
           </section>
         </div>
       </form>
