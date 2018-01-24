@@ -40,12 +40,10 @@ constructor(props) {
           </section>
         </div>
 
+        <LevelCounterContainer />
+
         <div className="page">
           <section id="sidebar">
-            <div>
-              <LevelCounterContainer />
-            </div>
-
             <FieldContainer  path={"levels." + this.props.lesson.level}/>
           </section>
 

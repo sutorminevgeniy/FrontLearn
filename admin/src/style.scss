@@ -175,15 +175,14 @@ pre {
 }
 
 #level-counter {
-  float: right;
+  float: none;
+  margin: 30px 0 0;
   position: relative;
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   font-size: 15px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  margin: 30px 0px 0px;
   user-select: none;
 }
 
@@ -380,13 +379,14 @@ button {
 }
 #board {
   position: relative;
-  width: 50vw;
-  height: 50vw;
+  width: 45vw;
+  height: 45vw;
   min-width: 300px;
   min-height: 300px;
   overflow: hidden;
   border: 12px solid #6D5720;
   border-radius: 12px;
+  margin-top: 20px;
 }
 
 #pond,
@@ -1199,10 +1199,6 @@ button {
   }
 }
 
-#level-counter {
-  float: none;
-}
-
 //==================================================================================================
 
 
@@ -1238,24 +1234,10 @@ button {
   }
 }
 
-@media only screen and (max-width: 1000px)  {
-
-  body,
-  #sidebar {
-    // font-size: 13px;
-  }
-}
-
 @media only screen and (min-width: 1200px)  {
 
   #board {
-    position: relative;
-    width: 600px;
-    height: 600px;
-    min-width: 300px;
-    min-height: 300px;
-    overflow: hidden;
-    border: 12px solid #6D5720;
-    border-radius: 12px;
+    width: 570px;
+    height: 570px;
   }
 }
