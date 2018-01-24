@@ -755,15 +755,27 @@ button {
 }
 
 .content {
-  display: -ms-flexbox;
   display: flex;
   max-width: 1200px;
-  margin: 25px auto;
+  margin: 0 auto;
   padding: 0 1rem;
 
   >form {
     width: 100%;
   }
+  main:first-child {
+    margin: 25px auto;
+  }    
+  main#books {
+    max-width: 1024px;
+  } 
+}
+
+.topics {
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .mdc-card {
