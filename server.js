@@ -71,7 +71,7 @@ app.get('/api/lesson/:lessonId', (req, res) => {
     });
 
   let p1 = db.Levels.findAll({
-      attributes: ['name', 'board', 'style', 'before', 'after'],
+      attributes: ['name', 'board', 'ansver', 'defansver', 'before', 'after'],
       where: {lessonId: req.params.lessonId},
       order: [['level', 'ASC']]
     });
@@ -83,7 +83,7 @@ app.get('/api/lesson/:lessonId', (req, res) => {
     });
 
   let p3 = db.LevelWin.findOne({
-      attributes: ['name', 'board', 'style', 'before', 'after'],
+      attributes: ['name', 'board', 'ansver', 'before', 'after'],
       where: {lessonId: req.params.lessonId}
     });
 
@@ -103,7 +103,9 @@ app.get('/api/lesson/:lessonId', (req, res) => {
     let levels = datas[1];
     levels = levels.map(item => {
       let level = item.get();
-      level.style = JSON.parse(level.style);
+      if(lesson.structure.topic === 'css'){
+        level.ansver = JSON.parse(level.ansver);
+      }
       level.instructions = {};
       return level;
     });
@@ -118,7 +120,7 @@ app.get('/api/lesson/:lessonId', (req, res) => {
     lesson.levels = levels;
 
     let levelWin = datas[3].get();
-    levelWin.style = JSON.parse(levelWin.style);
+    levelWin.ansver = JSON.parse(levelWin.ansver);
 
     let instructionsWin = datas[4];
     instructionsWin.forEach(item => {
@@ -148,8 +150,9 @@ app.put('/api/lesson', (req, res) => {
   // levels
   lesson.levels.forEach((level, i) => {
     let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
-    result.style = JSON.stringify(result.style);
-    
+    if(lesson.structure.topic === 'css'){
+      result.ansver = JSON.stringify(result.ansver);
+    }
     delete result.instructions;
 
     db.Levels.update(
@@ -173,7 +176,7 @@ app.put('/api/lesson', (req, res) => {
 
   // levelWin
   let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
-  result.style = JSON.stringify(result.style);
+  result.ansver = JSON.stringify(result.ansver);
   delete result.instructions;
 
   db.LevelWin.update(
@@ -213,13 +216,21 @@ function getLesson(lesson) {
   let levels = resState.lesson.levels;
 
   resState.stateUser = Array(levels.length).fill(null).map((item, i) => {
-    let questionStyle = getArrayStyle( levels[i].before + levels[i].after );
-    let strStyleAnswer = getStrStyle( levels[i].style );
-    let ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
+    let questionStyle = [];
+    let ansverStyle = [];
+    let answer = '';
+
+    if(lesson.structure.topic === 'css'){
+      questionStyle = getArrayStyle( levels[i].before + levels[i].after );
+      let strStyleAnswer = getStrStyle( levels[i].ansver );
+      ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
+    } else {
+      answer = levels[i].defansver;
+    }
 
     return {
       passed: false,
-      answer: '',
+      answer,
       ansverStyle,
       questionStyle
     };

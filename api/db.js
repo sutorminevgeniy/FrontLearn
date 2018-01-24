@@ -50,35 +50,36 @@ const Structure = sequelize.define('structure', {
   });
 
 const Levels = sequelize.define('levels', {
-    lessonId: { type: Sequelize.STRING },
-    level:    { type: Sequelize.INTEGER },
-    name:     { type: Sequelize.STRING },
-    board:    { type: Sequelize.STRING },
-    style:    { type: Sequelize.TEXT },
-    before:   { type: Sequelize.TEXT },
-    after:    { type: Sequelize.TEXT }
+    lessonId:  { type: Sequelize.STRING },
+    level:     { type: Sequelize.INTEGER },
+    name:      { type: Sequelize.STRING },
+    board:     { type: Sequelize.STRING },
+    ansver:    { type: Sequelize.TEXT },
+    defansver: { type: Sequelize.TEXT },
+    before:    { type: Sequelize.TEXT },
+    after:     { type: Sequelize.TEXT }
   });
 
 const Instructions = sequelize.define('instructions', {
     lessonId: { type: Sequelize.STRING },
     level:    { type: Sequelize.INTEGER },
-    lang:    { type: Sequelize.STRING },
-    content: { type: Sequelize.TEXT }
+    lang:     { type: Sequelize.STRING },
+    content:  { type: Sequelize.TEXT }
   });
 
 const LevelWin = sequelize.define('levelWins', {
     lessonId: { type: Sequelize.STRING },
     name:     { type: Sequelize.STRING },
     board:    { type: Sequelize.STRING },
-    style:    { type: Sequelize.TEXT },
+    ansver:   { type: Sequelize.TEXT },
     before:   { type: Sequelize.TEXT },
     after:    { type: Sequelize.TEXT }
   });
 
 const InstructionsWin = sequelize.define('instructionsWins', {
     lessonId: { type: Sequelize.STRING },
-    lang:    { type: Sequelize.STRING },
-    content: { type: Sequelize.TEXT }
+    lang:     { type: Sequelize.STRING },
+    content:  { type: Sequelize.TEXT }
   });
 
 module.exports = {
