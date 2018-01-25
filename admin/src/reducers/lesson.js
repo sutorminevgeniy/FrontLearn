@@ -1,5 +1,9 @@
+import lessonTempl from './lessontempl';
+
 import { GET_LESSON,
-         EDIT_LESSON, 
+         EDIT_LESSON,
+         ADD_LEVEL,
+         DELETE_LEVEL, 
          SET_VALUE,
          NEXT_BUTTON, 
          NEXT_LEVEL, 
@@ -24,6 +28,12 @@ function reducer(state = initialState, action) {
 
     case SET_VALUE:
       return setValue(state, action);
+
+    case ADD_LEVEL:
+      return addLevel(state);
+
+    case DELETE_LEVEL:
+      return deleteLevel(state);
 
     case NEXT_BUTTON:
         return nextButton(state);
@@ -70,6 +80,31 @@ function setValue(state, action) {
     }
 
     return resState;
+}
+
+// Добавление уровня
+function addLevel(state, action) {
+  let resState = Object.assign({}, state);
+
+  resState.lesson.levels.splice(resState.level+1, 0, lessonTempl.levels[0]);
+  resState.stateUser.splice(resState.level+1, 0, initialState);
+
+  ++resState.level;
+
+  return resState;
+}
+
+// Удаление текущего уровня
+function deleteLevel(state, action) {
+  let resState = Object.assign({}, state);
+
+  resState.lesson.levels.splice(resState.level, 1);
+
+  if(resState.lesson.levels.length === resState.level) {
+    --resState.level;
+  }
+
+  return resState;
 }
 
 // следующий уровень

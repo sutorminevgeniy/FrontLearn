@@ -9,6 +9,8 @@ constructor(props) {
   super(props);
 
   this.handleSubmit = this.handleSubmit.bind(this);
+  this.handleAdd = this.handleAdd.bind(this);
+  this.handleDelete = this.handleDelete.bind(this);
 }
 
   componentWillMount() {
@@ -16,10 +18,20 @@ constructor(props) {
   }
 
   handleSubmit(event) {
-        event.preventDefault();
+    event.preventDefault();
+    this.props.editLesson(this.props.lesson.lesson);
+  }
 
-        this.props.editLesson(this.props.lesson.lesson);
-    }
+
+  handleAdd(event) {
+    event.preventDefault();
+    this.props.addLevel();
+  }
+
+  handleDelete(event) {
+    event.preventDefault();
+    this.props.deleteLevel();
+  }
 
   render() {
     // Вывод пока не подгрузились дданные
@@ -27,11 +39,10 @@ constructor(props) {
       return null;
     }
 
-        console.log(this.props.lesson.lesson);   
     // Вывод после загрузки данных
     return (
       <form action="" onSubmit={this.handleSubmit}>
-        <button className="save icon" type="submit" >Save</button>
+        <button className="save icon" type="submit" >Сохранить</button>
 
         <div className="page">
           <section id="structure">
@@ -51,6 +62,9 @@ constructor(props) {
             {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer level = "level" />}
           </section>
         </div>
+
+        <button onClick={this.handleAdd}>Добавить уровень</button>
+        <button onClick={this.handleDelete}>Удалить уровень</button>
 
         <div className="page">
           <section id="sidebar">

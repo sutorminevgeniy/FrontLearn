@@ -14,7 +14,7 @@ function Board(props) {
       (props.state.statusWin || props.level === "levelWin") ? 
       props.state.lesson.levelWin.ansver : 
       props.state.stateUser[props.state.level].answer );
-    console.log(htmlData, props.state.lesson)
+
     return (
       <div id="board">
         <div id="backgroundHTML" className="htmlBoard" dangerouslySetInnerHTML={{__html: htmlData}}></div>  

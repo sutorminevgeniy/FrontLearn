@@ -20,6 +20,22 @@ export function editLesson (lesson) {
         }));
 }
 
+export const ADD_LEVEL = 'ADD_LEVEL';
+export function addLevel() {
+    return {
+        type: ADD_LEVEL,
+        
+    };
+}
+
+export const DELETE_LEVEL = 'DELETE_LEVEL';
+export function deleteLevel() {
+    return {
+        type: DELETE_LEVEL,
+        
+    };
+}
+
 export const SET_VALUE = 'SET_VALUE';
 export function setValue(path, value) {
     return {
