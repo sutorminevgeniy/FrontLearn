@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Card from '../components/Card';
+import CardContainer from '../container/CardContainer';
 
 function Lessons({ match, data }) {
     const lessons = match.params.topic ? data.filter(lessons => lessons.topic === match.params.topic) : data;
@@ -9,9 +9,9 @@ function Lessons({ match, data }) {
         <main id="books">
             <div className="mdc-layout-grid">
                 <div className="mdc-layout-grid__inner">
-                    {lessons.map((lessons, index) =>
+                    {lessons.map((lesson, index) =>
                         <div key={index} className="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                            <Card lessons={lessons} />
+                            <CardContainer lesson={lesson} />
                         </div>
                     )}
                 </div>

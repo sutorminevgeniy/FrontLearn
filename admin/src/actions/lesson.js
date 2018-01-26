@@ -72,3 +72,13 @@ export function changeLevel(level) {
         level
     };
 }
+
+
+export const DELETE_LESSON = 'DELETE_LESSON';
+export function deleteLesson(id) {
+    return axios.delete(`api/lesson/${id}`)
+        .then(response => ({
+            type: DELETE_LESSON,
+            id
+        }));
+}
