@@ -155,9 +155,13 @@ app.put('/api/lesson', (req, res) => {
     }
     delete result.instructions;
 
-    db.Levels.update(
-      result, 
-      { where: {lessonId: lesson.structure.lessonId, level: i} });
+    db.Levels.destroy({ where: {lessonId: lesson.structure.lessonId, level: i} })
+    .then(() => {
+      db.Levels.upsert(
+        result, 
+        { where: {lessonId: lesson.structure.lessonId, level: i} 
+      })
+    });
   });
 
   // instructions
