@@ -136,16 +136,6 @@ app.get('/api/lesson/:lessonId', (req, res) => {
   });    
 });
 
-app.delete('/api/lesson/:lessonId', (req, res) => {
-    // const index = todos.findIndex(todo => todo.id == req.params.id);
-    
-    // if (index === -1) return res.sendStatus(404);
-
-    // todos.splice(index, 1);
-
-    res.sendStatus(204);
-});
-
 app.put('/api/lesson', (req, res) => {
   const lesson = req.body.lesson;
 
@@ -210,6 +200,24 @@ app.put('/api/lesson', (req, res) => {
   console.log(lesson.structure);
 
   res.json(lesson);
+});
+
+app.delete('/api/lesson/:lessonId', (req, res) => {
+  console.log(req.params.lessonId);
+
+  let p0 = db.Structure.destroy({ where: {lessonId: req.params.lessonId} });
+
+  let p1 = db.Levels.destroy({ where: {lessonId: req.params.lessonId} });
+
+  let p2 = db.Instructions.destroy({ where: {lessonId: req.params.lessonId} });
+
+  let p3 = db.LevelWin.destroy({ where: {lessonId: req.params.lessonId} });
+
+  let p4 = db.InstructionsWin.destroy({ where: {lessonId: req.params.lessonId} });
+
+  Promise.all([p0, p1, p2, p3, p4]).then(datas => { 
+    res.sendStatus(204);
+  });
 });
 
 app.listen(app.get('port'), () => console.log(`Server is listening: http://localhost:${app.get('port')}`));
