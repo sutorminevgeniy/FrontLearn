@@ -1,4 +1,4 @@
-import { GET_TOPICS } from '../actions';
+import { GET_TOPICS, DELETE_LESSON } from '../actions';
 
 const initState = {
   topics: [],
@@ -13,7 +13,23 @@ export default function reducer(state = initState, action) {
         lessons: action.lessons,
       });
 
+    case DELETE_LESSON:
+      return deleteLesson(state, action.id);
+
     default:
       return state;
   }
+}
+
+function deleteLesson(state, id) {
+  let resState = Object.assign({}, state);
+
+  let index = resState.lessons.findIndex(item => item.lessonId === id);
+
+  if(index > -1) {
+    resState.lessons = resState.lessons.slice();
+    resState.lessons.splice(index, 1);
+  }
+
+  return resState;
 }

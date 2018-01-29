@@ -136,6 +136,16 @@ app.get('/api/lesson/:lessonId', (req, res) => {
   });    
 });
 
+app.delete('/api/lesson/:lessonId', (req, res) => {
+    // const index = todos.findIndex(todo => todo.id == req.params.id);
+    
+    // if (index === -1) return res.sendStatus(404);
+
+    // todos.splice(index, 1);
+
+    res.sendStatus(204);
+});
+
 app.put('/api/lesson', (req, res) => {
   const lesson = req.body.lesson;
 
