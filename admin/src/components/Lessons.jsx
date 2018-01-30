@@ -1,16 +1,19 @@
 import React from 'react';
+import { history } from '../store';
 
 import CardContainer from '../container/CardContainer';
 
 class Lessons extends React.Component {
     constructor(props){
         super(props);
-
+ 
         this.handleAdd = this.handleAdd.bind(this);
     }
 
     handleAdd(event){
         event.preventDefault();
+
+        history.push('/lessons/new/new');
     }
 
     render() {
@@ -30,7 +33,7 @@ class Lessons extends React.Component {
                     </div>
                 </div>
                 <section className="mdc-card__actions">
-                    <button onClick = {this.handlrAdd }>Добавить урок</button>
+                    <button onClick = {this.handleAdd }>Добавить урок</button>
                 </section>
             </main>
         );

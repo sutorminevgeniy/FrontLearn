@@ -2,10 +2,12 @@
 
 const fs = require('fs');
 const path = require('path');
+const url = require('url');
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const db = require('./api/db');
+const lessontempl = require('./api/lessontempl');
 
 const app = express();
 
@@ -65,79 +67,88 @@ app.get('/api/topics', (req, res) => {
 app.get('/api/lesson/:lessonId', (req, res) => {
   let lesson = {};
 
-  let p0 = db.Structure.findOne({
-      attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image', 'group', 'color'],
-      where: {lessonId: req.params.lessonId}
-    });
-
-  let p1 = db.Levels.findAll({
-      attributes: ['name', 'board', 'ansver', 'defansver', 'before', 'after'],
-      where: {lessonId: req.params.lessonId},
-      order: [['level', 'ASC']]
-    });
-
-  let p2 = db.Instructions.findAll({
-      attributes: ['level','lang', 'content'],
-      where: {lessonId: req.params.lessonId},
-      order: [['level', 'ASC']]
-    });
-
-  let p3 = db.LevelWin.findOne({
-      attributes: ['name', 'board', 'ansver', 'before', 'after'],
-      where: {lessonId: req.params.lessonId}
-    });
-
-  let p4 = db.InstructionsWin.findAll({
-      attributes: ['lang', 'content'],
-      where: {lessonId: req.params.lessonId}
-    });
-
-  Promise.all([p0, p1, p2, p3, p4]).then(datas => { 
-    let structure = datas[0].get();
-
-    structure.group = JSON.parse(structure.group);
-    structure.color = JSON.parse(structure.color);
-
-    lesson.structure = structure;
-
-    let levels = datas[1];
-    levels = levels.map(item => {
-      let level = item.get();
-      if(lesson.structure.topic === 'css'){
-        level.ansver = JSON.parse(level.ansver);
-      }
-      level.instructions = {};
-      return level;
-    });
-
-    let instructions = datas[2];
-    instructions.forEach(item => {
-      let dataItem = item.get();
-
-      levels[dataItem.level].instructions[dataItem.lang] = dataItem.content;
-    });
-
-    lesson.levels = levels;
-
-    let levelWin = datas[3].get();
-    levelWin.ansver = JSON.parse(levelWin.ansver);
-
-    let instructionsWin = datas[4];
-    instructionsWin.forEach(item => {
-      let dataItem = item.get();
-
-      levelWin.instructions = levelWin.instructions || {};
-      levelWin.instructions[dataItem.lang] = dataItem.content;
-    });
-
-    lesson.levelWin = levelWin;
-
+  console.log(req.params.lessonId);
+  if(req.params.lessonId === 'new') {
+    lesson = lessontempl;
     res.send(getLesson(lesson));
-  });    
+  } else {
+    let p0 = db.Structure.findOne({
+        attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image', 'group', 'color'],
+        where: {lessonId: req.params.lessonId}
+      });
+
+    let p1 = db.Levels.findAll({
+        attributes: ['name', 'board', 'ansver', 'defansver', 'before', 'after'],
+        where: {lessonId: req.params.lessonId},
+        order: [['level', 'ASC']]
+      });
+
+    let p2 = db.Instructions.findAll({
+        attributes: ['level','lang', 'content'],
+        where: {lessonId: req.params.lessonId},
+        order: [['level', 'ASC']]
+      });
+
+    let p3 = db.LevelWin.findOne({
+        attributes: ['name', 'board', 'ansver', 'before', 'after'],
+        where: {lessonId: req.params.lessonId}
+      });
+
+    let p4 = db.InstructionsWin.findAll({
+        attributes: ['lang', 'content'],
+        where: {lessonId: req.params.lessonId}
+      });
+
+    Promise.all([p0, p1, p2, p3, p4]).then(datas => { 
+      let structure = datas[0].get();
+
+      structure.group = JSON.parse(structure.group);
+      structure.color = JSON.parse(structure.color);
+
+      lesson.structure = structure;
+
+      let levels = datas[1];
+      levels = levels.map(item => {
+        let level = item.get();
+        if(lesson.structure.topic === 'css'){
+          level.ansver = JSON.parse(level.ansver);
+        }
+        level.instructions = {};
+        return level;
+      });
+
+      let instructions = datas[2];
+      instructions.forEach(item => {
+        let dataItem = item.get();
+
+        levels[dataItem.level].instructions[dataItem.lang] = dataItem.content;
+      });
+
+      lesson.levels = levels;
+
+      let levelWin = datas[3].get();
+      levelWin.ansver = JSON.parse(levelWin.ansver);
+
+      let instructionsWin = datas[4];
+      instructionsWin.forEach(item => {
+        let dataItem = item.get();
+
+        levelWin.instructions = levelWin.instructions || {};
+        levelWin.instructions[dataItem.lang] = dataItem.content;
+      });
+
+      lesson.levelWin = levelWin;
+
+      res.send(getLesson(lesson));
+    });      
+  }
 });
 
 app.put('/api/lesson', (req, res) => {
   const lesson = req.body.lesson;
+  const headerURL = url.parse(req.headers.referer);
+
+  console.log(req.headers.referer, headerURL);
 
   // structure
   lesson.structure.group = JSON.stringify(lesson.structure.group);
