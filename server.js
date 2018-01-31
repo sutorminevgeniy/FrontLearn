@@ -148,69 +148,130 @@ app.put('/api/lesson', (req, res) => {
   const lesson = req.body.lesson;
   const headerURL = url.parse(req.headers.referer);
 
-  console.log(req.headers.referer, headerURL);
+  if(headerURL.pathname === '/lessons/new/new') {
+    console.log(req.headers.referer, headerURL);
 
-  // structure
-  lesson.structure.group = JSON.stringify(lesson.structure.group);
-  lesson.structure.color = JSON.stringify(lesson.structure.color);
+    // structure
+    lesson.structure.group = JSON.stringify(lesson.structure.group);
+    lesson.structure.color = JSON.stringify(lesson.structure.color);
 
-  db.Structure.update(
-    lesson.structure, 
-    { where: {lessonId: lesson.structure.lessonId} });
+    db.Structure.upsert(
+      lesson.structure, 
+      { where: {lessonId: lesson.structure.lessonId} });
 
-  // levels
-  lesson.levels.forEach((level, i) => {
-    let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
-    if(lesson.structure.topic === 'css'){
-      result.ansver = JSON.stringify(result.ansver);
-    }
-    delete result.instructions;
+    // levels
+    lesson.levels.forEach((level, i) => {
+      let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
+      if(lesson.structure.topic === 'css'){
+        result.ansver = JSON.stringify(result.ansver);
+      }
+      delete result.instructions;
 
-    db.Levels.destroy({ where: {lessonId: lesson.structure.lessonId, level: i} })
-    .then(() => {
       db.Levels.upsert(
         result, 
         { where: {lessonId: lesson.structure.lessonId, level: i} 
-      })
+      });
     });
-  });
 
-  // instructions
-  lesson.levels.forEach((level, i) => {
-    for(let lang in level.instructions) {
-      db.Instructions.update(
-      { lessonId: lesson.structure.lessonId, 
-        level: i, 
-        lang, 
-        content: level.instructions[lang]}, 
-      { where: {lessonId: lesson.structure.lessonId, 
-                level: i, 
-                lang} });
+    // instructions
+    lesson.levels.forEach((level, i) => {
+      for(let lang in level.instructions) {
+        db.Instructions.upsert(
+        { lessonId: lesson.structure.lessonId, 
+          level: i, 
+          lang, 
+          content: level.instructions[lang]}, 
+        { where: {lessonId: lesson.structure.lessonId, 
+                  level: i, 
+                  lang} });
+      }
+    });
+
+    // levelWin
+    let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
+    result.ansver = JSON.stringify(result.ansver);
+    delete result.instructions;
+
+    db.LevelWin.upsert(
+      result, 
+      { where: {lessonId: lesson.structure.lessonId} });
+
+    // instructionsWin
+    for(let lang in lesson.levelWin.instructions) {
+      db.InstructionsWin.upsert(
+        { lessonId: lesson.structure.lessonId, 
+          lang, 
+          content: lesson.levelWin.instructions[lang] }, 
+        { where: {lessonId: lesson.structure.lessonId, 
+                  lang } });
     }
-  });
 
-  // levelWin
-  let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
-  result.ansver = JSON.stringify(result.ansver);
-  delete result.instructions;
+    console.log(lesson.structure);
 
-  db.LevelWin.update(
-    result, 
-    { where: {lessonId: lesson.structure.lessonId} });
+    res.json(lesson); 
+  } else {
+    // structure
+    lesson.structure.group = JSON.stringify(lesson.structure.group);
+    lesson.structure.color = JSON.stringify(lesson.structure.color);
 
-  // instructionsWin
-  for(let lang in lesson.levelWin.instructions) {
-    db.InstructionsWin.update(
-      { lessonId: lesson.structure.lessonId, 
-        lang, 
-        content: lesson.levelWin.instructions[lang] }, 
-      { where: {lessonId: lesson.structure.lessonId, 
-                lang } });
+    db.Structure.update(
+      lesson.structure, 
+      { where: {lessonId: lesson.structure.lessonId} });
+
+    // levels
+    lesson.levels.forEach((level, i) => {
+      let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
+      if(lesson.structure.topic === 'css'){
+        result.ansver = JSON.stringify(result.ansver);
+      }
+      delete result.instructions;
+
+      db.Levels.destroy({ where: {lessonId: lesson.structure.lessonId, level: i} })
+      .then(() => {
+        db.Levels.upsert(
+          result, 
+          { where: {lessonId: lesson.structure.lessonId, level: i} 
+        })
+      });
+    });
+
+    // instructions
+    lesson.levels.forEach((level, i) => {
+      for(let lang in level.instructions) {
+        db.Instructions.update(
+        { lessonId: lesson.structure.lessonId, 
+          level: i, 
+          lang, 
+          content: level.instructions[lang]}, 
+        { where: {lessonId: lesson.structure.lessonId, 
+                  level: i, 
+                  lang} });
+      }
+    });
+
+    // levelWin
+    let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
+    result.ansver = JSON.stringify(result.ansver);
+    delete result.instructions;
+
+    db.LevelWin.update(
+      result, 
+      { where: {lessonId: lesson.structure.lessonId} });
+
+    // instructionsWin
+    for(let lang in lesson.levelWin.instructions) {
+      db.InstructionsWin.update(
+        { lessonId: lesson.structure.lessonId, 
+          lang, 
+          content: lesson.levelWin.instructions[lang] }, 
+        { where: {lessonId: lesson.structure.lessonId, 
+                  lang } });
+    }
+
+    console.log(lesson.structure);
+
+    res.json(lesson);    
   }
-
-  console.log(lesson.structure);
-
-  res.json(lesson);
 });
 
 app.delete('/api/lesson/:lessonId', (req, res) => {
