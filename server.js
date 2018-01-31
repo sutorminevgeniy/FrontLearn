@@ -147,17 +147,22 @@ app.get('/api/lesson/:lessonId', (req, res) => {
 app.put('/api/lesson', (req, res) => {
   const lesson = req.body.lesson;
   const headerURL = url.parse(req.headers.referer);
+  let info = {
+    newUrl: null
+  };
 
   if(headerURL.pathname === '/lessons/new/new') {
     console.log(req.headers.referer, headerURL);
+
+    if(lesson.structure.lessonId && lesson.structure.topic){
+      info.newUrl = '/lessons/' + lesson.structure.lessonId + '/' + lesson.structure.topic;
+    }
 
     // structure
     lesson.structure.group = JSON.stringify(lesson.structure.group);
     lesson.structure.color = JSON.stringify(lesson.structure.color);
 
-    db.Structure.upsert(
-      lesson.structure, 
-      { where: {lessonId: lesson.structure.lessonId} });
+    db.Structure.upsert( lesson.structure );
 
     // levels
     lesson.levels.forEach((level, i) => {
@@ -167,10 +172,7 @@ app.put('/api/lesson', (req, res) => {
       }
       delete result.instructions;
 
-      db.Levels.upsert(
-        result, 
-        { where: {lessonId: lesson.structure.lessonId, level: i} 
-      });
+      db.Levels.upsert( result );
     });
 
     // instructions
@@ -180,10 +182,7 @@ app.put('/api/lesson', (req, res) => {
         { lessonId: lesson.structure.lessonId, 
           level: i, 
           lang, 
-          content: level.instructions[lang]}, 
-        { where: {lessonId: lesson.structure.lessonId, 
-                  level: i, 
-                  lang} });
+          content: level.instructions[lang]});
       }
     });
 
@@ -193,22 +192,19 @@ app.put('/api/lesson', (req, res) => {
     delete result.instructions;
 
     db.LevelWin.upsert(
-      result, 
-      { where: {lessonId: lesson.structure.lessonId} });
+      result);
 
     // instructionsWin
     for(let lang in lesson.levelWin.instructions) {
       db.InstructionsWin.upsert(
         { lessonId: lesson.structure.lessonId, 
           lang, 
-          content: lesson.levelWin.instructions[lang] }, 
-        { where: {lessonId: lesson.structure.lessonId, 
-                  lang } });
+          content: lesson.levelWin.instructions[lang] });
     }
 
     console.log(lesson.structure);
 
-    res.json(lesson); 
+    res.json(info); 
   } else {
     // structure
     lesson.structure.group = JSON.stringify(lesson.structure.group);
@@ -270,7 +266,7 @@ app.put('/api/lesson', (req, res) => {
 
     console.log(lesson.structure);
 
-    res.json(lesson);    
+    res.json(info);    
   }
 });
 

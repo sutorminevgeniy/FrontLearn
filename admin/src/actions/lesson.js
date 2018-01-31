@@ -14,9 +14,9 @@ export const EDIT_LESSON = 'EDIT_LESSON';
 export function editLesson (lesson) {
     return axios.put(`/api/lesson`, { lesson })
         .then(response => response.data)
-        .then(lesson => ({
+        .then(info => ({
             type: EDIT_LESSON,
-            lesson
+            info
         }));
 }
 

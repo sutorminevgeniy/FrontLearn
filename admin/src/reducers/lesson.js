@@ -1,3 +1,4 @@
+import { history } from '../store';
 import lessonTempl from './lessontempl';
 
 import { GET_LESSON,
@@ -11,6 +12,7 @@ import { GET_LESSON,
          CHANGE_LEVEL } from '../actions';
 
 const initialState = {
+  newUrl: null,
   level: 0,
   lang: 'ru',
   statusWin: false,
@@ -24,7 +26,7 @@ function reducer(state = initialState, action) {
       return action.lesson;
       
     case EDIT_LESSON:
-      return state;
+      return editLesson(state, action);
 
     case SET_VALUE:
       return setValue(state, action);
@@ -81,6 +83,18 @@ function setValue(state, action) {
 
     return resState;
 }
+
+function editLesson(state, action) {
+  let resState = Object.assign({}, state);
+
+  if(action.info.newUrl){
+        console.log(state);
+       // history.push(action.info.newUrl);
+      }
+
+  return resState;
+}
+
 
 // Добавление уровня
 function addLevel(state, action) {
