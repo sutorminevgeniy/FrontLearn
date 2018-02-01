@@ -1,4 +1,5 @@
 import axios from 'axios';
+import confLesson from '../confLesson';
 
 export const GET_LESSON = 'GET_LESSON';
 export function getLesson (lessonId) {
@@ -12,12 +13,39 @@ export function getLesson (lessonId) {
 
 export const EDIT_LESSON = 'EDIT_LESSON';
 export function editLesson (lesson) {
-    return axios.put(`/api/lesson`, { lesson })
-        .then(response => response.data)
-        .then(info => ({
+    let incorrFlag = false;
+    let incorrField = {};
+
+    for(let key in confLesson){
+        // проверка на заполненность полей
+        if(confLesson[key].req && getByPath(lesson, key) === '' ){
+          incorrField[key] = 'Поле должно быть заполнено';
+          incorrFlag = true;
+        }
+    }
+
+    if(incorrFlag){ 
+        console.log(incorrField);
+        return ({
             type: EDIT_LESSON,
-            info
-        }));
+            info: { incorrField }
+        });
+    } else {
+        return axios.put(`/api/lesson`, { lesson })
+            .then(response => response.data)
+            .then(info => ({
+                type: EDIT_LESSON,
+                info
+            }));}
+    }
+
+export const SET_VALUE = 'SET_VALUE';
+export function setValue(path, value) {
+    return {
+        type: SET_VALUE,
+        path, 
+        value
+    };
 }
 
 export const ADD_LEVEL = 'ADD_LEVEL';
@@ -33,15 +61,6 @@ export function deleteLevel() {
     return {
         type: DELETE_LEVEL,
         
-    };
-}
-
-export const SET_VALUE = 'SET_VALUE';
-export function setValue(path, value) {
-    return {
-        type: SET_VALUE,
-        path, 
-        value
     };
 }
 
@@ -73,3 +92,15 @@ export function changeLevel(level) {
     };
 }
 
+
+function getByPath(obj, path){
+    let pathArr = path.split('.');
+
+    let resfield = obj;
+
+    for (let key in pathArr) {
+        resfield = resfield[pathArr[key]];
+    }
+
+    return resfield;
+}

@@ -1,10 +1,11 @@
 import lessonTempl from './lessontempl';
+import confLesson from '../confLesson';
 
 import { GET_LESSON,
-         EDIT_LESSON,
-         ADD_LEVEL,
-         DELETE_LEVEL, 
+         EDIT_LESSON, 
          SET_VALUE,
+         ADD_LEVEL,
+         DELETE_LEVEL,
          NEXT_BUTTON, 
          NEXT_LEVEL, 
          PREV_LEVEL, 
@@ -14,6 +15,7 @@ const initialState = {
   level: 0,
   lang: 'ru',
   newUrl: null,
+  incorrField: {},
   statusWin: false,
   lesson: false,
   stateUser: false
@@ -80,14 +82,26 @@ function setValue(state, action) {
       }
     }
 
+    if(confLesson[action.path] && confLesson[action.path].req && action.value === '' ){
+      resState.incorrField[action.path] = 'Поле должно быть заполнено';
+    } else if(resState.incorrField[action.path]) {
+      delete resState.incorrField[action.path];
+    }
+
     return resState;
 }
 
 function editLesson(state, action) {
   let resState = Object.assign({}, state);
 
+  // редирект на новый id при певой записи нового урока
   if(action.info.newUrl){
     resState.newUrl = action.info.newUrl;
+  }
+
+  // результаты проверки на корректность ввода
+  if(action.info.incorrField){
+    resState.incorrField = action.info.incorrField;
   }
 
   return resState;

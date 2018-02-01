@@ -295,6 +295,7 @@ function getLesson(lesson) {
   let resState = {
     level: 0,
     newUrl: null,
+    incorrField: {},
     statusWin: false,
     lesson: {},
     stateUser: []

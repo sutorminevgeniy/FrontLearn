@@ -1197,6 +1197,9 @@ button {
   &:first-of-type {
     margin-top: 25px;
   }
+  &.warning {
+    background: #f50c0c8c;
+  }
 
   label {
     display: block;

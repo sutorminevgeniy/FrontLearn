@@ -36,7 +36,7 @@ constructor(props) {
   }
 
   render() {
-    // редирект на новый id пр певой записи нового урока
+    // редирект на новый id при певой записи нового урока
     if(this.props.lesson.newUrl && this.props.location.pathname !== this.props.lesson.newUrl){
       return (
         <Redirect to={this.props.lesson.newUrl}/>
