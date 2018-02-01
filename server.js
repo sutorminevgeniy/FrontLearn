@@ -17,11 +17,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache');
   next();
 });
+
 
 app.get('/api/main', (req, res) => {
   db.Messages.findAll({
@@ -152,8 +152,6 @@ app.put('/api/lesson', (req, res) => {
   };
 
   if(headerURL.pathname === '/lessons/new/new') {
-    console.log(req.headers.referer, headerURL);
-
     if(lesson.structure.lessonId && lesson.structure.topic){
       info.newUrl = '/lessons/' + lesson.structure.lessonId + '/' + lesson.structure.topic;
     }
@@ -296,6 +294,7 @@ app.listen(app.get('port'), () => console.log(`Server is listening: http://local
 function getLesson(lesson) {
   let resState = {
     level: 0,
+    newUrl: null,
     statusWin: false,
     lesson: {},
     stateUser: []

@@ -1,4 +1,3 @@
-import { history } from '../store';
 import lessonTempl from './lessontempl';
 
 import { GET_LESSON,
@@ -12,9 +11,9 @@ import { GET_LESSON,
          CHANGE_LEVEL } from '../actions';
 
 const initialState = {
-  newUrl: null,
   level: 0,
   lang: 'ru',
+  newUrl: null,
   statusWin: false,
   lesson: false,
   stateUser: false
@@ -88,9 +87,8 @@ function editLesson(state, action) {
   let resState = Object.assign({}, state);
 
   if(action.info.newUrl){
-        console.log(state);
-       // history.push(action.info.newUrl);
-      }
+    resState.newUrl = action.info.newUrl;
+  }
 
   return resState;
 }

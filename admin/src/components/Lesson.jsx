@@ -1,4 +1,6 @@
 import React from 'react';
+import { Redirect } from 'react-router'
+
 
 import LevelCounterContainer from '../container/LevelCounterContainer';
 import FieldContainer        from '../container/FieldContainer';
@@ -34,6 +36,13 @@ constructor(props) {
   }
 
   render() {
+    // редирект на новый id пр певой записи нового урока
+    if(this.props.lesson.newUrl && this.props.location.pathname !== this.props.lesson.newUrl){
+      return (
+        <Redirect to={this.props.lesson.newUrl}/>
+      );
+    }
+
     // Вывод пока не подгрузились дданные
     if(!this.props.lesson.lesson) {
       return null;
