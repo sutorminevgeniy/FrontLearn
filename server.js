@@ -99,7 +99,11 @@ app.get('/api/lesson/:lessonId', (req, res) => {
         where: {lessonId: req.params.lessonId}
       });
 
-    Promise.all([p0, p1, p2, p3, p4]).then(datas => { 
+    let p5 = db.Topics.findAll({
+      attributes: ['title', 'path']
+    });
+
+    Promise.all([p0, p1, p2, p3, p4, p5]).then(datas => { 
       let structure = datas[0].get();
 
       structure.group = JSON.parse(structure.group);
@@ -139,7 +143,18 @@ app.get('/api/lesson/:lessonId', (req, res) => {
 
       lesson.levelWin = levelWin;
 
-      res.send(getLesson(lesson));
+      let topics = datas[5];
+      topics = topics.map(item => item.get());
+
+      console.log({
+        lesson: getLesson(lesson),
+        topics
+      });
+
+      res.send({
+        lesson: getLesson(lesson),
+        topics
+      });
     });      
   }
 });

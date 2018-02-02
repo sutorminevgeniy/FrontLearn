@@ -55,13 +55,19 @@ class Field extends React.Component {
         message = this.props.lesson.incorrField[this.props.path];
         classField += ' warning'
       }
+
       return (
         <div className={classField}>
           <label htmlFor={this.props.path}>{labelText}</label>
-          <textarea 
-            id={ this.props.path } 
-            value={ pathItem.val }
-            onChange={ this.setValue } />
+          { this.props.path === 'structure.topic' ? (
+            <select id={ this.props.path } value={pathItem.val} onChange={ this.setValue }>
+              { this.props.topics.topics.map(item => (<option key={item.path} value={item.path}>{item.title}</option>)) }
+            </select>)
+            : 
+          (<textarea 
+                      id={ this.props.path } 
+                      value={ pathItem.val }
+                      onChange={ this.setValue } />)}
             <span>{message}</span>
         </div>
       );      

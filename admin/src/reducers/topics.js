@@ -1,4 +1,4 @@
-import { GET_TOPICS, DELETE_LESSON } from '../actions';
+import { GET_TOPICS, GET_LESSON, DELETE_LESSON } from '../actions';
 
 const initState = {
   topics: [],
@@ -11,6 +11,11 @@ export default function reducer(state = initState, action) {
       return ({
         topics: action.topics,
         lessons: action.lessons,
+      });
+
+    case GET_LESSON:
+      return ({
+        topics: action.topics
       });
 
     case DELETE_LESSON:
