@@ -8,13 +8,13 @@ const initState = {
 export default function reducer(state = initState, action) {
   switch (action.type) {
     case GET_TOPICS:
-      return ({
+      return Object.assign({}, state, {
         topics: action.topics,
         lessons: action.lessons,
       });
 
     case GET_LESSON:
-      return ({
+      return Object.assign({}, state, {
         topics: action.topics
       });
 
