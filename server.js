@@ -70,7 +70,20 @@ app.get('/api/lesson/:lessonId', (req, res) => {
   console.log(req.params.lessonId);
   if(req.params.lessonId === 'new') {
     lesson = lessontempl;
-    res.send(getLesson(lesson));
+
+    db.Topics.findAll({
+      attributes: ['title', 'path']
+    }).then(data => {
+      let topics = data;
+      topics = topics.map(item => item.get());
+
+      res.send({
+        lesson: getLesson(lesson),
+        topics
+      });
+    });
+
+
   } else {
     let p0 = db.Structure.findOne({
         attributes: ['lessonId', 'title', 'topic', 'author', 'preview_text', 'image', 'group', 'color'],
