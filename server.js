@@ -172,7 +172,7 @@ app.get('/api/lesson/:lessonId', (req, res) => {
   }
 });
 
-app.put('/api/lesson', (req, res) => {
+app.put('/api/lesson/:topicId/:lessonId', (req, res) => {
   const lesson = req.body.lesson;
   const headerURL = url.parse(req.headers.referer);
   let info = {

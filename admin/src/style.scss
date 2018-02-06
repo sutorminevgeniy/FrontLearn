@@ -555,29 +555,29 @@ button {
   border-width: 3px 5px 5px 3px;
 }
 
-.plant.carrot .bg {
+.plant.water .bg {
   background-image: url("./images/carrots.svg");
 }
 
-.plant.weed .bg {
+.plant.poison .bg {
   background-image: url("./images/weeds.svg");
 }
 
-.plant.carrot.correct .bg {
+.plant.water.correct .bg {
   background-image: url("./images/carrots-correct.svg");
 }
 
-.plant.weed.correct .bg {
+.plant.poison.correct .bg {
   background-image: url("./images/weeds-correct.svg");
 }
 
-.treatment.carrot .bg {
+.treatment.water .bg {
   background-color: rgba(81, 140, 179, 1);
   background-image: url("./images/water.svg");
   animation: scroll 6s linear infinite;
 }
 
-.treatment.weed .bg {
+.treatment.poison .bg {
   background-color: #63393E;
   background-image: url("./images/poison.svg");
   animation: scroll 6s linear infinite;

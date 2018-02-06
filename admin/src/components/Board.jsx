@@ -21,6 +21,8 @@ function Board(props) {
       </div>
     );
   }
+
+  
   
   return (
     <div id="board">

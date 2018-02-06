@@ -3,7 +3,7 @@ import React from 'react';
 import BoardItemContainer   from '../container/BoardItemContainer';
 
 function BoardItem(props) {
-  //console.log(props);
+  console.log(props);
   let id         = props.content.param.id || "";
   let className  = props.content.param.className || ""; 
   let index      = props.index || 0;
@@ -29,10 +29,10 @@ function BoardItem(props) {
   }
 
   if(props.content.color) {
-    className += (' ' + props.state.lesson.structure.color[levelDataBoard[index]]);
-    // замена стилей в связи с расхождением тегов в Editor и Board
-    if(props.content.changedColor) {
-      style = Object.assign({}, style, styleState[props.content.changedColor[levelDataBoard[index]]]);
+    let colorClass = props.state.lesson.structure.color[levelDataBoard[index]]
+    className += (' ' + colorClass);
+    if(styleState['.' + colorClass]) {
+      style = Object.assign({}, style, styleState['.' + colorClass]);
     }
   }
   if(props.state.statusWin && props.content.param.classWin) {
