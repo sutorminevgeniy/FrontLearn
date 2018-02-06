@@ -61,6 +61,7 @@ class Field extends React.Component {
           <label htmlFor={this.props.path}>{labelText}</label>
           { this.props.path === 'structure.topic' ? (
             <select id={ this.props.path } value={pathItem.val} onChange={ this.setValue }>
+              { pathItem.val === '' && <option value=""  style={{display: 'none'}}></option> }
               { this.props.topics.topics.map(item => (<option key={item.path} value={item.path}>{item.title}</option>)) }
             </select>)
             : 
