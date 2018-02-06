@@ -3,7 +3,6 @@ import React from 'react';
 import BoardItemContainer   from '../container/BoardItemContainer';
 
 function BoardItem(props) {
-  console.log(props);
   let id         = props.content.param.id || "";
   let className  = props.content.param.className || ""; 
   let index      = props.index || 0;

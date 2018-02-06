@@ -365,6 +365,7 @@ const lessons = [
             }]
           }]
         }],
+        questionText: "#garden>.treatment.color>.bg",
         question: [{
           param: {
             id: "garden"
@@ -381,6 +382,7 @@ const lessons = [
             }]
           }]
         }],
+        othersText: "#overlay>span|.plot|*25+#soil>span|.plot|*25",
         others: [
           {
             param: {

@@ -22,7 +22,15 @@ function Board(props) {
     );
   }
 
-  
+  if('ansverText' in props.state.lesson.structure.group && 
+  props.state.lesson.structure.group.ansverText){
+    let ansver = props.state.lesson.structure.group.ansverText;
+
+    ansver = ansver.split('>');
+
+    ansver = ansver.map(item => item.split('|'))
+    console.log(ansver);
+  }
   
   return (
     <div id="board">
