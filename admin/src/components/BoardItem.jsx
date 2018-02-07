@@ -3,14 +3,14 @@ import React from 'react';
 import BoardItemContainer   from '../container/BoardItemContainer';
 
 function BoardItem(props) {
-  let id         = props.content.param.id || "";
-  let className  = props.content.param.className || ""; 
+  let id         = props.content[0].id || "";
+  let className  = props.content[0].className || ""; 
   let index      = props.index || 0;
 
   let levelDataBoard = props.levelData.board;
 
   // стиль с структуры (dataLesson.js)
-  let style      = props.content.param.style || {}; 
+  let style      = props.content[0].style || {}; 
   // стили в Editor (stateUser)
   let styleState = props.state.stateUser[props.state.level][props.type + 'Style'] || {};
 
@@ -34,8 +34,8 @@ function BoardItem(props) {
       style = Object.assign({}, style, styleState['.' + colorClass]);
     }
   }
-  if(props.state.statusWin && props.content.param.classWin) {
-    className += (' ' + props.content.param.classWin);
+  if(props.state.statusWin && props.content[0].classWin) {
+    className += (' ' + props.content[0].classWin);
   }
   
   return (

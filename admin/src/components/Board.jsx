@@ -30,30 +30,24 @@ function Board(props) {
   return (
     <div id="board">
       { 'others' in props.state.lesson.structure.group && 
-        props.state.lesson.structure.group.others
-          .map((content, index) => <BoardItemContainer
+        <BoardItemContainer
             levelData = { levelData } 
             type="others"  
-            content={content} 
-            key={index} />)
+            content={getBoard(props.state.lesson.structure.group.othersText)} />
       }
 
       { 'ansver' in props.state.lesson.structure.group && 
-        props.state.lesson.structure.group.ansver
-          .map((content, index) => <BoardItemContainer
+        <BoardItemContainer
             levelData = { levelData } 
             type="ansver"  
-            content={content} 
-            key={index} />) 
+            content={getBoard(props.state.lesson.structure.group.ansverText)} /> 
       }
 
       { 'question' in props.state.lesson.structure.group && 
-        props.state.lesson.structure.group.question
-          .map((content, index) => <BoardItemContainer
+        <BoardItemContainer
             levelData = { levelData } 
             type="question"  
-            content={content} 
-            key={index} />) 
+            content={getBoard(props.state.lesson.structure.group.questionText)} /> 
       }
 
     </div>
@@ -62,6 +56,7 @@ function Board(props) {
 
 export default Board;
 
+// преобразование строки Board в массив
 function getBoard(strBoard) {
   let arrBoard = strBoard;
 
@@ -82,7 +77,7 @@ function getBoard(strBoard) {
           break;
 
         case ',':
-          result.className = element.slice(1);
+          result.classWin = element.slice(1);
           break;
 
         case '$':
