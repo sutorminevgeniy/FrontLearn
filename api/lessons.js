@@ -8,6 +8,7 @@ const lessons = [
       preview_text: "Краткое описание урока",
       image: "next-flexboxfroggy.png",
       group: {
+        ansverText: "#background|,wrap|&#pond>.lilypad|$color>.bg",
         ansver: [{
           param: {
             id: "background",
@@ -26,6 +27,7 @@ const lessons = [
             }]
           }]
         }],
+        questionText: "#pond|,wrap>.frog|$color>.bg.animated.pulse.infinite",
         question: [{
           param: {
             id: "pond",
@@ -347,7 +349,7 @@ const lessons = [
       preview_text: "Краткое описание урока",
       image: "next-gridgarden.png",
       group: {
-        ansverText: "#plants|&#garden>.plant.color>.bg",
+        ansverText: "#plants|&#garden>.plant|$color>.bg",
         ansver: [{
           param: {
             id: "plants"
@@ -365,7 +367,7 @@ const lessons = [
             }]
           }]
         }],
-        questionText: "#garden>.treatment.color>.bg",
+        questionText: "#garden>.treatment|$color>.bg",
         question: [{
           param: {
             id: "garden"
@@ -382,23 +384,11 @@ const lessons = [
             }]
           }]
         }],
-        othersText: "#overlay>span|.plot|*25+#soil>span|.plot|*25",
+        othersText: "#overlay>span|.plot|*25",
         others: [
           {
             param: {
               id: "overlay"
-            },
-            content: [{
-              param: {
-                className: "plot"
-              },
-              tag: "span",
-              count: 25
-            }]
-          },
-          {
-            param: {
-              id: "soil"
             },
             content: [{
               param: {
