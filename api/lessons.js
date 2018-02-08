@@ -8,43 +8,8 @@ const lessons = [
       preview_text: "Краткое описание урока",
       image: "next-flexboxfroggy.png",
       group: {
-        ansverText: "#background|,wrap|&#pond>.lilypad|$color>.bg",
-        ansver: [{
-          param: {
-            id: "background",
-            classWin: "wrap"
-          },
-          changedSyle: "#pond",
-          content: [{
-            param: {
-              className: "lilypad"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg"
-              }
-            }]
-          }]
-        }],
-        questionText: "#pond|,wrap>.frog|$color>.bg.animated.pulse.infinite",
-        question: [{
-          param: {
-            id: "pond",
-            classWin: "wrap"
-          },
-          content: [{
-            param: {
-              className: "frog"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg animated pulse infinite"
-              }
-            }]
-          }]
-        }]
+        ansver: "#background|,wrap|&#pond>.lilypad|$color>.bg",
+        question: "#pond|,wrap>.frog|$color>.bg.animated.pulse.infinite"
       },
       color: {
         g: 'green',
@@ -349,56 +314,9 @@ const lessons = [
       preview_text: "Краткое описание урока",
       image: "next-gridgarden.png",
       group: {
-        ansverText: "#plants|&#garden>.plant|$color>.bg",
-        ansver: [{
-          param: {
-            id: "plants"
-          },
-          changedSyles: "#garden",
-          content: [{
-            param: {
-              className: "plant"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg"
-              }
-            }]
-          }]
-        }],
-        questionText: "#garden>.treatment|$color>.bg",
-        question: [{
-          param: {
-            id: "garden"
-          },
-          content: [{
-            param: {
-              className: "treatment"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg"
-              }
-            }]
-          }]
-        }],
-        othersText: "#overlay>span|.plot|*25",
-        others: [
-          {
-            param: {
-              id: "overlay"
-            },
-            content: [{
-              param: {
-                className: "plot"
-              },
-              tag: "span",
-              count: 25
-            }]
-          }
-        ]
+        ansver: "#plants|&#garden>.plant|$color>.bg",
+        question: "#garden>.treatment|$color>.bg",
+        others: "#overlay>span|.plot|*25"
       },
       color: {
         c: "water",

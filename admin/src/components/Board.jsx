@@ -22,9 +22,9 @@ function Board(props) {
     );
   }
 
-  if('othersText' in props.state.lesson.structure.group && 
-  props.state.lesson.structure.group.othersText){
-    getBoard(props.state.lesson.structure.group.othersText);
+  if('others' in props.state.lesson.structure.group && 
+  props.state.lesson.structure.group.others){
+    getBoard(props.state.lesson.structure.group.others);
   }
   
   return (
@@ -33,21 +33,21 @@ function Board(props) {
         <BoardItemContainer
             levelData = { levelData } 
             type="others"  
-            content={getBoard(props.state.lesson.structure.group.othersText)} />
+            content={getBoard(props.state.lesson.structure.group.others)} />
       }
 
       { 'ansver' in props.state.lesson.structure.group && 
         <BoardItemContainer
             levelData = { levelData } 
             type="ansver"  
-            content={getBoard(props.state.lesson.structure.group.ansverText)} /> 
+            content={getBoard(props.state.lesson.structure.group.ansver)} /> 
       }
 
       { 'question' in props.state.lesson.structure.group && 
         <BoardItemContainer
             levelData = { levelData } 
             type="question"  
-            content={getBoard(props.state.lesson.structure.group.questionText)} /> 
+            content={getBoard(props.state.lesson.structure.group.question)} /> 
       }
 
     </div>
@@ -66,7 +66,6 @@ function getBoard(strBoard) {
     let result = {};
     let itemParam = item.split('|');
     itemParam.forEach(element => {
-      console.log(element[0]);
       switch (element[0]) {
         case '#':
           result.id = element.slice(1);
@@ -89,7 +88,7 @@ function getBoard(strBoard) {
           break;
 
         case '&':
-          result.changedSyles = element.slice(1);
+          result.changedSyle = element.slice(1);
           break;
       
         default:

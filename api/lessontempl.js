@@ -7,9 +7,9 @@ const lessonTempl = {
     preview_text: '',
     image: '',
     group: {
-      ansver: [{}],
-      question: [{}],
-      others: [{}]
+      ansver: '',
+      question: '',
+      others: ''
     },
     color: {
     }
