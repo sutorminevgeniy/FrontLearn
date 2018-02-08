@@ -4,7 +4,7 @@ import Board from '../components/Board';
 
 function mapStateToProps(state) {
   return {
-    state: state.lesson
+    state: state.lesson.lesson
   };
 }
 

@@ -5,7 +5,7 @@ import Lesson from '../components/Lesson';
 
 function mapStateToProps(state) {
     return {
-        state: state.lesson
+        state: state.lesson.lesson
     };
 }
 
