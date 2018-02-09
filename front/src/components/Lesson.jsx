@@ -11,9 +11,8 @@ class Lesson extends React.Component {
   }
 
   render() {
-    console.log(this.props.state);
     // Вывод пока не подгрузились дданные
-    if(!this.props.state) {
+    if(!this.props.state.lesson) {
       return null;
     }
 
