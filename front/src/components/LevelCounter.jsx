@@ -51,7 +51,6 @@ class LevelCounter extends React.Component {
   } 
 
   render() {
-    console.log(this.props);
     const lang = this.props.main.lang;
     const level = this.props.state.level;
     const levels = this.props.state.lesson.levels;

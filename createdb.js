@@ -93,6 +93,11 @@ initLessons.forEach(lesson => {
     let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
     if(lesson.structure.topic === 'css'){
       result.ansver = JSON.stringify(result.ansver);
+      result.ansver = result.ansver.replace(/[{}"]/g, '')
+      .replace(/:/g, ': ')
+      .replace(/,/g, '; ');
+
+      result.ansver += ';';
     }
     delete result.instructions;
 

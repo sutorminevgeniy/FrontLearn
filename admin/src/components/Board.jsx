@@ -98,7 +98,6 @@ function getBoard(strBoard) {
     });
     return result;
   })
-  console.log(arrBoard);
 
   return arrBoard;
 }

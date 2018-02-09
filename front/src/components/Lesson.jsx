@@ -16,8 +16,6 @@ class Lesson extends React.Component {
       return null;
     }
 
-    console.log(this.props.state.lesson.structure.topic)
-
     // Вывод после загрузки данных
     return (
       <div className="page">

@@ -127,9 +127,9 @@ app.get('/api/lesson/:lessonId', (req, res) => {
       let levels = datas[1];
       levels = levels.map(item => {
         let level = item.get();
-        if(lesson.structure.topic === 'css'){
-          level.ansver = JSON.parse(level.ansver);
-        }
+        // if(lesson.structure.topic === 'css'){
+        //   level.ansver = JSON.parse(level.ansver);
+        // }
         level.instructions = {};
         return level;
       });
@@ -193,9 +193,9 @@ app.put('/api/lesson/:topicId/:lessonId', (req, res) => {
     // levels
     lesson.levels.forEach((level, i) => {
       let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
-      if(lesson.structure.topic === 'css'){
-        result.ansver = JSON.stringify(result.ansver);
-      }
+      // if(lesson.structure.topic === 'css'){
+      //   result.ansver = JSON.stringify(result.ansver);
+      // }
       delete result.instructions;
 
       db.Levels.upsert( result );
@@ -243,9 +243,9 @@ app.put('/api/lesson/:topicId/:lessonId', (req, res) => {
     // levels
     lesson.levels.forEach((level, i) => {
       let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
-      if(lesson.structure.topic === 'css'){
-        result.ansver = JSON.stringify(result.ansver);
-      }
+      // if(lesson.structure.topic === 'css'){
+      //   result.ansver = JSON.stringify(result.ansver);
+      // }
       delete result.instructions;
 
       db.Levels.destroy({ where: {lessonId: lesson.structure.lessonId, level: i} })
@@ -340,7 +340,7 @@ function getLesson(lesson) {
 
     if(lesson.structure.topic === 'css'){
       questionStyle = getArrayStyle( levels[i].before + levels[i].after );
-      let strStyleAnswer = getStrStyle( levels[i].ansver );
+      let strStyleAnswer = levels[i].ansver;
       ansverStyle = getArrayStyle( levels[i].before + strStyleAnswer + levels[i].after );
     } else {
       answer = levels[i].defansver;
@@ -371,17 +371,6 @@ function getArrayStyle (strStyle) {
   arrStyle = arrStyle.replace(/-(\w)(\w*":)/g, (match, p1, p2) => p1.toUpperCase() + p2); 
 
   return JSON.parse(arrStyle);
-}
-
-// Разбор массива стилей в строку
-function getStrStyle(arrStyle) {
-  let strStyle = JSON.stringify(arrStyle);
-
-  strStyle = strStyle.replace(/[{}"]/g, '')
-             .replace(/:/g, ': ')
-             .replace(/,/g, '; ');
-
-  return strStyle + ';';
 }
 
 function shareByLang(content) {
