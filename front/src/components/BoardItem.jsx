@@ -29,7 +29,8 @@ function BoardItem(props) {
   }
 
   if(props.content[0].color) {
-    let colorClass = props.state.lesson.structure.color[levelDataBoard[index]]
+    let structureColor =  JSON.parse('{' + props.state.lesson.structure.color + '}');
+    let colorClass = structureColor[levelDataBoard[index]]
     className += (' ' + colorClass);
     if(styleState['.' + colorClass]) {
       style = Object.assign({}, style, styleState['.' + colorClass]);

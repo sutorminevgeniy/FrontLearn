@@ -91,7 +91,7 @@ app.get('/api/lesson/:lessonId', (req, res) => {
       });
 
     let p1 = db.Levels.findAll({
-        attributes: ['name', 'board', 'ansver', 'defansver', 'before', 'after'],
+        attributes: ['board', 'ansver', 'defansver', 'before', 'after'],
         where: {lessonId: req.params.lessonId},
         order: [['level', 'ASC']]
       });
@@ -103,7 +103,7 @@ app.get('/api/lesson/:lessonId', (req, res) => {
       });
 
     let p3 = db.LevelWin.findOne({
-        attributes: ['name', 'board', 'ansver', 'before', 'after'],
+        attributes: ['board', 'ansver', 'before', 'after'],
         where: {lessonId: req.params.lessonId}
       });
 
@@ -120,16 +120,13 @@ app.get('/api/lesson/:lessonId', (req, res) => {
       let structure = datas[0].get();
 
       structure.group = JSON.parse(structure.group);
-      structure.color = JSON.parse(structure.color);
+      // structure.color = JSON.parse(structure.color);
 
       lesson.structure = structure;
 
       let levels = datas[1];
       levels = levels.map(item => {
         let level = item.get();
-        // if(lesson.structure.topic === 'css'){
-        //   level.ansver = JSON.parse(level.ansver);
-        // }
         level.instructions = {};
         return level;
       });
@@ -186,18 +183,14 @@ app.put('/api/lesson/:topicId/:lessonId', (req, res) => {
 
     // structure
     lesson.structure.group = JSON.stringify(lesson.structure.group);
-    lesson.structure.color = JSON.stringify(lesson.structure.color);
+    // lesson.structure.color = JSON.stringify(lesson.structure.color);
 
     db.Structure.upsert( lesson.structure );
 
     // levels
     lesson.levels.forEach((level, i) => {
       let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
-      // if(lesson.structure.topic === 'css'){
-      //   result.ansver = JSON.stringify(result.ansver);
-      // }
       delete result.instructions;
-
       db.Levels.upsert( result );
     });
 

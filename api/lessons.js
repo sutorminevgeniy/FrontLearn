@@ -11,11 +11,7 @@ const lessons = [
         ansver: "#background|,wrap|&#pond>.lilypad|$color>.bg",
         question: "#pond|,wrap>.frog|$color>.bg.animated.pulse.infinite"
       },
-      color: {
-        g: 'green',
-        y: 'yellow',
-        r: 'red'
-      }
+      color: '"g": "green", "y": "yellow", "r": "red"'
     },
     levels: [
       {
@@ -318,10 +314,7 @@ const lessons = [
         question: "#garden>.treatment|$color>.bg",
         others: "#overlay>span|.plot|*25"
       },
-      color: {
-        c: "water",
-        w: "poison"
-      }
+      color: '"c": "water", "w": "poison"'
     },
     levels: [
       {

@@ -35,7 +35,7 @@ constructor(props) {
     this.props.deleteLevel();
   }
 
-  render() { console.log(this.props.lesson);
+  render() {
     // редирект на новый id при певой записи нового урока
     if(this.props.lesson.newUrl && this.props.location.pathname !== this.props.lesson.newUrl){
       return (
