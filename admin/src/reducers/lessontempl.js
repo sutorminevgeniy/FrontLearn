@@ -11,12 +11,10 @@ const lessonTempl = {
       question: '',
       others: ''
     },
-    color: {
-    }
+    color: ''
   },
   levels: [
     {
-      name: '',
       board: '',
       selector: '',
       ansver: '',
@@ -30,7 +28,6 @@ const lessonTempl = {
     }
   ],
   levelWin: {
-    name: '',
     instructions: {
       'en': '',
       'ru': '',

@@ -21,6 +21,7 @@ constructor(props) {
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log(this.props.lesson.lesson, this.props);
     this.props.editLesson(this.props.lesson.lesson);
   }
 
