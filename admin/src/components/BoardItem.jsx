@@ -9,12 +9,16 @@ function BoardItem(props) {
   let index      = props.index || 0;
   let levelDataBoard = props.levelData.board;
   let style = {}; 
-    console.log(props, props.state.winStyle);
+  let styleState = {};  
+
+    
   if(props.levelData.level === 'levelWin'){
-    style = props.state.winStyle; 
+    styleState = props.state.winStyle; 
+  } else {
+    // стили в Editor (stateUser)
+    styleState = props.state.stateUser[props.state.level][props.type + 'Style'];    
   }
-  // стили в Editor (stateUser)
-  let styleState = props.state.stateUser[props.state.level][props.type + 'Style'] || {};
+
 
   // поиск стилей по id и class
   if(styleState['#' + id]) {    
@@ -23,12 +27,12 @@ function BoardItem(props) {
   if(styleState['.' + className]) {
     style = Object.assign({}, style, styleState['.' + className]);
   }
-  
+
   // замена стилей в связи с расхождением тегов в Editor и Board
   if(props.content[0].changedSyle) {
     style = Object.assign({}, style, styleState[props.content[0].changedSyle]);
   }
-
+console.log(style, props.state.winStyle);  
   if(props.content[0].color) {
     let structureColor =  JSON.parse('{' + props.state.lesson.structure.color + '}');
     let colorClass = structureColor[levelDataBoard[index]]

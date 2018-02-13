@@ -297,7 +297,14 @@ const lessons = [
       board: 'gyrgyrgyrgyrgyrgyrgyrgyrg',
       classes: {'#pond, #background': 'wrap'},
       ansver: {},
-      before: "#pond {\n  display: flex;\n",
+      before: `#background {
+        display: flex;
+        flex-wrap: wrap;
+        flex-flow: column-reverse;
+      } 
+      #pond {
+        display: flex;
+        flex-wrap: wrap;`,
       after: "}"
     }
   },

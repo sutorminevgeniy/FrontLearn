@@ -226,9 +226,11 @@ app.put('/api/lesson', (req, res) => {
 
     db.Levels.destroy({ where: {lessonId: lesson.structure.lessonId} })
     .then(() => {    
-      lesson.levels.forEach((level, i) => {
-        let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
+      lesson.levels.forEach((item, i) => {
+        let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, item);
         delete result.instructions;
+
+        console.log(i);
 
         db.Levels.upsert( result )
       });
@@ -250,7 +252,6 @@ app.put('/api/lesson', (req, res) => {
 
     // levelWin
     let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
-    result.ansver = JSON.stringify(result.ansver);
     delete result.instructions;
 
     db.LevelWin.update(
