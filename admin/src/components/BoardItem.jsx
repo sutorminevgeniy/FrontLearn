@@ -5,13 +5,14 @@ import BoardItemContainer   from '../container/BoardItemContainer';
 function BoardItem(props) {
   let id         = props.content[0].id || '';
   let className  = props.content[0].className || [];
-  className  = className.join(' ')
+      className  = className.join(' ')
   let index      = props.index || 0;
-
   let levelDataBoard = props.levelData.board;
-
-  // стиль с структуры (dataLesson.js)
-  let style      = props.content[0].style || {}; 
+  let style = {}; 
+    console.log(props, props.state.winStyle);
+  if(props.levelData.level === 'levelWin'){
+    style = props.state.winStyle; 
+  }
   // стили в Editor (stateUser)
   let styleState = props.state.stateUser[props.state.level][props.type + 'Style'] || {};
 
@@ -29,7 +30,6 @@ function BoardItem(props) {
   }
 
   if(props.content[0].color) {
-    console.log(props.state.lesson.structure.color);
     let structureColor =  JSON.parse('{' + props.state.lesson.structure.color + '}');
     let colorClass = structureColor[levelDataBoard[index]]
     className += (' ' + colorClass);

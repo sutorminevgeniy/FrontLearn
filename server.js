@@ -102,7 +102,7 @@ app.get('/api/lesson/:lessonId', (req, res) => {
       });
 
     let p3 = db.LevelWin.findOne({
-        attributes: ['board', 'ansver', 'before', 'after'],
+        attributes: ['board', 'ansver', 'style'],
         where: {lessonId: req.params.lessonId}
       });
 
@@ -139,7 +139,6 @@ app.get('/api/lesson/:lessonId', (req, res) => {
       lesson.levels = levels;
 
       let levelWin = datas[3].get();
-      levelWin.ansver = JSON.parse(levelWin.ansver);
 
       let instructionsWin = datas[4];
       instructionsWin.forEach(item => {
@@ -299,6 +298,7 @@ function getLesson(lesson) {
     newUrl: null,
     incorrField: {},
     statusWin: false,
+    winStyle: {},
     lesson: {},
     stateUser: []
   };
@@ -327,6 +327,8 @@ function getLesson(lesson) {
       questionStyle
     };
   });
+
+  resState.winStyle = getArrayStyle( resState.lesson.levelWin.style );
 
   return resState;
 }
