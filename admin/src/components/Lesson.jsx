@@ -1,4 +1,6 @@
 import React from 'react';
+import { Redirect } from 'react-router'
+
 
 import LevelCounterContainer from '../container/LevelCounterContainer';
 import FieldContainer        from '../container/FieldContainer';
@@ -9,6 +11,8 @@ constructor(props) {
   super(props);
 
   this.handleSubmit = this.handleSubmit.bind(this);
+  this.handleAdd = this.handleAdd.bind(this);
+  this.handleDelete = this.handleDelete.bind(this);
 }
 
   componentWillMount() {
@@ -16,22 +20,39 @@ constructor(props) {
   }
 
   handleSubmit(event) {
-        event.preventDefault();
+    event.preventDefault();
+    console.log(this.props.lesson.lesson, this.props);
+    this.props.editLesson(this.props.lesson.lesson);
+  }
 
-        this.props.editLesson(this.props.lesson.lesson);
-    }
+
+  handleAdd(event) {
+    event.preventDefault();
+    this.props.addLevel();
+  }
+
+  handleDelete(event) {
+    event.preventDefault();
+    this.props.deleteLevel();
+  }
 
   render() {
+    // редирект на новый id при певой записи нового урока
+    if(this.props.lesson.newUrl && this.props.location.pathname !== this.props.lesson.newUrl){
+      return (
+        <Redirect to={this.props.lesson.newUrl}/>
+      );
+    }
+
     // Вывод пока не подгрузились дданные
     if(!this.props.lesson.lesson) {
       return null;
     }
 
-        console.log(this.props.lesson.lesson);   
     // Вывод после загрузки данных
     return (
       <form action="" onSubmit={this.handleSubmit}>
-        <button className="save icon" type="submit" >Save</button>
+        <button className="save icon" type="submit" >Сохранить</button>
 
         <div className="page">
           <section id="structure">
@@ -48,9 +69,13 @@ constructor(props) {
           </section>
 
           <section id="view">
-            {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer />}
+            {(this.props.lesson.lesson.structure.topic === "css" || this.props.lesson.lesson.structure.topic === "html") 
+              && <BoardContainer level = "level" />}
           </section>
         </div>
+
+        <button onClick={this.handleAdd}>Добавить уровень</button>
+        <button onClick={this.handleDelete}>Удалить уровень</button>
 
         <div className="page">
           <section id="sidebar">
@@ -58,7 +83,8 @@ constructor(props) {
           </section>
 
           <section id="view">
-            {this.props.lesson.lesson.structure.topic !== "javascript" && <BoardContainer />}
+            {(this.props.lesson.lesson.structure.topic === "css" || this.props.lesson.lesson.structure.topic === "html") 
+              && <BoardContainer level = "levelWin" />}
           </section>
         </div>
       </form>

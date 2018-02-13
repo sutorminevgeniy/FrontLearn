@@ -12,11 +12,9 @@ class Lesson extends React.Component {
 
   render() {
     // Вывод пока не подгрузились дданные
-    if(!this.props.state.lesson.structure) {
+    if(!this.props.state.lesson) {
       return null;
     }
-
-    console.log(this.props.state.lesson.structure.topic)
 
     // Вывод после загрузки данных
     return (

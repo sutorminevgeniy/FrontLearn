@@ -6,7 +6,8 @@ import Field from '../components/Field';
 function mapStateToProps(state) {
   return {
     main: state.main,
-    lesson: state.lesson
+    lesson: state.lesson,
+    topics: state.topics
   };
 }
 

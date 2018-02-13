@@ -4,9 +4,9 @@ export const GET_LESSON = 'GET_LESSON';
 export function getLesson (lessonId) {
     return axios.get(`/api/lesson/${lessonId}`)
         .then(response => response.data)
-        .then(lesson => ({
+        .then(data => ({
             type: GET_LESSON,
-            lesson
+            lesson: data.lesson
         }));
 }
 

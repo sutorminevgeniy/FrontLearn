@@ -8,47 +8,10 @@ const lessons = [
       preview_text: "Краткое описание урока",
       image: "next-flexboxfroggy.png",
       group: {
-        ansver: [{
-          param: {
-            id: "background",
-            classWin: "wrap"
-          },
-          changedSyle: "#pond",
-          content: [{
-            param: {
-              className: "lilypad"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg"
-              }
-            }]
-          }]
-        }],
-        question: [{
-          param: {
-            id: "pond",
-            classWin: "wrap"
-          },
-          content: [{
-            param: {
-              className: "frog"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg animated pulse infinite"
-              }
-            }]
-          }]
-        }]
+        ansver: "#background|,wrap|&#pond>.lilypad|$color>.bg",
+        question: "#pond|,wrap>.frog|$color>.bg.animated.pulse.infinite"
       },
-      color: {
-        g: 'green',
-        y: 'yellow',
-        r: 'red'
-      }
+      color: '"g": "green", "y": "yellow", "r": "red"'
     },
     levels: [
       {
@@ -347,74 +310,11 @@ const lessons = [
       preview_text: "Краткое описание урока",
       image: "next-gridgarden.png",
       group: {
-        ansver: [{
-          param: {
-            id: "plants"
-          },
-          changedSyle: "#garden",
-          content: [{
-            param: {
-              className: "plant"
-            },
-            color: true,
-            changedColor: {
-              c: "#water",
-              w: "#poison",
-            },
-            content: [{
-              param: {
-                className: "bg"
-              }
-            }]
-          }]
-        }],
-        question: [{
-          param: {
-            id: "garden"
-          },
-          content: [{
-            param: {
-              className: "treatment"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg"
-              }
-            }]
-          }]
-        }],
-        others: [
-          {
-            param: {
-              id: "overlay"
-            },
-            content: [{
-              param: {
-                className: "plot"
-              },
-              tag: "span",
-              count: 25
-            }]
-          },
-          {
-            param: {
-              id: "soil"
-            },
-            content: [{
-              param: {
-                className: "plot"
-              },
-              tag: "span",
-              count: 25
-            }]
-          }
-        ]
+        ansver: "#plants|&#garden>.plant|$color>.bg",
+        question: "#garden>.treatment|$color>.bg",
+        others: "#overlay>span|.plot|*25"
       },
-      color: {
-        c: "carrot",
-        w: "weed"
-      }
+      color: '"c": "water", "w": "poison"'
     },
     levels: [
       {
@@ -426,7 +326,7 @@ const lessons = [
         board: 'c',
         selector: '> :nth-child(1)',
         ansver: {'grid-column-start': '3'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n",
         after: "}"
       },
       {
@@ -438,7 +338,7 @@ const lessons = [
         board: 'w',
         selector: '> :nth-child(1)',
         ansver: {'grid-column-start': '5'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#poison {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.poison {\n",
         after: "}"
       },
       {
@@ -451,7 +351,7 @@ const lessons = [
         classes: {'#garden > *, #plants > *': 'grid-column-start-1'},
         selector: '> :nth-child(1)',
         ansver: {'grid-column-end': '4'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column-start: 1;\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  grid-column-start: 1;\n",
         after: "}"
       },
       {
@@ -464,7 +364,7 @@ const lessons = [
         classes: {'#garden > *, #plants > *': 'grid-column-start-5'},
         selector: '> :nth-child(1)',
         ansver: {'grid-column-end': '2'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column-start: 5;\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  grid-column-start: 5;\n",
         after: "}"
       },
       {
@@ -477,7 +377,7 @@ const lessons = [
         classes: {'#garden > *, #plants > *': 'grid-column-start-1'},
         selector: '> :nth-child(1)',
         ansver: {'grid-column-end': '-2'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column-start: 1;\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  grid-column-start: 1;\n",
         after: "}"
       },
       {
@@ -489,7 +389,7 @@ const lessons = [
         board: 'w',
         selector: '> :nth-child(1)',
         ansver: {'grid-column-start': '-3'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#poison {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.poison {\n",
         after: "}"
       },
       {
@@ -502,7 +402,7 @@ const lessons = [
         classes: {'#garden > *, #plants > *': 'grid-column-start-2'},
         selector: '> :nth-child(1)',
         ansver: {'grid-column-end': 'span 2'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column-start: 2;\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  grid-column-start: 2;\n",
         after: "}"
       },
       {
@@ -515,7 +415,7 @@ const lessons = [
         classes: {'#garden > *, #plants > *': 'grid-column-start-1'},
         selector: '> :nth-child(1)',
         ansver: {'grid-column-end': 'span 5'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column-start: 1;\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  grid-column-start: 1;\n",
         after: "}"
       },
       {
@@ -528,7 +428,7 @@ const lessons = [
         classes: {'#garden > *, #plants > *': 'grid-column-end-6'},
         selector: '> :nth-child(1)',
         ansver: {'grid-column-start': 'span 3'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n",
         after: "  grid-column-end: 6;\n}"
       },
       {
@@ -540,7 +440,7 @@ const lessons = [
         board: 'c',
         selector: '> :nth-child(1)',
         ansver: {'grid-column': '4 / 6'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n",
         after: "}"
       },
       {
@@ -552,7 +452,7 @@ const lessons = [
         board: 'c',
         selector: '> :nth-child(1)',
         ansver: {'grid-column': '2 / 5'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n",
         after: "}"
       },
       {
@@ -564,7 +464,7 @@ const lessons = [
         board: 'c',
         selector: '> :nth-child(1)',
         ansver: {'grid-row-start': '3'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n",
         after: "}"
       },
       {
@@ -576,7 +476,7 @@ const lessons = [
         board: 'c',
         selector: '> :nth-child(1)',
         ansver: {'grid-row': '3 / 6'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n",
         after: "}"
       },
       {
@@ -588,7 +488,7 @@ const lessons = [
         board: 'w',
         selector: '> :nth-child(1)',
         ansver: {'grid-column': '2', 'grid-row': '5'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#poison {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.poison {\n",
         after: "}"
       },
       {
@@ -600,7 +500,7 @@ const lessons = [
         board: 'c',
         selector: '> :nth-child(1)',
         ansver: {'grid-column': '2 / 6', 'grid-row': '1 / 6'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n",
         after: "}"
       },
       {
@@ -612,7 +512,7 @@ const lessons = [
         board: 'c',
         selector: '> :nth-child(1)',
         ansver: {'grid-area': '1 / 2 / 4 / 6'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n",
         after: "}"
       },
       {
@@ -625,7 +525,7 @@ const lessons = [
         classes: {'#garden > :nth-child(2), #plants > :nth-child(2)': 'grid-column-4'},
         selector: '> :nth-child(1)',
         ansver: {'grid-area': '2 / 3 / 5 / 6'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water-1 {\n  grid-area: 1 / 4 / 6 / 5;\n}\n\n#water-2 {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water-1 {\n  grid-area: 1 / 4 / 6 / 5;\n}\n\n.water-2 {\n",
         after: "}"
       },
       {
@@ -637,7 +537,7 @@ const lessons = [
         board: 'cwccc',
         selector: '> :nth-child(2)',
         ansver: {'order': '2'},
-        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  order: 0;\n}\n\n#poison {\n",
+        before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  order: 0;\n}\n\n.poison {\n",
         after: "}"
       },
       {
@@ -661,7 +561,7 @@ const lessons = [
         board: 'c',
         ansver: {'grid-template-columns': '50% 50%'},
         before: "#garden {\n  display: grid;\n",
-        after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column: 1;\n  grid-row: 1;\n}"
+        after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  grid-column: 1;\n  grid-row: 1;\n}"
       },
       {
         name: 'grid-template-columns 2',
@@ -673,7 +573,7 @@ const lessons = [
         classes: {'#plants': 'grid-template-columns-repeat-8-12'},
         ansver: {'grid-template-columns': 'repeat(8, 12.5%)'},
         before: "#garden {\n  display: grid;\n",
-        after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-column: 1;\n  grid-row: 1;\n}"
+        after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  grid-column: 1;\n  grid-row: 1;\n}"
       },
       {
         name: 'grid-template-columns 4',
@@ -713,7 +613,7 @@ const lessons = [
         },
         ansver: {'grid-template-columns': '50px 1fr 1fr 1fr 50px;'},
         before: "#garden {\n  display: grid;\n",
-        after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n#water {\n  grid-area: 1 / 1 / 6 / 2;\n}\n\n#poison {\n  grid-area: 1 / 5 / 6 / 6;\n}"
+        after: "  grid-template-rows: 20% 20% 20% 20% 20%;\n}\n\n.water {\n  grid-area: 1 / 1 / 6 / 2;\n}\n\n.poison {\n  grid-area: 1 / 5 / 6 / 6;\n}"
       },
       {
         name: 'grid-template-columns 6',
@@ -740,7 +640,7 @@ const lessons = [
         },
         ansver: {'grid-template-rows': '1fr 100px;'},
         before: "#garden {\n  display: grid;\n  grid-template-columns: 20% 20% 20% 20% 20%;\n",
-        after: "}\n\n#water {\n  grid-column: 1 / 6;\n  grid-row: 5 / 6;\n}"
+        after: "}\n\n.water {\n  grid-column: 1 / 6;\n  grid-row: 5 / 6;\n}"
       },
       {
         name: 'grid-template 1',
@@ -751,7 +651,7 @@ const lessons = [
         board: 'c',
         ansver: {'grid-template': '60% 1fr / 200px 1fr'},
         before: "#garden {\n  display: grid;\n",
-        after: "}\n\n#water {\n  grid-column: 1;\n  grid-row: 1;\n}"
+        after: "}\n\n.water {\n  grid-column: 1;\n  grid-row: 1;\n}"
       },
       {
         name: 'grid-template 2',
@@ -786,49 +686,7 @@ const lessons = [
       topic: "html",
       author:"Thomas Park",
       preview_text: "Краткое описание урока",
-      image: "next-treehouse.png",
-      group: {
-        ansver: [{
-          param: {
-            id: "background",
-            classWin: "wrap"
-          },
-          changedSyle: "#pond",
-          content: [{
-            param: {
-              className: "lilypad"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg"
-              }
-            }]
-          }]
-        }],
-        question: [{
-          param: {
-            id: "pond",
-            classWin: "wrap"
-          },
-          content: [{
-            param: {
-              className: "frog"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg animated pulse infinite"
-              }
-            }]
-          }]
-        }]
-      },
-      color: {
-        g: 'green',
-        y: 'yellow',
-        r: 'red'
-      }
+      image: "next-treehouse.png"
     },
     levels: [
       {
@@ -837,7 +695,6 @@ const lessons = [
           'en': '<p>Build paragraph</p><p>text text text 1</p>',
           'ru': '<p>Создать абзацы</p><p>text text text 2</p>'
         },
-        board: 'g',
         ansver: `<p>text text text 1</p>
 <p>text text text 2</p>`,
         defansver: `text text text 1
@@ -851,7 +708,6 @@ text text text 2`,
           'en': '<p>Build paragraph</p><p>text text text 1</p>',
           'ru': '<p>Создать абзацы</p><p>text text text 2</p>'
         },
-        board: 'gy',
         ansver: `<ul>
   <li>item1</li>
   <li>item2</li>
@@ -869,7 +725,6 @@ item3`,
           'en': '<p>Build paragraph</p><p>text text text 1</p>',
           'ru': '<p>Создать абзацы</p><p>text text text 2</p>'
         },
-        board: 'gyr',
         ansver: `<ol>
   <li>item1</li>
   <li>item2</li>
@@ -888,9 +743,7 @@ item3`,
         'en': '<p>You win! Thanks to your mastery of flexbox, you were able to help all of the frogs to their lilypads. Just look how hoppy they are!</p><p>If you found this ribbeting, be sure to visit <a href="http://cssgridgarden.com/">Grid Garden</a> to learn about another powerful new feature of CSS layout. You can also check out my other projects on <a href="http://thomaspark.co">my blog</a> or <a href="http://twitter.com/thomashpark">Twitter</a>.</p><p>Want to keep learning while supporting Flexbox Froggy? Try out the topnotch web design and coding courses offered by <a href="http://treehouse.7eer.net/c/371033/228915/3944?subId1=flexboxfroggy">Treehouse</a>. And be sure to share Flexbox Froggy with your friends!</p>',
         'ru': '<p>Ты выиграл! Благодарим тебя за мастерство flexbox, ты смог помочь всем лягушатам добраться до их лилий. Просто взгляни, как они счастливы!</p><p>Если тебе понравилось, зацени мои другие проекты в моем <a href="http://thomaspark.co">блоге</a> или <a href="http://twitter.com/thomashpark">твитере</a>, и не забудь поделится этой игрой со своими друзьями!</p>',
       },
-      board: 'gyrgyrgyrgyrgyrgyrgyrgyrg',
-      classes: {'#pond, #background': 'wrap'},
-      ansver: {},
+      ansver: '<h2>Winner</h2>',
       before: "",
       after: ""
     }
@@ -902,49 +755,7 @@ item3`,
       topic: "javascript",
       author:"Thomas Park",
       preview_text: "Краткое описание урока",
-      image: "next-treehouse.png",
-      group: {
-        ansver: [{
-          param: {
-            id: "background",
-            classWin: "wrap"
-          },
-          changedSyle: "#pond",
-          content: [{
-            param: {
-              className: "lilypad"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg"
-              }
-            }]
-          }]
-        }],
-        question: [{
-          param: {
-            id: "pond",
-            classWin: "wrap"
-          },
-          content: [{
-            param: {
-              className: "frog"
-            },
-            color: true,
-            content: [{
-              param: {
-                className: "bg animated pulse infinite"
-              }
-            }]
-          }]
-        }]
-      },
-      color: {
-        g: 'green',
-        y: 'yellow',
-        r: 'red'
-      }
+      image: "next-treehouse.png"
     },
     levels: [
       {
@@ -986,9 +797,7 @@ item3`,
         'en': '<p>You win! Thanks to your mastery of flexbox, you were able to help all of the frogs to their lilypads. Just look how hoppy they are!</p><p>If you found this ribbeting, be sure to visit <a href="http://cssgridgarden.com/">Grid Garden</a> to learn about another powerful new feature of CSS layout. You can also check out my other projects on <a href="http://thomaspark.co">my blog</a> or <a href="http://twitter.com/thomashpark">Twitter</a>.</p><p>Want to keep learning while supporting Flexbox Froggy? Try out the topnotch web design and coding courses offered by <a href="http://treehouse.7eer.net/c/371033/228915/3944?subId1=flexboxfroggy">Treehouse</a>. And be sure to share Flexbox Froggy with your friends!</p>',
         'ru': '<p>Ты выиграл! Благодарим тебя за мастерство flexbox, ты смог помочь всем лягушатам добраться до их лилий. Просто взгляни, как они счастливы!</p><p>Если тебе понравилось, зацени мои другие проекты в моем <a href="http://thomaspark.co">блоге</a> или <a href="http://twitter.com/thomashpark">твитере</a>, и не забудь поделится этой игрой со своими друзьями!</p>',
       },
-      board: 'gyrgyrgyrgyrgyrgyrgyrgyrg',
-      classes: {'#pond, #background': 'wrap'},
-      ansver: {},
+      ansver: '',
       before: "",
       after: ""
     }

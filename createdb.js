@@ -5,38 +5,9 @@ const db = require('./api/db');
 const initTopics = require('./api/topics');
 
 db.Topics.sync({force: true})
-  // .then(() => {
-  //   return db.Topics.create({
-  //     path:  'css',
-  //     title: 'CSS'
-  //   });
-  // })
-  // .then(() => {
-  //   return db.Topics.bulkCreate([
-  //     {path: 'css', title: 'CSS'},
-  //     {path: 'html', title: 'HTML'},
-  //     {path: 'javascript', title: 'JavaScript'}
-  //   ]);
-  // })
-  // .then(() => {
-  //   db.Topics.findAll({
-  //       attributes: ['title', ['path', 'id']]
-  //     })
-  //     .then(topics => {
-  //       console.log(topics)
-  //     });
-  // })
   .then(() => {
     return db.Topics.bulkCreate(initTopics);
-  })
-  // .then(() => {
-  //   db.Topics.findAll({
-  //       attributes: ['title', 'path']
-  //     })
-  //     .then(topics => {
-  //       console.log(topics)
-  //     });
-  // });
+  });
 
 
 // messages
@@ -76,7 +47,6 @@ let dataStructure = initLessons.map(item => {
   let result = item.structure;
 
   result.group = JSON.stringify(result.group);
-  result.color = JSON.stringify(result.color);
 
   return result;
 });
@@ -93,6 +63,11 @@ initLessons.forEach(lesson => {
     let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
     if(lesson.structure.topic === 'css'){
       result.ansver = JSON.stringify(result.ansver);
+      result.ansver = result.ansver.replace(/[{}"]/g, '')
+      .replace(/:/g, ': ')
+      .replace(/,/g, '; ');
+
+      result.ansver += ';';
     }
     delete result.instructions;
 
