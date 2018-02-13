@@ -1,0 +1,37 @@
+{
+  "languageActive": {
+    "en": "English",
+    "ru": "Русский"
+  },
+  "next": {
+    "en": "Next",
+    "ru": "Следующий"
+  },
+  "labelFooter": {
+    "en": "Flexbox Froggy is created by",
+    "ru": "Игра Flexbox Froggy создана"
+  },
+  "labelLevel": {
+    "en": "Level",
+    "ru": "Уровень"
+  },
+  "labelOf": {
+    "en": "of",
+    "ru": "из"
+  },
+  "title": {
+    "en": "Flexbox Froggy - A game for learning CSS flexbox",
+    "ru": "Flexbox Froggy - Игра для изучения CSS Flexbox"
+  },
+  "labelReset": {
+    "en": "Reset",
+    "ru": "Сбросить"
+  },
+  "warningReset": {
+    "en": "Are you sure you want to reset the game?\n\nYour saved progress will be lost and you\"ll be sent to the start of the game.",
+    "ru": "Вы действительно хотите сбросить игру?\n\nВаш прогресс будет потерян и вы вернетесь к началу игры."
+  },
+  "gridGarden": {
+    "en": "Want to learn CSS grid? Play"
+  }
+}
