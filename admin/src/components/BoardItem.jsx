@@ -19,7 +19,6 @@ function BoardItem(props) {
     styleState = props.state.stateUser[props.state.level][props.type + 'Style'];    
   }
 
-
   // поиск стилей по id и class
   if(styleState['#' + id]) {    
     style = Object.assign({}, style, styleState['#' + id]);

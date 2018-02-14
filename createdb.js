@@ -107,8 +107,8 @@ initLessons.forEach(lesson => {
   let result ={ 
     lessonId: lesson.structure.lessonId, 
     board: lesson.levelWin.board,
-    ansver: '' };
-  result.style = lesson.levelWin.before + lesson.levelWin.after;
+    ansver: '',
+    style: lesson.levelWin.style };
 
   dataLevelsWin.push(result);
 });
