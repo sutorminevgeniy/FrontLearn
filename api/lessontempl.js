@@ -16,7 +16,6 @@ const lessonTempl = {
   },
   levels: [
     {
-      name: '',
       board: '',
       selector: '',
       ansver: '',
@@ -30,16 +29,13 @@ const lessonTempl = {
     }
   ],
   levelWin: {
-    name: '',
     instructions: {
       'en': '',
       'ru': '',
     },
     board: '',
-    classes: '',
     ansver: '',
-    before: '',
-    after: ''
+    style: ''
   }
 };
 

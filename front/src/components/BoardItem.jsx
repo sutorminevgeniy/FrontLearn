@@ -13,10 +13,10 @@ function BoardItem(props) {
 
     
   if(props.levelData.level === 'levelWin'){
-    styleState = props.state.winStyle; 
+    styleState = props.state.winStyle || {}; 
   } else {
     // стили в Editor (stateUser)
-    styleState = props.state.stateUser[props.state.level][props.type + 'Style'];    
+    styleState = props.state.stateUser[props.state.level][props.type + 'Style'] || {};    
   }
 
   // поиск стилей по id и class

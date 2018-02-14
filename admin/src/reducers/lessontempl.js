@@ -11,7 +11,8 @@ const lessonTempl = {
       question: '',
       others: ''
     },
-    color: ''
+    color: {
+    }
   },
   levels: [
     {
@@ -33,11 +34,10 @@ const lessonTempl = {
       'ru': '',
     },
     board: '',
-    classes: '',
     ansver: '',
-    before: '',
-    after: ''
+    style: ''
   }
 };
 
-export default lessonTempl;
+
+module.exports = lessonTempl;
