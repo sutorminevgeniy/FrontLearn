@@ -16,28 +16,44 @@ class Editor extends React.Component {
     this.props.inputAnswer(answer)
   }
 
+  getCountStr(str, substr){
+    let countStr = 0;
+    let pos = 0;
+    while (true) {
+      let foundPos = str.indexOf(substr, pos);
+      if (foundPos === -1) break;
+
+      countStr++;
+      pos = foundPos + 1;
+    }
+    return countStr;
+  }
+
   render() {
     const dataLevel = this.props.state.lesson.levels[this.props.state.level];
 
-    let styleTextarea = {};
+    let styleTextarea = { 
+      height: 22 * (this.getCountStr(dataLevel.ansver, '\n') + 2) + 4 + 'px'
+    };
 
-    console.log(typeof dataLevel.ansver);
-    if(this.props.state.lesson.structure.topic !== "css"){
-      styleTextarea = { height: ((20 * Object.entries(dataLevel.ansver).length + 4) + 'px') };
-    }
-
+    let countLine = this.getCountStr(dataLevel.ansver + dataLevel.before + dataLevel.after, '\n') + 5;
+    console.log(dataLevel, countLine);
     return (
       <div id="editor">
         <div id="css">
-          <div className="line-numbers">1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</div>
-
-          <pre id="before" dangerouslySetInnerHTML={{__html: dataLevel.before}}></pre>
+          <div className="line-numbers">
+            { Array(countLine).fill(null)
+              .map((item, i) => <div key={i}>{i+1}<br/></div>) }
+          </div>
+          <div className="editCont">
+            <pre id="before" dangerouslySetInnerHTML={{__html: dataLevel.before}}></pre>
             <textarea 
               id="code" 
               onChange={ this.inputAnswer } 
               style={ styleTextarea } 
               value={ this.props.state.stateUser[this.props.state.level].answer }></textarea>
-          <pre id="after" dangerouslySetInnerHTML={{__html: dataLevel.after}}></pre>
+            <pre id="after" dangerouslySetInnerHTML={{__html: dataLevel.after}}></pre>
+          </div>
         </div>
 
         <button 

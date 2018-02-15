@@ -151,19 +151,17 @@ pre {
 }
 
 #css {
-  height: 260px;
   position: relative;
-  padding: 10px 10px 10px 40px;
   background-color: #ddd;
   border-radius: 4px;
   overflow: hidden;
 }
+.editCont {
+  margin: 10px 10px 10px 40px;
+}
 
 .line-numbers {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
+  float: left;
   padding: 10px 6px;
   text-align: right;
   background-color: #999;
@@ -176,6 +174,7 @@ pre {
   height: 24px;
   margin-left: 16px;
   border: none;
+  line-height: 22px;
   font-family: 'Source Code Pro', monospace;
   font-size: 16px;
   outline: none;
