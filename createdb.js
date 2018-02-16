@@ -104,9 +104,11 @@ db.Instructions.sync({force: true})
 // levelWin
 let dataLevelsWin = [];
 initLessons.forEach(lesson => {
-  let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
-  result.ansver = JSON.stringify(result.ansver);
-  delete result.instructions;
+  let result ={ 
+    lessonId: lesson.structure.lessonId, 
+    board: lesson.levelWin.board,
+    ansver: '',
+    style: lesson.levelWin.style };
 
   dataLevelsWin.push(result);
 });

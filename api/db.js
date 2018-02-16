@@ -70,8 +70,7 @@ const LevelWin = sequelize.define('levelWins', {
     lessonId: { type: Sequelize.STRING },
     board:    { type: Sequelize.STRING },
     ansver:   { type: Sequelize.TEXT },
-    before:   { type: Sequelize.TEXT },
-    after:    { type: Sequelize.TEXT }
+    style:    { type: Sequelize.TEXT }
   });
 
 const InstructionsWin = sequelize.define('instructionsWins', {

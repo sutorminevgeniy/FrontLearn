@@ -5,15 +5,19 @@ import BoardItemContainer   from '../container/BoardItemContainer';
 function BoardItem(props) {
   let id         = props.content[0].id || '';
   let className  = props.content[0].className || [];
-  className  = className.join(' ')
+      className  = className.join(' ')
   let index      = props.index || 0;
-
   let levelDataBoard = props.levelData.board;
+  let style = {}; 
+  let styleState = {};  
 
-  // стиль с структуры (dataLesson.js)
-  let style      = props.content[0].style || {}; 
-  // стили в Editor (stateUser)
-  let styleState = props.state.stateUser[props.state.level][props.type + 'Style'] || {};
+    
+  if(props.levelData.level === 'levelWin'){
+    styleState = props.state.winStyle || {}; 
+  } else {
+    // стили в Editor (stateUser)
+    styleState = props.state.stateUser[props.state.level][props.type + 'Style'] || {};    
+  }
 
   // поиск стилей по id и class
   if(styleState['#' + id]) {    
@@ -22,14 +26,13 @@ function BoardItem(props) {
   if(styleState['.' + className]) {
     style = Object.assign({}, style, styleState['.' + className]);
   }
-  
+
   // замена стилей в связи с расхождением тегов в Editor и Board
   if(props.content[0].changedSyle) {
     style = Object.assign({}, style, styleState[props.content[0].changedSyle]);
   }
-
+console.log(style, props.state.winStyle);  
   if(props.content[0].color) {
-    console.log(props.state.lesson.structure.color);
     let structureColor =  JSON.parse('{' + props.state.lesson.structure.color + '}');
     let colorClass = structureColor[levelDataBoard[index]]
     className += (' ' + colorClass);

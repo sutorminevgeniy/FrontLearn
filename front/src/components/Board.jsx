@@ -8,6 +8,7 @@ function Board(props) {
     (props.state.statusWin || props.level === "levelWin") ? 
     props.state.lesson.levelWin : 
     props.state.lesson.levels[level] );
+  levelData.level = props.level;
 
   if(props.state.lesson.structure.topic === 'html'){
     let htmlData = ( 

@@ -295,10 +295,14 @@ const lessons = [
         'ru': '<p>Ты выиграл! Благодарим тебя за мастерство flexbox, ты смог помочь всем лягушатам добраться до их лилий. Просто взгляни, как они счастливы!</p><p>Если тебе понравилось, зацени мои другие проекты в моем <a href="http://thomaspark.co">блоге</a> или <a href="http://twitter.com/thomashpark">твитере</a>, и не забудь поделится этой игрой со своими друзьями!</p>'
       },
       board: 'gyrgyrgyrgyrgyrgyrgyrgyrg',
-      classes: {'#pond, #background': 'wrap'},
-      ansver: {},
-      before: "#pond {\n  display: flex;\n",
-      after: "}"
+      style: `#background {
+        display: flex;
+        flex-flow: column-reverse wrap;
+      } 
+      #pond {
+        display: flex;
+        flex-wrap: wrap;
+      }`
     }
   },
   {
@@ -675,8 +679,7 @@ const lessons = [
       board: '',
       classes: {'#garden, #plants, #overlay': 'win'},
       ansver: {},
-      before: "#pond {\n  display: flex;\n",
-      after: "}"
+      style: "#pond {\n  display: flex;\n}"
     }
   },
   {
@@ -744,8 +747,7 @@ item3`,
         'ru': '<p>Ты выиграл! Благодарим тебя за мастерство flexbox, ты смог помочь всем лягушатам добраться до их лилий. Просто взгляни, как они счастливы!</p><p>Если тебе понравилось, зацени мои другие проекты в моем <a href="http://thomaspark.co">блоге</a> или <a href="http://twitter.com/thomashpark">твитере</a>, и не забудь поделится этой игрой со своими друзьями!</p>',
       },
       ansver: '<h2>Winner</h2>',
-      before: "",
-      after: ""
+      style: ""
     }
   },
   {
@@ -798,8 +800,7 @@ item3`,
         'ru': '<p>Ты выиграл! Благодарим тебя за мастерство flexbox, ты смог помочь всем лягушатам добраться до их лилий. Просто взгляни, как они счастливы!</p><p>Если тебе понравилось, зацени мои другие проекты в моем <a href="http://thomaspark.co">блоге</a> или <a href="http://twitter.com/thomashpark">твитере</a>, и не забудь поделится этой игрой со своими друзьями!</p>',
       },
       ansver: '',
-      before: "",
-      after: ""
+      style: ""
     }
   }
 ];

@@ -102,7 +102,7 @@ app.get('/api/lesson/:lessonId', (req, res) => {
       });
 
     let p3 = db.LevelWin.findOne({
-        attributes: ['board', 'ansver', 'before', 'after'],
+        attributes: ['board', 'ansver', 'style'],
         where: {lessonId: req.params.lessonId}
       });
 
@@ -139,7 +139,6 @@ app.get('/api/lesson/:lessonId', (req, res) => {
       lesson.levels = levels;
 
       let levelWin = datas[3].get();
-      levelWin.ansver = JSON.parse(levelWin.ansver);
 
       let instructionsWin = datas[4];
       instructionsWin.forEach(item => {
@@ -227,9 +226,11 @@ app.put('/api/lesson', (req, res) => {
 
     db.Levels.destroy({ where: {lessonId: lesson.structure.lessonId} })
     .then(() => {    
-      lesson.levels.forEach((level, i) => {
-        let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, level);
+      lesson.levels.forEach((item, i) => {
+        let result = Object.assign({ lessonId: lesson.structure.lessonId, level: i}, item);
         delete result.instructions;
+
+        console.log(i);
 
         db.Levels.upsert( result )
       });
@@ -251,7 +252,6 @@ app.put('/api/lesson', (req, res) => {
 
     // levelWin
     let result = Object.assign({ lessonId: lesson.structure.lessonId}, lesson.levelWin);
-    result.ansver = JSON.stringify(result.ansver);
     delete result.instructions;
 
     db.LevelWin.update(
@@ -299,6 +299,7 @@ function getLesson(lesson) {
     newUrl: null,
     incorrField: {},
     statusWin: false,
+    winStyle: {},
     lesson: {},
     stateUser: []
   };
@@ -327,6 +328,8 @@ function getLesson(lesson) {
       questionStyle
     };
   });
+
+  resState.winStyle = getArrayStyle( resState.lesson.levelWin.style );
 
   return resState;
 }
