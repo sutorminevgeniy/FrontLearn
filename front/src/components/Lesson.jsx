@@ -12,16 +12,14 @@ class Lesson extends React.Component {
 
   render() {
     // Вывод пока не подгрузились дданные
-    if(!this.props.state.lesson.structure) {
+    if(!this.props.state.lesson) {
       return null;
     }
-
-    console.log(this.props.state.lesson.structure.topic)
 
     // Вывод после загрузки данных
     return (
       <div className="page">
-        <section id={this.props.state.lesson.structure.topic === "javascript" ? "fullpage" : "sidebar"}>
+        <section id={this.props.state.lesson.structure.topic === "javascript" ? "fullpage" : "sidebar"} className={this.props.state.lesson.structure.topic} >
           <div>
             <LevelCounterContainer />
             <InstructionsContainer />
