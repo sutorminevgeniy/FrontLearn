@@ -20,7 +20,7 @@ function Toolbar({ user }) {
               <ToolbarLink to="/login" className="mdc-tab">Войти</ToolbarLink>
             }
           </nav>
-          <span>{ user && user.username }</span>
+          <span className="usernav">{ user && user.username }</span>
         </section>
       </div>
     </header>
