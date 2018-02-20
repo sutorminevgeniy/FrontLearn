@@ -64,6 +64,29 @@ app.get('/api/topics', (req, res) => {
     });
 });
 
+app.post('/api/user', (req, res) => {
+  const logUser = req.body.logUser;
+  console.log('+++', logUser, req.body);
+
+  db.Users.findOne({
+    attributes: ['username', 'login', 'password', 'role'],
+    where: {
+      login:    req.body.login,
+      password: req.body.password
+    }
+  })
+    .then(data => {
+      let user = data;
+      if(user){
+        user = user.get();
+      }
+
+      res.send({
+        user
+      });
+    });
+});
+
 app.get('/api/lesson/:lessonId', (req, res) => {
   let lesson = {};
 
@@ -162,7 +185,6 @@ app.get('/api/lesson/:lessonId', (req, res) => {
 });
 
 app.put('/api/lesson', (req, res) => {
-  console.log('+++');
   const lesson = req.body.lesson;
   const headerURL = url.parse(req.headers.referer);
   let info = {

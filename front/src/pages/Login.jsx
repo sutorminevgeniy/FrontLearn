@@ -6,7 +6,7 @@ class Login extends Component {
 		event.preventDefault();
 
 		this.props.getUser({
-			username: this.usernameInput.value,
+			login: this.loginInput.value,
 			password: this.passwordInput.value
 		});
 	};
@@ -21,10 +21,10 @@ class Login extends Component {
 					<div className="mdc-textfield">
 						<input
 							type="text"
-							name="username"
+							name="login"
 							className="mdc-textfield__input"
 							placeholder="Имя пользователя"
-							ref={input => this.usernameInput = input} />
+							ref={input => this.loginInput = input} />
 					</div>
 					
 					<div className="mdc-textfield">
