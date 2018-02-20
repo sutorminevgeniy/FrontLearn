@@ -10,6 +10,15 @@ db.Topics.sync({force: true})
   });
 
 
+// users
+const initUsers = require('./api/users');
+
+db.Users.sync({force: true})
+  .then(() => {
+    return db.Users.bulkCreate(initUsers);
+  });
+
+
 // messages
 const initMessages = require('./api/messages');
 let dataMessage = [];
