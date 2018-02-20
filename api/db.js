@@ -22,67 +22,75 @@ sequelize
   });
 
 const Messages = sequelize.define('messages', {
-    name:    { type: Sequelize.STRING },
-    lang:    { type: Sequelize.STRING },
-    content: { type: Sequelize.TEXT }
-  });
+  name:    { type: Sequelize.STRING },
+  lang:    { type: Sequelize.STRING },
+  content: { type: Sequelize.TEXT }
+});
 
 const Docs = sequelize.define('docs', {
-    name:    { type: Sequelize.STRING },
-    lang:    { type: Sequelize.STRING },
-    content: { type: Sequelize.TEXT }
-  });
+  name:    { type: Sequelize.STRING },
+  lang:    { type: Sequelize.STRING },
+  content: { type: Sequelize.TEXT }
+});
 
 const Topics = sequelize.define('topics', {
-    path:  { type: Sequelize.STRING },
-    title: { type: Sequelize.STRING }
-  });
+  path:  { type: Sequelize.STRING },
+  title: { type: Sequelize.STRING }
+});
+
+const Users = sequelize.define('users', {
+  username: { type: Sequelize.STRING },
+  login:    { type: Sequelize.STRING },
+  password: { type: Sequelize.STRING },
+  role:     { type: Sequelize.STRING }
+});
 
 const Structure = sequelize.define('structure', {
-    lessonId:     { type: Sequelize.STRING },
-    title:        { type: Sequelize.STRING },
-    topic:        { type: Sequelize.STRING },
-    author:       { type: Sequelize.STRING },
-    preview_text: { type: Sequelize.STRING },
-    image:        { type: Sequelize.STRING },
-    group:        { type: Sequelize.TEXT },
-    color:        { type: Sequelize.TEXT }
-  });
+  lessonId:     { type: Sequelize.STRING },
+  title:        { type: Sequelize.STRING },
+  topic:        { type: Sequelize.STRING },
+  author:       { type: Sequelize.STRING },
+  preview_text: { type: Sequelize.STRING },
+  image:        { type: Sequelize.STRING },
+  group:        { type: Sequelize.TEXT },
+  color:        { type: Sequelize.TEXT }
+});
 
 const Levels = sequelize.define('levels', {
-    lessonId:  { type: Sequelize.STRING },
-    level:     { type: Sequelize.INTEGER },
-    board:     { type: Sequelize.STRING },
-    ansver:    { type: Sequelize.TEXT },
-    defansver: { type: Sequelize.TEXT },
-    before:    { type: Sequelize.TEXT },
-    after:     { type: Sequelize.TEXT }
-  });
+  lessonId:  { type: Sequelize.STRING },
+  level:     { type: Sequelize.INTEGER },
+  board:     { type: Sequelize.STRING },
+  ansver:    { type: Sequelize.TEXT },
+  defansver: { type: Sequelize.TEXT },
+  before:    { type: Sequelize.TEXT },
+  after:     { type: Sequelize.TEXT }
+});
 
 const Instructions = sequelize.define('instructions', {
-    lessonId: { type: Sequelize.STRING },
-    level:    { type: Sequelize.INTEGER },
-    lang:     { type: Sequelize.STRING },
-    content:  { type: Sequelize.TEXT }
-  });
+  lessonId: { type: Sequelize.STRING },
+  level:    { type: Sequelize.INTEGER },
+  lang:     { type: Sequelize.STRING },
+  content:  { type: Sequelize.TEXT }
+});
 
 const LevelWin = sequelize.define('levelWins', {
-    lessonId: { type: Sequelize.STRING },
-    board:    { type: Sequelize.STRING },
-    ansver:   { type: Sequelize.TEXT },
-    style:    { type: Sequelize.TEXT }
-  });
+  lessonId: { type: Sequelize.STRING },
+  board:    { type: Sequelize.STRING },
+  ansver:   { type: Sequelize.TEXT },
+  style:    { type: Sequelize.TEXT }
+});
 
 const InstructionsWin = sequelize.define('instructionsWins', {
-    lessonId: { type: Sequelize.STRING },
-    lang:     { type: Sequelize.STRING },
-    content:  { type: Sequelize.TEXT }
-  });
+  lessonId: { type: Sequelize.STRING },
+  lang:     { type: Sequelize.STRING },
+  content:  { type: Sequelize.TEXT }
+});
 
 module.exports = {
   Messages,
   Docs,
-  Topics,  
+  Topics,
+  Users,  
   Structure, 
   Levels, 
   Instructions, 
