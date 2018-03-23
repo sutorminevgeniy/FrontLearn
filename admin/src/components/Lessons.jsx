@@ -13,7 +13,7 @@ class Lessons extends React.Component {
     handleAdd(event){
         event.preventDefault();
 
-        history.push('/lessons/new/new');
+        history.push('/admin/lessons/new/new');
     }
 
     render() {

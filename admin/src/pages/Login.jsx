@@ -13,7 +13,7 @@ class Login extends Component {
 
 	render() {
 		if(this.props.user) {
-			return <Redirect to="/lessons" />;
+			return <Redirect to="/admin/lessons" />;
 		}
 		return (
 			<main id="login">

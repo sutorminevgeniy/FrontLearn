@@ -8,7 +8,7 @@ class Logout extends Component {
 
 	render() {
 		if(!this.props.user) {
-			return <Redirect to="/" />;
+			return <Redirect to="/admin" />;
 		}
 		return null;
 	}

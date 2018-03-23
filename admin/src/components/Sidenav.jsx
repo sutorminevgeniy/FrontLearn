@@ -8,7 +8,7 @@ function Sidenav({ topics }) {
         {topics.map(topic => 
           <NavLink
             key={topic.path}
-            to={`/lessons/${topic.path}`}
+            to={`/admin/lessons/${topic.path}`}
             className="mdc-list-item"
             activeClassName="mdc-temporary-drawer--selected">
               <img 

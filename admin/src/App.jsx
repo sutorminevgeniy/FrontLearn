@@ -20,12 +20,12 @@ function App () {
 
       <div className="content">
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/about'  component={About} />
-          <Route path="/login"  component={LoginContainer} />
-          <Route path="/logout" component={LogoutContainer} />
-          <PrivateRouteContainer exact path='/lessons/:topic?' component={TopicsContainer} />
-          <PrivateRouteContainer path='/lessons/:topic/:lessonId' component={LessonContainer} />
+          <Route exact path='/admin' component={Home} />
+          <Route path='/admin/about'  component={About} />
+          <Route path="/admin/login"  component={LoginContainer} />
+          <Route path="/admin/logout" component={LogoutContainer} />
+          <PrivateRouteContainer exact path='/admin/lessons/:topic?' component={TopicsContainer} />
+          <PrivateRouteContainer path='/admin/lessons/:topic/:lessonId' component={LessonContainer} />
 
           <Route component={NotFound} />
         </Switch>

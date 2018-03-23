@@ -13,7 +13,7 @@ const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-// app.use('admin', express.static(path.join(__dirname, 'admin/public')));
+app.use('admin', express.static(path.join(__dirname, 'admin/public')));
 app.use(express.static(path.join(__dirname, 'front/build')));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
@@ -308,6 +308,10 @@ app.delete('/api/lesson/:lessonId', (req, res) => {
   Promise.all([p0, p1, p2, p3, p4]).then(datas => { 
     res.sendStatus(204);
   });
+});
+
+app.get('admin/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/front/build/admin.html'));
 });
 
 app.get('/*', (req, res) => {

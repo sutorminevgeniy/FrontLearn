@@ -8,7 +8,7 @@ function PrivateRoute({ user, component: Component, ...rest }) {
 				user ?
 					<Component match={rest.computedMatch} />
 					:
-					<Redirect to="/login" />
+					<Redirect to="/admin/login" />
 			)
 		} />
 	);

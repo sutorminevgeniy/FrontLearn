@@ -30,7 +30,7 @@ class Card extends React.Component {
                 </div>
 
                 <section className="mdc-card__actions">
-                    <Link to={`/lessons/${lesson.topic}/${lesson.lessonId}`} className="mdc-button mdc-card__action">Редактировать</Link>
+                    <Link to={`/admin/lessons/${lesson.topic}/${lesson.lessonId}`} className="mdc-button mdc-card__action">Редактировать</Link>
                 </section>
 
                 <section className="mdc-card__actions">
