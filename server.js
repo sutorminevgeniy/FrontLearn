@@ -16,8 +16,8 @@ app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-app.use(express.static(path.join(__dirname, 'admin/build/')));
-// app.use(express.static(path.join(__dirname, 'front/build')));
+// app.use(express.static(path.join(__dirname, 'admin/build/')));
+app.use(express.static(path.join(__dirname, 'front/build')));
 
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache');
