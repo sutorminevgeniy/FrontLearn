@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router'
 
 import { history, store } from './store';
 import { getMain } from './actions';
@@ -13,6 +13,7 @@ import './style.css';
 import './animate.css';
 
 store.dispatch(getMain());
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>

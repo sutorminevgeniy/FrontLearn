@@ -24,8 +24,8 @@ function App () {
           <Route path='/about'  component={About} />
           <Route path="/login"  component={LoginContainer} />
           <Route path="/logout" component={LogoutContainer} />
-          <PrivateRouteContainer exact path='/lessons/:topic?' component={TopicsContainer} />
-          <PrivateRouteContainer path='/lessons/:topic/:lessonId' component={LessonContainer} />
+          {/* <PrivateRouteContainer exact path='/lessons/:topic?' component={TopicsContainer} />
+          <PrivateRouteContainer path='/lessons/:topic/:lessonId' component={LessonContainer} /> */}
 
           <Route component={NotFound} />
         </Switch>

@@ -2,7 +2,7 @@ import createHistory from 'history/createBrowserHistory';
 
 import { createStore, applyMiddleware } from 'redux';
 
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'connected-react-router'
 import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 
@@ -16,6 +16,6 @@ export const history = createHistory();
 const middleware = routerMiddleware(history);
 
 export const store = createStore(
-  reducer,
+  reducer(history),
   applyMiddleware(middleware, promise, thunk)
 )
