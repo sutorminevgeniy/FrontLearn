@@ -9,8 +9,8 @@ import { getMain } from './actions';
 
 import App from './App.jsx';
 
-import './style.css';
-import './animate.css';
+import './style.scss';
+import './animate.scss';
 
 store.dispatch(getMain());
 

@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
-	onSubmit = event => {
+	constructor(props) {
+    super(props);
+
+		this.onSubmit = this.onSubmit.bind(this);
+  }
+
+	onSubmit(event) {
 		event.preventDefault();
 
 		this.props.getUser({

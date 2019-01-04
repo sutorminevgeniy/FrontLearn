@@ -16,8 +16,8 @@ app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-// app.use(express.static(path.join(__dirname, 'admin/build/')));
-app.use(express.static(path.join(__dirname, 'front/build')));
+// app.use(express.static(path.join(__dirname, 'admin/public/')));
+app.use(express.static(path.join(__dirname, 'front/public')));
 
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache');
@@ -314,12 +314,12 @@ app.delete('/api/lesson/:lessonId', (req, res) => {
 
 app.get('/admin/*', (req, res) => {
   console.log('*/admin.html');
-  res.sendFile(path.join(__dirname, '/admin/build/index.html'));
+  res.sendFile(path.join(__dirname, '/admin/public/index.html'));
 });
 
 app.get('/*', (req, res) => {
   console.log('front.html');
-  res.sendFile(path.join(__dirname, '/front/build/index.html'));
+  res.sendFile(path.join(__dirname, '/front/public/index.html'));
 });
 
 app.listen(app.get('port'), () => console.log(`Server is listening: http://localhost:${app.get('port')}`));
