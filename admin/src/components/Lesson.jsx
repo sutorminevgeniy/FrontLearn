@@ -1,22 +1,29 @@
 import React from 'react';
 import { Redirect } from 'react-router'
 
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
+import 'codemirror/theme/neat.css';
+import 'codemirror/mode/xml/xml.js';
+import 'codemirror/mode/javascript/javascript.js';
+
+import FieldCodeMirror from './FieldCodeMirror'
 
 import LevelCounterContainer from '../container/LevelCounterContainer';
-import FieldContainer        from '../container/FieldContainer';
-import BoardContainer        from '../container/BoardContainer';
+import FieldContainer from '../container/FieldContainer';
+import BoardContainer from '../container/BoardContainer';
 
 class Lesson extends React.Component {
-constructor(props) {
-  super(props);
+  constructor(props) {
+    super(props);
 
-  this.handleSubmit = this.handleSubmit.bind(this);
-  this.handleAdd = this.handleAdd.bind(this);
-  this.handleDelete = this.handleDelete.bind(this);
-}
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
 
   componentWillMount() {
-    this.props.getLesson( this.props.match.params.lessonId );
+    this.props.getLesson(this.props.match.params.lessonId);
   }
 
   handleSubmit(event) {
@@ -38,14 +45,14 @@ constructor(props) {
 
   render() {
     // редирект на новый id при певой записи нового урока
-    if(this.props.lesson.newUrl && this.props.location.pathname !== this.props.lesson.newUrl){
+    if (this.props.lesson.newUrl && this.props.location.pathname !== this.props.lesson.newUrl) {
       return (
-        <Redirect to={this.props.lesson.newUrl}/>
+        <Redirect to={this.props.lesson.newUrl} />
       );
     }
 
     // Вывод пока не подгрузились дданные
-    if(!this.props.lesson.lesson) {
+    if (!this.props.lesson.lesson) {
       return null;
     }
 
@@ -56,8 +63,12 @@ constructor(props) {
 
         <div className="page">
           <section id="structure">
-            <h1>{ this.props.lesson.lesson.structure.title }</h1>
-            <FieldContainer  path="structure"/>
+            <h1>{this.props.lesson.lesson.structure.title}</h1>
+            <FieldContainer path="structure" />
+
+            {/* Test !!! */}
+            <FieldCodeMirror />
+            {/* enn Test !!! */}
           </section>
         </div>
 
@@ -65,12 +76,12 @@ constructor(props) {
 
         <div className="page">
           <section id="sidebar">
-            <FieldContainer  path={"levels." + this.props.lesson.level}/>
+            <FieldContainer path={"levels." + this.props.lesson.level} />
           </section>
 
           <section id="view">
-            {(this.props.lesson.lesson.structure.topic === "css" || this.props.lesson.lesson.structure.topic === "html") 
-              && <BoardContainer level = "level" />}
+            {(this.props.lesson.lesson.structure.topic === "css" || this.props.lesson.lesson.structure.topic === "html")
+              && <BoardContainer level="level" />}
           </section>
         </div>
 
@@ -79,17 +90,17 @@ constructor(props) {
 
         <div className="page">
           <section id="sidebar">
-            <FieldContainer  path="levelWin"/>
+            <FieldContainer path="levelWin" />
           </section>
 
           <section id="view">
-            {(this.props.lesson.lesson.structure.topic === "css" || this.props.lesson.lesson.structure.topic === "html") 
-              && <BoardContainer level = "levelWin" />}
+            {(this.props.lesson.lesson.structure.topic === "css" || this.props.lesson.lesson.structure.topic === "html")
+              && <BoardContainer level="levelWin" />}
           </section>
         </div>
       </form>
-    );      
-  }  
+    );
+  }
 }
 
 
