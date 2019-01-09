@@ -4,13 +4,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  context: path.resolve(__dirname, 'front'),
+  context: path.resolve(__dirname, 'admin'),
 
   entry: './src/index.jsx',
 
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'front', 'public')
+    path: path.resolve(__dirname, 'admin', 'public')
   },
 
   module: {
@@ -60,7 +60,7 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: './front/public',
+    contentBase: './admin/public',
     port: 3030,
     proxy: {
       '/api': 'http://localhost:5000'
