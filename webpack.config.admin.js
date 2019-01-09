@@ -10,7 +10,8 @@ module.exports = {
 
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'admin', 'public')
+    path: path.resolve(__dirname, 'admin', 'public'),
+    publicPath: '/'
   },
 
   module: {
@@ -69,6 +70,7 @@ module.exports = {
   devServer: {
     contentBase: './admin/public',
     port: 3030,
+    historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:5000'
     }
