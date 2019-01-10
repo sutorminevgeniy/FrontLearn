@@ -5,10 +5,9 @@ function PrivateRoute({ user, component: Component, ...rest }) {
     return (
         <Route {...rest} render={
             props => (
-                user ?
-                    <Component match={rest.computedMatch} />
-                    :
-                    <Redirect to="/login" />
+                <Component match={rest.computedMatch} />
+				// !!! Заменено на время разработки пока не сделал сессию
+				// user ? <Component match={rest.computedMatch} /> : <Redirect to="/admin/login" />
             )
         } />
     );

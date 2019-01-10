@@ -10,7 +10,8 @@ module.exports = {
 
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'front', 'public')
+    path: path.resolve(__dirname, 'front', 'public'),
+    publicPath: '/'
   },
 
   module: {
@@ -62,6 +63,7 @@ module.exports = {
   devServer: {
     contentBase: './front/public',
     port: 3030,
+    historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:5000'
     }
