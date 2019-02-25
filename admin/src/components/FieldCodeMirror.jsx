@@ -22,7 +22,9 @@ class FieldCodeMirror extends React.Component {
           options={{
             mode: 'xml',
             theme: 'xq-light',
-            lineNumbers: true
+            lineNumbers: true,
+            readOnly: true,
+            showCursorWhenSelecting: false
           }}
           onChange={(editor, data, value) => {
             console.log(editor, data, value);

@@ -1,17 +1,11 @@
 import React from 'react';
 import { Redirect } from 'react-router'
 
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css';
-import 'codemirror/theme/neat.css';
-import 'codemirror/mode/xml/xml.js';
-import 'codemirror/mode/javascript/javascript.js';
-
-import FieldCodeMirror from './FieldCodeMirror'
-
 import LevelCounterContainer from '../container/LevelCounterContainer';
 import FieldContainer from '../container/FieldContainer';
 import BoardContainer from '../container/BoardContainer';
+
+import FieldCodeMirror from './FieldCodeMirror'
 
 class Lesson extends React.Component {
   constructor(props) {
@@ -26,12 +20,11 @@ class Lesson extends React.Component {
     this.props.getLesson(this.props.match.params.lessonId);
   }
 
+  // Обработчики
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.props.lesson.lesson, this.props);
     this.props.editLesson(this.props.lesson.lesson);
   }
-
 
   handleAdd(event) {
     event.preventDefault();
