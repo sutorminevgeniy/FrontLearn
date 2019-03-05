@@ -14,20 +14,23 @@ class FieldCodeMirror extends React.Component {
   }
 
   render() {
+    const {id, value, options = {}, onChange} = this.props;
+
     return (
       <div className="FieldCodeMirror">
-        <h1>Test FieldCodeMirror</h1>
         <CodeMirror
-          value='<h1>I ♥ react-codemirror2</h1>'
-          options={{
-            mode: 'xml',
-            theme: 'xq-light',
-            lineNumbers: true,
-            readOnly: true,
-            showCursorWhenSelecting: false
+          id = {id}
+          value = {value || 'xml'}
+          options = {{
+            mode: options.mode || 'xml',
+            theme: options.theme || 'xq-light',
+            lineNumbers: options.lineNumbers || true,
+            readOnly: options.readOnly || false,
+            showCursorWhenSelecting: options.showCursorWhenSelecting || false
           }}
-          onChange={(editor, data, value) => {
+          onChange = {(editor, data, value) => {
             console.log(editor, data, value);
+            onChange(value);
           }}
         />
       </div>
