@@ -6,7 +6,7 @@ function Credits(props) {
   if(!props.main.lang) return null;
 
   return (
-    <div>
+    <footer>
       <div className="credits">
         <span id="labelFooter" className="translate">{ props.main.messages.labelFooter[props.main.lang] } </span>
         <a href="https://github.com/thomaspark/flexboxfroggy/">GitHub</a> • 
@@ -15,7 +15,7 @@ function Credits(props) {
       <div className="credits">
         <span id="gridGarden" className="translate">Want to learn CSS grid? Play</span> <a href="http://cssgridgarden.com">Grid Garden</a>.
       </div>
-    </div>
+    </footer>
   );
 }
 

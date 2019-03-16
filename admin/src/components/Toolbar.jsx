@@ -3,25 +3,28 @@ import ToolbarLink from './ToolbarLink';
 
 function Toolbar({ user }) {
   return (
-    <header className="mdc-toolbar">
-      <div className="mdc-toolbar__row">
-      <section className="mdc-toolbar__section mdc-toolbar__section--align-start">
-        <span className="mdc-toolbar__title">Библиотека</span>
-      </section>
+    <header>
+      <div className="content">
+        <section className="block-title">
+          <span className="title">Библиотека</span>
+        </section>
 
-      <section className="mdc-toolbar__section mdc-toolbar__section--align-end">
-        <nav className="mdc-tab-bar">
-        <ToolbarLink exact to="/admin" className="mdc-tab">Главная</ToolbarLink>
-        <ToolbarLink to="/admin/about" className="mdc-tab">О проекте</ToolbarLink>
-        <ToolbarLink to="/admin/lessons" className="mdc-tab">Уроки</ToolbarLink>
-        {user ?
-          <ToolbarLink to="/admin/logout" className="mdc-tab">Выйти</ToolbarLink>
-          :
-          <ToolbarLink to="/admin/login" className="mdc-tab">Войти</ToolbarLink>
-        }
-        </nav>
-        <span className="usernav">{ user && user.username }</span>
-      </section>
+        <section className="block-toolbar">
+          <nav className="mdc-tab-bar">
+            <ToolbarLink exact to="/admin" className="mdc-tab">Главная</ToolbarLink>
+            <ToolbarLink to="/admin/about" className="mdc-tab">О проекте</ToolbarLink>
+            <ToolbarLink to="/admin/lessons" className="mdc-tab">Уроки</ToolbarLink>
+            {user ?
+              <ToolbarLink to="/admin/logout" className="mdc-tab">Выйти</ToolbarLink>
+              :
+              <ToolbarLink to="/admin/login" className="mdc-tab">Войти</ToolbarLink>
+            }
+          </nav>
+        </section>
+
+        <section className="block-usernav">
+          <span className="usernav">{user && user.username}</span>
+        </section>
       </div>
     </header>
   );
