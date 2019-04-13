@@ -22,20 +22,18 @@ class Lessons extends React.Component {
                         : this.props.data;
 
         return (
-            <main id="books">
+            <div className="books">
                 <div className="mdc-layout-grid">
-                    <div className="mdc-layout-grid__inner">
-                        {lessons.map((lesson, index) =>
-                            <div key={index} className="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                                <CardContainer lesson={lesson} />
-                            </div>
-                        )}
-                    </div>
+                    {lessons.map((lesson, index) =>
+                        <CardContainer key={index} lesson={lesson} />
+                    )}
+                    <div className="hideitem"></div>
+                    <div className="hideitem"></div>
                 </div>
-                <section className="mdc-card__actions">
+                <section className="actions">
                     <button onClick = {this.handleAdd }>Добавить урок</button>
                 </section>
-            </main>
+            </div>
         );
     }    
 }

@@ -16,9 +16,11 @@
 
 * Собрать: `npm run front-dev` или `npm run front-prod`
 * Запустить (при необходимости перенести вручную изображения): `npm run front-start`
+* Зайти на http://localhost:3030/
 
 
 ## 3б. Админка
 
 * Собрать: `npm run admin-dev` или `npm run admin-prod`
 * Запустить (при необходимости перенести вручную изображения): `npm run admin-start`
+* Зайти на http://localhost:3030/

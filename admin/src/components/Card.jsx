@@ -20,7 +20,7 @@ class Card extends React.Component {
         return (
             <div className="mdc-card">
                 <div className="mdc-card__horizontal-block">
-                    <img src={`/images/${lesson.image}`} className="mdc-card__media-item mdc-card__media-item--2x" alt={lesson.title} />
+                    <img src={`/images/${lesson.image}`} className="mdc-card__media-item" alt={lesson.title} />
 
                     <section className="mdc-card__primary">
                         <h2 className="mdc-card__title mdc-card__title--large">{lesson.title}</h2>

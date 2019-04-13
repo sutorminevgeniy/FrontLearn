@@ -3,7 +3,11 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = {
+const mode = process.argv[process.argv.indexOf('--mode') + 1];
+
+console.log(process.argv, mode);
+
+const config = {
   context: path.resolve(__dirname, 'admin'),
 
   entry: './src/index.jsx',
@@ -20,15 +24,6 @@ module.exports = {
         test: /\.js$|\.jsx?$/,
         exclude: /node_modules/,
         use: 'babel-loader'
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader', 
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ]
       },
       {
         test: /\.css$/,
@@ -57,9 +52,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html'
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'style.[contenthash].css',
     })
   ],
 
@@ -78,3 +70,36 @@ module.exports = {
 
   devtool: 'eval-source-map'  // for debugging
 };
+
+if(mode === 'production') {
+  config.plugins.push(
+    new MiniCssExtractPlugin({
+      filename: 'style.[contenthash].css'
+    })
+  );
+  config.module.rules.push(
+    {
+      test: /\.scss$/,
+      use: [
+        'style-loader',
+        MiniCssExtractPlugin.loader,
+        'css-loader',
+        'sass-loader'
+      ]
+    }
+  );
+}
+else {
+  config.module.rules.push(
+    {
+      test: /\.scss$/,
+      use: [
+        'style-loader',
+        'css-loader',
+        'sass-loader'
+      ]
+    }
+  );
+}
+
+module.exports = config;
